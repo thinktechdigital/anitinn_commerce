@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Terms of Service{% endblock %}
+
+{% block extra_head %}
+<style>
+    body {
+      background-color: #fcfbf8;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .royal-green { background-color: #1B5E3F; }
+    .text-royal-green { color: #1B5E3F; }
+    .border-royal-green { border-color: #1B5E3F; }
+    .golden-yellow { background-color: #D4A520; }
+    .text-golden-yellow { color: #D4A520; }
+</style>
+{% endblock %}
+
+{% block body %}
+<!-- Navigation Header -->
+<header class="sticky top-0 bg-white/80 backdrop-blur-md border-b border-gray-100 z-50">
+  <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+    <a href="/marketplace/" class="flex items-center gap-3">
+      <img src="https://vgbujcuwptvheqijyjbe.supabase.co/storage/v1/object/public/hmac-uploads/uploads/ef5bc30d-cbeb-42a5-88a1-362daf4d51a4/1780139179048-642ea9dd/ChatGPT_Image_May_29__2026__11_28_10_AM.png" alt="Anitinn Logo" class="w-10 h-10 rounded-full border border-gray-200 shadow-sm">
+      <span class="font-bold text-xl tracking-tight text-gray-900">ANITINN</span>
+    </a>
+    <nav class="hidden md:flex items-center gap-8">
+      <a href="/marketplace/" class="text-sm font-semibold text-gray-600 hover:text-royal-green transition-colors">Marketplace</a>
+      <a href="/catalog/" class="text-sm font-semibold text-gray-600 hover:text-royal-green transition-colors">Catalog</a>
+      <a href="/help/" class="text-sm font-semibold text-gray-600 hover:text-royal-green transition-colors">Help Center</a>
+      <a href="/contact/" class="text-sm font-semibold text-gray-600 hover:text-royal-green transition-colors">Contact</a>
+    </nav>
+    <div class="flex items-center gap-4">
+      <a href="/login/" class="text-sm font-bold text-royal-green hover:underline decoration-golden-yellow decoration-2 decoration-offset-2">Sign In</a>
+      <a href="/register/" class="px-5 py-2.5 royal-green text-white text-sm font-bold rounded-xl shadow-md hover:brightness-110 transition-all">Join Free</a>
+    </div>
+  </div>
+</header>
+
+<main class="max-w-4xl mx-auto px-6 py-16 space-y-12">
+  <!-- Page Title Header -->
+  <div class="text-center space-y-4">
+    <span class="text-xs font-black uppercase tracking-widest text-golden-yellow">Legal Framework</span>
+    <h1 class="text-4xl md:text-5xl font-black text-gray-900 tracking-tight leading-none">Terms of Service</h1>
+    <p class="text-sm text-gray-500 font-medium">Last updated: June 2, 2026</p>
+  </div>
+
+  <!-- Premium Scrollable Card for Terms -->
+  <div class="bg-white rounded-[2rem] border border-gray-100 shadow-sm p-8 md:p-12 space-y-8 leading-relaxed text-gray-600 font-medium">
+    
+    <section class="space-y-4">
+      <h2 class="text-xl font-bold text-gray-900 flex items-center gap-2">
+        <span class="text-golden-yellow">1.</span> Acceptance of Terms
+      </h2>
+      <p class="text-sm leading-relaxed">
+        Welcome to ANITINN ("the Platform"), Ghana's premier AI-powered marketplace. By accessing, browsing, registering, or selling on the Platform, you acknowledge that you have read, understood, and agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use the Platform.
+      </p>
+    </section>
+
+    <div class="h-[1px] bg-gray-100"></div>
+
+    <section class="space-y-4">
+      <h2 class="text-xl font-bold text-gray-900 flex items-center gap-2">
+        <span class="text-golden-yellow">2.</span> Account Registration & Security
+      </h2>
+      <p class="text-sm leading-relaxed">
+        To utilize certain features, including purchasing or listing products, you must create a secure account. You agree to provide accurate, current, and complete information. You are solely responsible for safeguarding your login credentials. ANITINN will not be held liable for unauthorized access resulting from user negligence.
+      </p>
+    </section>
+
+    <div class="h-[1px] bg-gray-100"></div>
+
+    <section class="space-y-4">
+      <h2 class="text-xl font-bold text-gray-900 flex items-center gap-2">
+        <span class="text-golden-yellow">3.</span> Vendor Rules & Commisions
+      </h2>
+      <p class="text-sm leading-relaxed">
+        Vendors represent that they possess all legal rights and licenses necessary to sell their products in Ghana. ANITINN charges a standard commission on completed transactions as defined by the merchant tier plan (Standard vs. Pro). Earnings are settled into registered Mobile Money (MoMo) or bank accounts after delivery verification.
+      </p>
+    </section>
+
+    <div class="h-[1px] bg-gray-100"></div>
+
+    <section class="space-y-4">
+      <h2 class="text-xl font-bold text-gray-900 flex items-center gap-2">
+        <span class="text-golden-yellow">4.</span> Buyer Framework & Deliveries
+      </h2>
+      <p class="text-sm leading-relaxed">
+        All orders placed on the Platform are subject to product availability and logistics verification. Delivery timeframes listed are estimates. Buyers are entitled to settlements and refunds only under the conditions specified in our official refund guidelines.
+      </p>
+    </section>
+
+    <div class="h-[1px] bg-gray-100"></div>
+
+    <section class="space-y-4">
+      <h2 class="text-xl font-bold text-gray-900 flex items-center gap-2">
+        <span class="text-golden-yellow">5.</span> Intellectual Property
+      </h2>
+      <p class="text-sm leading-relaxed">
+        The ANITINN platform architecture, AI copywriting assistants, algorithms, brand names, and user interface elements are protected by trade secret, trademark, and copyright laws. No part of the platform may be duplicated, scraped, or engineered without express written permission.
+      </p>
+    </section>
+
+  </div>
+</main>
+
+<!-- Navigation Footer -->
+<footer class="bg-gray-900 text-white/70 py-12 px-6">
+  <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 border-b border-white/10 pb-8">
+    <div class="flex items-center gap-3">
+      <img src="https://vgbujcuwptvheqijyjbe.supabase.co/storage/v1/object/public/hmac-uploads/uploads/ef5bc30d-cbeb-42a5-88a1-362daf4d51a4/1780139179048-642ea9dd/ChatGPT_Image_May_29__2026__11_28_10_AM.png" alt="Anitinn Logo" class="w-10 h-10 rounded-full border border-white/10 opacity-80">
+      <span class="font-bold text-xl tracking-tight text-white">ANITINN</span>
+    </div>
+    <div class="flex flex-wrap gap-8 text-xs font-bold uppercase tracking-wider">
+      <a href="/privacy/" class="hover:text-white transition-colors">Privacy Policy</a>
+      <a href="/terms/" class="text-white hover:text-white transition-colors underline decoration-golden-yellow decoration-2 decoration-offset-2">Terms of Service</a>
+      <a href="/contact/" class="hover:text-white transition-colors">Contact Support</a>
+    </div>
+  </div>
+  <p class="text-center text-xs opacity-40 mt-8">© 2026 ANITINN Marketplace. Ghana's #1 AI-Powered Marketplace Platform.</p>
+</footer>
+{% endblock %}

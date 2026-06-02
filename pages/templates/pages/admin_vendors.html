@@ -1,0 +1,134 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Admin Vendors{% endblock %}
+
+{% block extra_head %}
+<style>body{font-family:'Plus Jakarta Sans',sans-serif;background-color:#fcfbf8;overflow-x:hidden}.royal-green{background-color:#1B5E3F}.golden-yellow{background-color:#D4A520}.text-royal-green{color:#1B5E3F}.text-golden-yellow{color:#D4A520}.border-royal-green{border-color:#1B5E3F}.border-golden-yellow{border-color:#D4A520}::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:#f1f1f1}::-webkit-scrollbar-thumb{background:#1B5E3F;border-radius:10px}.modal-backdrop{background-color:rgba(0,0,0,0.5);backdrop-filter:blur(4px)}</style>
+<style>sd-component { display: block; }</style>
+{% endblock %}
+
+{% block body %}
+<div class="flex min-h-screen"><!-- component: DashboardSidebar (3e4d5170-0fd6-49b5-8819-3230c98e99b7) -->
+<div v-scope="{ ...{&quot;activeItem&quot;:&quot;dashboard&quot;,&quot;dashboardHref&quot;:&quot;https://draft-aa0ca535-feab-4e01-8db8-b8cf8f06e855.preview.superdesign.dev&quot;,&quot;productsHref&quot;:&quot;https://draft-189044eb-5763-4705-8248-0eca3a4f4be8.preview.superdesign.dev&quot;,&quot;ordersHref&quot;:&quot;https://draft-e2a0e24c-2a02-4309-a0cf-f76fd9fdb3c5.preview.superdesign.dev&quot;,&quot;analyticsHref&quot;:&quot;https://draft-fc09c5c8-0935-414c-b7e0-9d5807532064.preview.superdesign.dev&quot;,&quot;reviewsHref&quot;:&quot;#reviews&quot;,&quot;orderBadgeCount&quot;:12}, $emit() {} }">
+<aside class="w-64 bg-[#1B5E3F] text-white fixed h-full flex flex-col z-50">
+  <div class="p-6 flex items-center gap-3">
+    <img src="https://vgbujcuwptvheqijyjbe.supabase.co/storage/v1/object/public/hmac-uploads/uploads/ef5bc30d-cbeb-42a5-88a1-362daf4d51a4/1780139179048-642ea9dd/ChatGPT_Image_May_29__2026__11_28_10_AM.png" alt="Anitinn Logo" class="w-10 h-10 rounded-full border border-white/20">
+    <span class="font-bold text-xl tracking-tight">ANITINN</span>
+  </div>
+  <nav class="flex-1 px-4 space-y-1 overflow-y-auto mt-4" style="scrollbar-width: thin; scrollbar-color: rgba(255, 255, 255, 0.1) transparent;">
+    <p class="text-xs font-semibold text-white/40 px-3 py-2 uppercase tracking-wider">Main Menu</p>
+    
+    <a :href="dashboardHref" 
+       class="flex items-center gap-3 px-3 py-3 rounded-lg transition-all" 
+       :class="activeItem === 'dashboard' ? 'bg-white/10 text-[#D4A520] border-l-4 border-[#D4A520]' : 'text-white/70 hover:bg-white/5 hover:text-white'">
+      <iconify-icon icon="lucide:layout-dashboard"></iconify-icon>
+      <span class="font-medium">Dashboard</span>
+    </a>
+
+    <a :href="productsHref" 
+       class="flex items-center gap-3 px-3 py-3 rounded-lg transition-all" 
+       :class="activeItem === 'products' ? 'bg-white/10 text-[#D4A520] border-l-4 border-[#D4A520]' : 'text-white/70 hover:bg-white/5 hover:text-white'">
+      <iconify-icon icon="lucide:box"></iconify-icon>
+      <span class="font-medium">Products</span>
+    </a>
+
+    <a :href="ordersHref" 
+       class="flex items-center gap-3 px-3 py-3 rounded-lg transition-all" 
+       :class="activeItem === 'orders' ? 'bg-white/10 text-[#D4A520] border-l-4 border-[#D4A520]' : 'text-white/70 hover:bg-white/5 hover:text-white'">
+      <iconify-icon icon="lucide:shopping-cart"></iconify-icon>
+      <span class="font-medium">Orders</span>
+      <span v-if="orderBadgeCount > 0" class="ml-auto bg-[#D4A520] text-white text-[10px] px-1.5 py-0.5 rounded-full">{{ orderBadgeCount }}</span>
+    </a>
+
+    <a :href="analyticsHref" 
+       class="flex items-center gap-3 px-3 py-3 rounded-lg transition-all" 
+       :class="activeItem === 'analytics' ? 'bg-white/10 text-[#D4A520] border-l-4 border-[#D4A520]' : 'text-white/70 hover:bg-white/5 hover:text-white'">
+      <iconify-icon icon="lucide:bar-chart-3"></iconify-icon>
+      <span class="font-medium">Analytics</span>
+    </a>
+
+    <p class="text-xs font-semibold text-white/40 px-3 py-2 uppercase tracking-wider mt-8">Storefront</p>
+
+    <a :href="reviewsHref" 
+       class="flex items-center gap-3 px-3 py-3 rounded-lg transition-all" 
+       :class="activeItem === 'reviews' ? 'bg-white/10 text-[#D4A520] border-l-4 border-[#D4A520]' : 'text-white/70 hover:bg-white/5 hover:text-white'">
+      <iconify-icon icon="lucide:message-square"></iconify-icon>
+      <span class="font-medium">Reviews</span>
+    </a>
+  </nav>
+  <div class="p-4 mt-auto">
+    <button @click="$emit('upgrade')" class="w-full bg-[#D4A520] hover:brightness-110 text-white text-xs font-bold py-2 rounded-lg transition-all uppercase tracking-wide">Upgrade Plan</button>
+  </div>
+</aside>
+</div>
+<!-- /component: DashboardSidebar (3e4d5170-0fd6-49b5-8819-3230c98e99b7) --><main class="flex-1 ml-64 min-h-screen flex flex-col relative"><!-- component: DashboardHeader (87403f5a-a910-4ccc-9453-3a69605a2a11) -->
+<div v-scope="{ ...{&quot;vendorName&quot;:&quot;System Administration&quot;,&quot;userName&quot;:&quot;Admin Chief&quot;,&quot;userAvatarUrl&quot;:&quot;https://api.dicebear.com/7.x/avataaars/svg?seed=Admin&quot;,&quot;hasNotifications&quot;:true}, $emit() {} }">
+<header class="sticky top-0 bg-white/80 backdrop-blur-md border-b border-gray-100 z-40 px-8 py-4"><div class="flex items-center justify-between"><div class="flex items-center gap-4"><div><h1 class="text-2xl font-bold text-gray-800 tracking-tight">Dashboard Overview</h1><p class="text-sm text-gray-500 font-medium">Welcome back, <span class="text-[#1B5E3F] font-semibold underline decoration-[#D4A520]">{{ vendorName }}</span></p></div></div><div class="flex items-center gap-6"><div class="relative hidden lg:block"><iconify-icon icon="lucide:search" class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></iconify-icon><input type="text" placeholder="Search products, orders..." @input="$emit('search', { query: $event.target.value })" class="pl-10 pr-4 py-2 w-80 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#1B5E3F]/20 focus:border-[#1B5E3F] transition-all"></div><div class="flex items-center gap-3"><button @click="$emit('notificationClick')" class="p-2 hover:bg-gray-100 rounded-full relative"><iconify-icon icon="lucide:bell" class="text-2xl text-gray-600"></iconify-icon><span v-if="hasNotifications" class="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full border-2 border-white"></span></button><div class="h-8 w-[1px] bg-gray-200 mx-2"></div><div class="flex items-center gap-3 group cursor-pointer" @click="$emit('profileClick')"><img :src="userAvatarUrl" alt="Vendor Avatar" class="w-10 h-10 rounded-full border-2 border-[#D4A520] bg-gray-100 p-0.5"><div class="hidden md:block"><p class="text-sm font-bold text-gray-800 leading-none">{{ userName }}</p><p class="text-[10px] text-gray-500 font-medium">Pro Vendor</p></div><iconify-icon icon="lucide:chevron-down" class="text-gray-400"></iconify-icon></div></div></div></div></header>
+</div>
+<!-- /component: DashboardHeader (87403f5a-a910-4ccc-9453-3a69605a2a11) --><div class="p-8 flex-1"><div class="flex items-center justify-between mb-8"><div><h2 class="text-3xl font-bold text-gray-800 tracking-tight">Vendor Management</h2><p class="text-sm text-gray-500 font-medium mt-1">Monitor applications, performance, and commission rates across the marketplace.</p></div><div class="flex items-center gap-3"><button id="export-vendors-btn" class="px-6 py-2.5 bg-white border border-gray-200 text-gray-600 text-sm font-bold rounded-xl shadow-sm hover:bg-gray-50 transition-all flex items-center gap-2"><iconify-icon icon="lucide:download"></iconify-icon>Export Registry</button></div></div><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10"><!-- component: KPICard (caafade4-ddb0-479f-9bdb-d79b134cd835) -->
+<div v-scope="{ ...{&quot;label&quot;:&quot;Total Vendors&quot;,&quot;value&quot;:&quot;1,428&quot;,&quot;trendLabel&quot;:&quot;+12 this month&quot;,&quot;trendIcon&quot;:&quot;lucide:trending-up&quot;,&quot;trendClass&quot;:&quot;text-green-600&quot;,&quot;iconName&quot;:&quot;lucide:users&quot;,&quot;iconBgClass&quot;:&quot;bg-[#1B5E3F]&quot;}, $emit() {} }">
+<div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-shadow group">
+  <div class="flex justify-between items-start mb-4">
+    <div :class="['p-3 rounded-xl text-white group-hover:scale-110 transition-transform', iconBgClass]">
+      <iconify-icon :icon="iconName" class="text-2xl"></iconify-icon>
+    </div>
+    <span class="text-xs font-bold text-gray-400 uppercase tracking-wider">{{ label }}</span>
+  </div>
+  <h3 class="text-3xl font-bold text-gray-800">{{ value }}</h3>
+  <div :class="['mt-4 flex items-center text-sm font-semibold', trendClass]">
+    <iconify-icon :icon="trendIcon" class="mr-1"></iconify-icon>
+    <span>{{ trendLabel }}</span>
+  </div>
+</div>
+</div>
+<!-- /component: KPICard (caafade4-ddb0-479f-9bdb-d79b134cd835) --><!-- component: KPICard (caafade4-ddb0-479f-9bdb-d79b134cd835) -->
+<div v-scope="{ ...{&quot;label&quot;:&quot;Active Stores&quot;,&quot;value&quot;:&quot;1,310&quot;,&quot;trendLabel&quot;:&quot;91.7% active rate&quot;,&quot;trendIcon&quot;:&quot;lucide:trending-up&quot;,&quot;trendClass&quot;:&quot;text-green-600&quot;,&quot;iconName&quot;:&quot;lucide:store&quot;,&quot;iconBgClass&quot;:&quot;bg-blue-600&quot;}, $emit() {} }">
+<div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-shadow group">
+  <div class="flex justify-between items-start mb-4">
+    <div :class="['p-3 rounded-xl text-white group-hover:scale-110 transition-transform', iconBgClass]">
+      <iconify-icon :icon="iconName" class="text-2xl"></iconify-icon>
+    </div>
+    <span class="text-xs font-bold text-gray-400 uppercase tracking-wider">{{ label }}</span>
+  </div>
+  <h3 class="text-3xl font-bold text-gray-800">{{ value }}</h3>
+  <div :class="['mt-4 flex items-center text-sm font-semibold', trendClass]">
+    <iconify-icon :icon="trendIcon" class="mr-1"></iconify-icon>
+    <span>{{ trendLabel }}</span>
+  </div>
+</div>
+</div>
+<!-- /component: KPICard (caafade4-ddb0-479f-9bdb-d79b134cd835) --><!-- component: KPICard (caafade4-ddb0-479f-9bdb-d79b134cd835) -->
+<div v-scope="{ ...{&quot;label&quot;:&quot;Pending Approval&quot;,&quot;value&quot;:&quot;45&quot;,&quot;trendLabel&quot;:&quot;Requires review&quot;,&quot;trendIcon&quot;:&quot;lucide:trending-up&quot;,&quot;trendClass&quot;:&quot;text-amber-600&quot;,&quot;iconName&quot;:&quot;lucide:clock-4&quot;,&quot;iconBgClass&quot;:&quot;bg-amber-500&quot;}, $emit() {} }">
+<div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-shadow group">
+  <div class="flex justify-between items-start mb-4">
+    <div :class="['p-3 rounded-xl text-white group-hover:scale-110 transition-transform', iconBgClass]">
+      <iconify-icon :icon="iconName" class="text-2xl"></iconify-icon>
+    </div>
+    <span class="text-xs font-bold text-gray-400 uppercase tracking-wider">{{ label }}</span>
+  </div>
+  <h3 class="text-3xl font-bold text-gray-800">{{ value }}</h3>
+  <div :class="['mt-4 flex items-center text-sm font-semibold', trendClass]">
+    <iconify-icon :icon="trendIcon" class="mr-1"></iconify-icon>
+    <span>{{ trendLabel }}</span>
+  </div>
+</div>
+</div>
+<!-- /component: KPICard (caafade4-ddb0-479f-9bdb-d79b134cd835) --><!-- component: KPICard (caafade4-ddb0-479f-9bdb-d79b134cd835) -->
+<div v-scope="{ ...{&quot;label&quot;:&quot;Total Commissions&quot;,&quot;value&quot;:&quot;GH₵ 84k&quot;,&quot;trendLabel&quot;:&quot;+18.4% vs LMTD&quot;,&quot;trendIcon&quot;:&quot;lucide:trending-up&quot;,&quot;trendClass&quot;:&quot;text-green-600&quot;,&quot;iconName&quot;:&quot;lucide:badge-percent&quot;,&quot;iconBgClass&quot;:&quot;bg-emerald-600&quot;}, $emit() {} }">
+<div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-shadow group">
+  <div class="flex justify-between items-start mb-4">
+    <div :class="['p-3 rounded-xl text-white group-hover:scale-110 transition-transform', iconBgClass]">
+      <iconify-icon :icon="iconName" class="text-2xl"></iconify-icon>
+    </div>
+    <span class="text-xs font-bold text-gray-400 uppercase tracking-wider">{{ label }}</span>
+  </div>
+  <h3 class="text-3xl font-bold text-gray-800">{{ value }}</h3>
+  <div :class="['mt-4 flex items-center text-sm font-semibold', trendClass]">
+    <iconify-icon :icon="trendIcon" class="mr-1"></iconify-icon>
+    <span>{{ trendLabel }}</span>
+  </div>
+</div>
+</div>
+<!-- /component: KPICard (caafade4-ddb0-479f-9bdb-d79b134cd835) --></div><div class="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden mb-8"><div class="p-6 border-b border-gray-50 flex flex-col md:flex-row md:items-center justify-between gap-4"><div class="flex items-center gap-4 flex-1"><div class="relative flex-1 max-w-md"><iconify-icon icon="lucide:search" class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></iconify-icon><input type="text" placeholder="Search by vendor name, store ID, or email..." class="w-full pl-12 pr-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-royal-green/20 focus:border-royal-green transition-all"></div><div class="flex items-center gap-2"><button class="p-2.5 bg-gray-50 border border-gray-200 rounded-xl text-gray-500 hover:bg-gray-100 transition-colors"><iconify-icon icon="lucide:filter" class="text-lg"></iconify-icon></button></div></div><div class="flex items-center gap-2 overflow-x-auto"><button class="px-4 py-2 bg-royal-green text-white text-xs font-bold rounded-lg">All Vendors</button><button class="px-4 py-2 bg-gray-50 text-gray-500 text-xs font-bold rounded-lg hover:bg-gray-100">Pending</button><button class="px-4 py-2 bg-gray-50 text-gray-500 text-xs font-bold rounded-lg hover:bg-gray-100">Suspended</button></div></div><div class="overflow-x-auto"><table class="w-full text-left"><thead class="bg-gray-50 border-y border-gray-100"><tr><th class="px-6 py-4 text-[10px] font-black text-gray-400 uppercase tracking-widest">Vendor Store</th><th class="px-6 py-4 text-[10px] font-black text-gray-400 uppercase tracking-widest">Joined Date</th><th class="px-6 py-4 text-[10px] font-black text-gray-400 uppercase tracking-widest">Commission</th><th class="px-6 py-4 text-[10px] font-black text-gray-400 uppercase tracking-widest">Sales Performance</th><th class="px-6 py-4 text-[10px] font-black text-gray-400 uppercase tracking-widest">Status</th><th class="px-6 py-4 text-[10px] font-black text-gray-400 uppercase tracking-widest">Actions</th></tr></thead><tbody class="divide-y divide-gray-100"><tr class="hover:bg-gray-50/50 transition-colors group"><td class="px-6 py-5"><div class="flex items-center gap-4"><img src="https://api.dicebear.com/7.x/initials/svg?seed=KE" alt="KE" class="w-10 h-10 rounded-full border border-gray-100 bg-gray-50"><div class="flex flex-col"><p class="text-sm font-bold text-gray-800 group-hover:text-royal-green transition-colors">Kofi's Electronics</p><p class="text-xs text-gray-400">ID: V-GH-00129</p></div></div></td><td class="px-6 py-5"><p class="text-sm text-gray-600 font-medium">Oct 12, 2023</p></td><td class="px-6 py-5"><span class="text-sm font-bold text-royal-green">12.5%</span></td><td class="px-6 py-5"><div><p class="text-sm font-bold text-gray-800">GH₵ 12.4k</p><p class="text-[10px] text-green-600 font-bold uppercase">High Performance</p></div></td><td class="px-6 py-5"><span class="px-3 py-1 bg-green-100 text-green-700 text-[10px] font-bold rounded-full uppercase tracking-tighter">Verified</span></td><td class="px-6 py-5"><div class="flex items-center gap-2"><button id="edit-vendor-1" class="p-2 hover:bg-royal-green/5 text-royal-green rounded-lg transition-colors"><iconify-icon icon="lucide:edit-3" class="text-lg"></iconify-icon></button><button id="suspend-vendor-1" class="p-2 hover:bg-red-50 text-red-500 rounded-lg transition-colors"><iconify-icon icon="lucide:shield-ban" class="text-lg"></iconify-icon></button></div></td></tr><tr class="hover:bg-gray-50/50 transition-colors group"><td class="px-6 py-5"><div class="flex items-center gap-4"><div class="w-10 h-10 rounded-full border border-gray-100 bg-gray-100 flex items-center justify-center"><iconify-icon icon="lucide:store" class="text-gray-400"></iconify-icon></div><div class="flex flex-col"><p class="text-sm font-bold text-gray-800">Kwame's Organic Farm</p><p class="text-xs text-gray-400">ID: V-GH-00452</p></div></div></td><td class="px-6 py-5"><p class="text-sm text-gray-600 font-medium">May 20, 2024</p></td><td class="px-6 py-5"><span class="text-sm font-bold text-royal-green">10.0%</span></td><td class="px-6 py-5"><div><p class="text-sm font-bold text-gray-800">GH₵ 0.00</p><p class="text-[10px] text-gray-400 font-bold uppercase tracking-tighter">New Vendor</p></div></td><td class="px-6 py-5"><span class="px-3 py-1 bg-amber-100 text-amber-700 text-[10px] font-bold rounded-full uppercase tracking-tighter">Pending Review</span></td><td class="px-6 py-5"><div class="flex items-center gap-2"><button id="approve-vendor-2" class="p-2 bg-emerald-50 text-emerald-600 rounded-lg hover:bg-emerald-100 transition-colors font-bold text-[11px] uppercase px-3">Approve</button><button id="view-docs-2" class="p-2 hover:bg-gray-100 text-gray-400 rounded-lg transition-colors"><iconify-icon icon="lucide:file-text" class="text-lg"></iconify-icon></button></div></td></tr><tr class="hover:bg-gray-50/50 transition-colors group"><td class="px-6 py-5"><div class="flex items-center gap-4"><img src="https://api.dicebear.com/7.x/initials/svg?seed=AD" alt="AD" class="w-10 h-10 rounded-full border border-gray-100 bg-gray-50"><div class="flex flex-col"><p class="text-sm font-bold text-gray-800 group-hover:text-royal-green transition-colors">Ama's Decor</p><p class="text-xs text-gray-400">ID: V-GH-00215</p></div></div></td><td class="px-6 py-5"><p class="text-sm text-gray-600 font-medium">Jan 05, 2024</p></td><td class="px-6 py-5"><span class="text-sm font-bold text-royal-green">15.0%</span></td><td class="px-6 py-5"><div><p class="text-sm font-bold text-gray-800">GH₵ 32.8k</p><p class="text-[10px] text-emerald-600 font-bold uppercase">Platinum Tier</p></div></td><td class="px-6 py-5"><span class="px-3 py-1 bg-green-100 text-green-700 text-[10px] font-bold rounded-full uppercase tracking-tighter">Verified</span></td><td class="px-6 py-5"><div class="flex items-center gap-2"><button id="edit-vendor-3" class="p-2 hover:bg-royal-green/5 text-royal-green rounded-lg transition-colors"><iconify-icon icon="lucide:edit-3" class="text-lg"></iconify-icon></button><button id="suspend-vendor-3" class="p-2 hover:bg-red-50 text-red-500 rounded-lg transition-colors"><iconify-icon icon="lucide:shield-ban" class="text-lg"></iconify-icon></button></div></td></tr></tbody></table></div><div class="p-6 bg-gray-50 border-t border-gray-100 flex items-center justify-between"><p class="text-xs font-bold text-gray-400 uppercase tracking-widest">Showing 1-10 of 1,428 vendors</p><div class="flex items-center gap-2"><button class="w-8 h-8 rounded-lg border border-gray-200 bg-white flex items-center justify-center text-gray-400 hover:text-gray-600"><iconify-icon icon="lucide:chevron-left"></iconify-icon></button><button class="w-8 h-8 rounded-lg royal-green text-white text-xs font-bold">1</button><button class="w-8 h-8 rounded-lg border border-gray-200 bg-white flex items-center justify-center text-gray-600 hover:bg-gray-50 text-xs font-bold">2</button><button class="w-8 h-8 rounded-lg border border-gray-200 bg-white flex items-center justify-center text-gray-600 hover:bg-gray-50 text-xs font-bold">3</button><span class="px-2 text-gray-400 text-xs">...</span><button class="w-8 h-8 rounded-lg border border-gray-200 bg-white flex items-center justify-center text-gray-600 hover:bg-gray-50"><iconify-icon icon="lucide:chevron-right"></iconify-icon></button></div></div></div><div class="bg-amber-50 rounded-3xl p-8 border border-amber-100 flex flex-col md:flex-row items-center gap-8 shadow-sm"><div class="w-24 h-24 bg-white rounded-2xl flex items-center justify-center border border-amber-200 shadow-sm shrink-0"><iconify-icon icon="lucide:shield-alert" class="text-4xl text-amber-500"></iconify-icon></div><div class="flex-1 text-center md:text-left"><h3 class="text-xl font-bold text-gray-800">Commission Audit Pending</h3><p class="text-sm text-gray-600 font-medium mt-1">We have detected 14 vendors with inconsistent commission calculations for the previous quarter. Please perform a manual review of the billing registry.</p></div><button id="audit-btn" class="px-8 py-3 bg-golden-yellow text-white font-bold rounded-xl shadow-lg shadow-amber-600/20 hover:scale-105 transition-all">Start Audit Run</button></div></div><footer class="p-8 text-center border-t border-gray-100"><p class="text-xs text-gray-400 font-medium">© 2024 ANITINN Marketplace Administrator Portal. Built with Royal Green & Golden Yellow Pride.</p></footer></main><div id="vendor-detail-modal" class="fixed inset-0 z-[60] flex items-center justify-center p-4 hidden"><div class="modal-backdrop absolute inset-0"></div><div class="bg-white w-full max-w-4xl rounded-[2.5rem] shadow-2xl relative z-10 overflow-hidden flex flex-col max-h-[90vh]"><div class="p-8 royal-green text-white flex justify-between items-center"><div class="flex items-center gap-4"><div class="w-14 h-14 bg-white/10 rounded-2xl flex items-center justify-center"><iconify-icon icon="lucide:store" class="text-3xl"></iconify-icon></div><div><h3 class="text-2xl font-bold tracking-tight">Vendor Detail Profile</h3><p class="text-white/60 text-sm font-medium">Management Console • ID: V-GH-00129</p></div></div><button id="close-modal" class="p-2 hover:bg-white/10 rounded-full transition-all"><iconify-icon icon="lucide:x" class="text-2xl"></iconify-icon></button></div><div class="flex-1 overflow-y-auto p-8"><div class="grid grid-cols-1 lg:grid-cols-3 gap-10"><div class="lg:col-span-2 space-y-8"><div><h4 class="text-xs font-black text-gray-400 uppercase tracking-[0.2em] mb-4">General Store Information</h4><div class="grid grid-cols-2 gap-6"><div class="space-y-1"><label class="text-[10px] font-bold text-gray-400 uppercase">Store Name</label><p class="text-sm font-bold text-gray-800 p-3 bg-gray-50 rounded-xl border border-gray-100">Kofi's Electronics</p></div><div class="space-y-1"><label class="text-[10px] font-bold text-gray-400 uppercase">Legal Business Name</label><p class="text-sm font-bold text-gray-800 p-3 bg-gray-50 rounded-xl border border-gray-100">Kofi Mensah Ent.</p></div><div class="space-y-1"><label class="text-[10px] font-bold text-gray-400 uppercase">Business Location</label><p class="text-sm font-bold text-gray-800 p-3 bg-gray-50 rounded-xl border border-gray-100">Circle, Accra - Ghana</p></div><div class="space-y-1"><label class="text-[10px] font-bold text-gray-400 uppercase">Primary Category</label><p class="text-sm font-bold text-gray-800 p-3 bg-gray-50 rounded-xl border border-gray-100">Consumer Tech</p></div></div></div><div><h4 class="text-xs font-black text-gray-400 uppercase tracking-[0.2em] mb-4">Documents & Verification</h4><div class="grid grid-cols-2 gap-4"><div class="flex items-center gap-3 p-4 bg-gray-50 rounded-2xl border border-gray-100 hover:border-royal-green transition-all cursor-pointer"><iconify-icon icon="lucide:file-text" class="text-2xl text-royal-green"></iconify-icon><div class="flex-1"><p class="text-xs font-bold text-gray-800">BusinessCert.pdf</p><p class="text-[10px] text-gray-400">Verified Oct 10, 2023</p></div><iconify-icon icon="lucide:check-circle-2" class="text-green-500"></iconify-icon></div><div class="flex items-center gap-3 p-4 bg-gray-50 rounded-2xl border border-gray-100 hover:border-royal-green transition-all cursor-pointer"><iconify-icon icon="lucide:credit-card" class="text-2xl text-royal-green"></iconify-icon><div class="flex-1"><p class="text-xs font-bold text-gray-800">TaxPin_Ghana.pdf</p><p class="text-[10px] text-gray-400">Verified Oct 11, 2023</p></div><iconify-icon icon="lucide:check-circle-2" class="text-green-500"></iconify-icon></div></div></div></div><div class="space-y-8"><div class="bg-amber-50 rounded-3xl p-6 border border-amber-100 shadow-sm"><h4 class="text-sm font-bold text-amber-900 mb-6">Commission Settings</h4><div class="space-y-6"><div class="space-y-3"><div class="flex justify-between items-center"><label class="text-xs font-bold text-gray-600">Standard Rate</label><span class="text-lg font-black text-royal-green">12.5%</span></div><input type="range" min="5" max="25" value="12.5" class="w-full h-2 bg-amber-200 rounded-lg appearance-none cursor-pointer accent-royal-green"></div><div class="flex items-center gap-2 p-3 bg-white/50 rounded-xl border border-amber-200/50"><iconify-icon icon="lucide:info" class="text-amber-600"></iconify-icon><p class="text-[10px] text-amber-800 font-medium leading-tight">Changes to commission will apply to orders from the next billing cycle.</p></div></div></div><div class="space-y-3"><h4 class="text-xs font-black text-gray-400 uppercase tracking-widest">Account Status</h4><div class="flex flex-col gap-2"><button class="w-full py-3 bg-red-100 text-red-700 font-bold rounded-xl text-xs hover:bg-red-200 transition-all">Suspend Account</button><button class="w-full py-3 bg-gray-100 text-gray-500 font-bold rounded-xl text-xs hover:bg-gray-200 transition-all">Mark for Re-review</button></div></div></div></div></div><div class="p-8 bg-gray-50 border-t border-gray-100 flex justify-end gap-3"><button id="modal-cancel" class="px-8 py-3 bg-white border border-gray-200 text-gray-600 font-bold rounded-xl text-sm">Discard</button><button id="modal-save" class="px-10 py-3 royal-green text-white font-bold rounded-xl text-sm shadow-xl shadow-royal-green/20 hover:brightness-110">Save Vendor Update</button></div></div></div></div>
+{% endblock %}

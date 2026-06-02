@@ -1,0 +1,183 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Contact Us{% endblock %}
+
+{% block extra_head %}
+<style>
+    body {
+      background-color: #fcfbf8;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .royal-green { background-color: #1B5E3F; }
+    .text-royal-green { color: #1B5E3F; }
+    .border-royal-green { border-color: #1B5E3F; }
+    .golden-yellow { background-color: #D4A520; }
+    .text-golden-yellow { color: #D4A520; }
+    .focus-ring:focus {
+      outline: none;
+      box-shadow: 0 0 0 2px rgba(27, 94, 63, 0.2);
+      border-color: #1B5E3F;
+    }
+</style>
+{% endblock %}
+
+{% block block_body %}
+{% endblock %}
+
+{% block body %}
+<!-- Navigation Header -->
+<header class="sticky top-0 bg-white/80 backdrop-blur-md border-b border-gray-100 z-50">
+  <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+    <a href="/marketplace/" class="flex items-center gap-3">
+      <img src="https://vgbujcuwptvheqijyjbe.supabase.co/storage/v1/object/public/hmac-uploads/uploads/ef5bc30d-cbeb-42a5-88a1-362daf4d51a4/1780139179048-642ea9dd/ChatGPT_Image_May_29__2026__11_28_10_AM.png" alt="Anitinn Logo" class="w-10 h-10 rounded-full border border-gray-200 shadow-sm">
+      <span class="font-bold text-xl tracking-tight text-gray-900">ANITINN</span>
+    </a>
+    <nav class="hidden md:flex items-center gap-8">
+      <a href="/marketplace/" class="text-sm font-semibold text-gray-600 hover:text-royal-green transition-colors">Marketplace</a>
+      <a href="/catalog/" class="text-sm font-semibold text-gray-600 hover:text-royal-green transition-colors">Catalog</a>
+      <a href="/help/" class="text-sm font-semibold text-gray-600 hover:text-royal-green transition-colors">Help Center</a>
+      <a href="/contact/" class="text-sm font-semibold text-royal-green hover:text-royal-green transition-colors underline decoration-golden-yellow decoration-2 decoration-offset-2">Contact</a>
+    </nav>
+    <div class="flex items-center gap-4">
+      <a href="/login/" class="text-sm font-bold text-royal-green hover:underline decoration-golden-yellow decoration-2 decoration-offset-2">Sign In</a>
+      <a href="/register/" class="px-5 py-2.5 royal-green text-white text-sm font-bold rounded-xl shadow-md hover:brightness-110 transition-all">Join Free</a>
+    </div>
+  </div>
+</header>
+
+<main class="max-w-7xl mx-auto px-6 py-16 space-y-12">
+  <!-- Page Title Header -->
+  <div class="text-center space-y-4">
+    <span class="text-xs font-black uppercase tracking-widest text-golden-yellow">Get In Touch</span>
+    <h1 class="text-4xl md:text-5xl font-black text-gray-900 tracking-tight leading-none">Contact Our Support Team</h1>
+    <p class="text-sm text-gray-500 font-medium max-w-lg mx-auto leading-relaxed">Have questions about setting up a store, placing an order, or integrating payouts? Send us a message and we'll reply shortly.</p>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+    <!-- Contact Info Cards (Col span 1) -->
+    <div class="space-y-6">
+      <!-- Call Support -->
+      <div class="bg-white rounded-3xl p-6 border border-gray-100 shadow-sm flex items-start gap-4">
+        <div class="p-3.5 bg-emerald-50 rounded-2xl text-royal-green">
+          <iconify-icon icon="lucide:phone" class="text-2xl"></iconify-icon>
+        </div>
+        <div class="space-y-1">
+          <h3 class="text-sm font-bold text-gray-900 uppercase tracking-wide">Phone Support</h3>
+          <p class="text-sm font-bold text-gray-800">+233 (0) 302 123 456</p>
+          <p class="text-xs text-gray-400 font-semibold uppercase">Mon - Fri · 8AM - 5PM</p>
+        </div>
+      </div>
+
+      <!-- Email Support -->
+      <div class="bg-white rounded-3xl p-6 border border-gray-100 shadow-sm flex items-start gap-4">
+        <div class="p-3.5 bg-amber-50 rounded-2xl text-golden-yellow">
+          <iconify-icon icon="lucide:mail" class="text-2xl"></iconify-icon>
+        </div>
+        <div class="space-y-1">
+          <h3 class="text-sm font-bold text-gray-900 uppercase tracking-wide">Email Enquiries</h3>
+          <p class="text-sm font-bold text-gray-800">support@anitinn.com.gh</p>
+          <p class="text-xs text-gray-400 font-semibold uppercase">24/7 Digital Ticket Response</p>
+        </div>
+      </div>
+
+      <!-- Office Locations -->
+      <div class="bg-white rounded-3xl p-6 border border-gray-100 shadow-sm flex items-start gap-4">
+        <div class="p-3.5 bg-blue-50 rounded-2xl text-blue-600">
+          <iconify-icon icon="lucide:map-pin" class="text-2xl"></iconify-icon>
+        </div>
+        <div class="space-y-3">
+          <h3 class="text-sm font-bold text-gray-900 uppercase tracking-wide">Ghana Office Hubs</h3>
+          
+          <div class="space-y-1.5">
+            <p class="text-xs font-bold text-gray-800">Accra Main Hub</p>
+            <p class="text-xs text-gray-500 font-medium">East Legon, Boundary Road, Block C</p>
+          </div>
+
+          <div class="space-y-1.5 pt-2 border-t border-gray-50">
+            <p class="text-xs font-bold text-gray-800">Kumasi Office</p>
+            <p class="text-xs text-gray-500 font-medium">Adum Plaza, Commercial Street, Floor 2</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contact Form (Col span 2) -->
+    <div class="lg:col-span-2 bg-white rounded-[2.5rem] shadow-sm border border-gray-100 p-8 md:p-12">
+      <h3 class="text-xl font-bold text-gray-800 mb-8 flex items-center gap-2">
+        <iconify-icon icon="lucide:send" class="text-royal-green text-xl"></iconify-icon>
+        Send an Inquiry
+      </h3>
+
+      <form action="#" class="space-y-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Full Name -->
+          <div class="space-y-2">
+            <label class="text-xs font-black uppercase tracking-wider text-gray-400 block ml-1">Your Name *</label>
+            <input type="text" placeholder="Kofi Mensah" required
+                   class="w-full px-5 py-4 bg-gray-50 border border-gray-200 rounded-2xl focus-ring transition-all font-semibold text-gray-850">
+          </div>
+
+          <!-- Email Address -->
+          <div class="space-y-2">
+            <label class="text-xs font-black uppercase tracking-wider text-gray-400 block ml-1">Email Address *</label>
+            <input type="email" placeholder="kofi@example.com" required
+                   class="w-full px-5 py-4 bg-gray-50 border border-gray-200 rounded-2xl focus-ring transition-all font-semibold text-gray-850">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Phone Number -->
+          <div class="space-y-2">
+            <label class="text-xs font-black uppercase tracking-wider text-gray-400 block ml-1">Phone Number</label>
+            <input type="tel" placeholder="+233 24 123 4567"
+                   class="w-full px-5 py-4 bg-gray-50 border border-gray-200 rounded-2xl focus-ring transition-all font-semibold text-gray-850">
+          </div>
+
+          <!-- Inquiry Subject -->
+          <div class="space-y-2">
+            <label class="text-xs font-black uppercase tracking-wider text-gray-400 block ml-1">Inquiry Type *</label>
+            <select required
+                    class="w-full px-5 py-4 bg-gray-50 border border-gray-200 rounded-2xl focus-ring transition-all font-semibold text-gray-600">
+              <option value="">Choose a category...</option>
+              <option value="vendor">Become a Vendor / Shop Setup</option>
+              <option value="orders">Orders & Logistics Tracking</option>
+              <option value="payment">Payouts & Billing Fees</option>
+              <option value="other">General Feedback / Support</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Inquiry Message -->
+        <div class="space-y-2">
+          <label class="text-xs font-black uppercase tracking-wider text-gray-400 block ml-1">Message Description *</label>
+          <textarea rows="6" placeholder="Describe your questions or details clearly..." required
+                    class="w-full px-5 py-4 bg-gray-50 border border-gray-200 rounded-2xl focus-ring transition-all font-medium text-gray-850"></textarea>
+        </div>
+
+        <button type="submit" 
+                class="w-full py-4.5 bg-royal-green text-white font-bold rounded-2xl shadow-[0_12px_24px_-8px_rgba(27,94,63,0.3)] hover:shadow-[0_16px_32px_-8px_rgba(27,94,63,0.4)] hover:-translate-y-0.5 active:translate-y-0 transition-all text-lg flex items-center justify-center gap-3 group">
+          Send Inquiry
+          <iconify-icon icon="lucide:arrow-right" class="group-hover:translate-x-1 transition-transform"></iconify-icon>
+        </button>
+      </form>
+    </div>
+  </div>
+</main>
+
+<!-- Navigation Footer -->
+<footer class="bg-gray-900 text-white/70 py-12 px-6">
+  <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 border-b border-white/10 pb-8">
+    <div class="flex items-center gap-3">
+      <img src="https://vgbujcuwptvheqijyjbe.supabase.co/storage/v1/object/public/hmac-uploads/uploads/ef5bc30d-cbeb-42a5-88a1-362daf4d51a4/1780139179048-642ea9dd/ChatGPT_Image_May_29__2026__11_28_10_AM.png" alt="Anitinn Logo" class="w-10 h-10 rounded-full border border-white/10 opacity-80">
+      <span class="font-bold text-xl tracking-tight text-white">ANITINN</span>
+    </div>
+    <div class="flex flex-wrap gap-8 text-xs font-bold uppercase tracking-wider">
+      <a href="/privacy/" class="hover:text-white transition-colors">Privacy Policy</a>
+      <a href="/terms/" class="hover:text-white transition-colors">Terms of Service</a>
+      <a href="/contact/" class="text-white hover:text-white transition-colors underline decoration-golden-yellow decoration-2 decoration-offset-2">Contact Support</a>
+    </div>
+  </div>
+  <p class="text-center text-xs opacity-40 mt-8">© 2026 ANITINN Marketplace. Ghana's #1 AI-Powered Marketplace Platform.</p>
+</footer>
+{% endblock %}

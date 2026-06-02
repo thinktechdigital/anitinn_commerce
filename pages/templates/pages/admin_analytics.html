@@ -1,0 +1,506 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Admin Analytics{% endblock %}
+
+{% block extra_head %}
+<style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #fcfbf8;
+    }
+    .royal-green { background-color: #1B5E3F; }
+    .golden-yellow { background-color: #D4A520; }
+    .text-royal-green { color: #1B5E3F; }
+    .text-golden-yellow { color: #D4A520; }
+    .border-royal-green { border-color: #1B5E3F; }
+    .border-golden-yellow { border-color: #D4A520; }
+    
+    .chart-bar-hover:hover {
+      filter: brightness(1.1);
+      transform: translateY(-2px);
+    }
+    
+    .sidebar-scroll::-webkit-scrollbar {
+      width: 4px;
+    }
+    .sidebar-scroll::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+    }
+  </style>
+<style>sd-component { display: block; }</style>
+{% endblock %}
+
+{% block body %}
+<div class="flex min-h-screen">
+    <!-- Sidebar Navigation -->
+    <!-- component: DashboardSidebar (3e4d5170-0fd6-49b5-8819-3230c98e99b7) -->
+<div v-scope="{ ...{&quot;activeItem&quot;:&quot;analytics&quot;,&quot;dashboardHref&quot;:&quot;https://draft-aa0ca535-feab-4e01-8db8-b8cf8f06e855.preview.superdesign.dev&quot;,&quot;productsHref&quot;:&quot;https://draft-189044eb-5763-4705-8248-0eca3a4f4be8.preview.superdesign.dev&quot;,&quot;ordersHref&quot;:&quot;https://draft-e2a0e24c-2a02-4309-a0cf-f76fd9fdb3c5.preview.superdesign.dev&quot;,&quot;analyticsHref&quot;:&quot;#&quot;,&quot;reviewsHref&quot;:&quot;#&quot;,&quot;orderBadgeCount&quot;:12}, $emit() {} }">
+<aside class="w-64 bg-[#1B5E3F] text-white fixed h-full flex flex-col z-50">
+  <div class="p-6 flex items-center gap-3">
+    <img src="https://vgbujcuwptvheqijyjbe.supabase.co/storage/v1/object/public/hmac-uploads/uploads/ef5bc30d-cbeb-42a5-88a1-362daf4d51a4/1780139179048-642ea9dd/ChatGPT_Image_May_29__2026__11_28_10_AM.png" alt="Anitinn Logo" class="w-10 h-10 rounded-full border border-white/20">
+    <span class="font-bold text-xl tracking-tight">ANITINN</span>
+  </div>
+  <nav class="flex-1 px-4 space-y-1 overflow-y-auto mt-4" style="scrollbar-width: thin; scrollbar-color: rgba(255, 255, 255, 0.1) transparent;">
+    <p class="text-xs font-semibold text-white/40 px-3 py-2 uppercase tracking-wider">Main Menu</p>
+    
+    <a :href="dashboardHref" 
+       class="flex items-center gap-3 px-3 py-3 rounded-lg transition-all" 
+       :class="activeItem === 'dashboard' ? 'bg-white/10 text-[#D4A520] border-l-4 border-[#D4A520]' : 'text-white/70 hover:bg-white/5 hover:text-white'">
+      <iconify-icon icon="lucide:layout-dashboard"></iconify-icon>
+      <span class="font-medium">Dashboard</span>
+    </a>
+
+    <a :href="productsHref" 
+       class="flex items-center gap-3 px-3 py-3 rounded-lg transition-all" 
+       :class="activeItem === 'products' ? 'bg-white/10 text-[#D4A520] border-l-4 border-[#D4A520]' : 'text-white/70 hover:bg-white/5 hover:text-white'">
+      <iconify-icon icon="lucide:box"></iconify-icon>
+      <span class="font-medium">Products</span>
+    </a>
+
+    <a :href="ordersHref" 
+       class="flex items-center gap-3 px-3 py-3 rounded-lg transition-all" 
+       :class="activeItem === 'orders' ? 'bg-white/10 text-[#D4A520] border-l-4 border-[#D4A520]' : 'text-white/70 hover:bg-white/5 hover:text-white'">
+      <iconify-icon icon="lucide:shopping-cart"></iconify-icon>
+      <span class="font-medium">Orders</span>
+      <span v-if="orderBadgeCount > 0" class="ml-auto bg-[#D4A520] text-white text-[10px] px-1.5 py-0.5 rounded-full">{{ orderBadgeCount }}</span>
+    </a>
+
+    <a :href="analyticsHref" 
+       class="flex items-center gap-3 px-3 py-3 rounded-lg transition-all" 
+       :class="activeItem === 'analytics' ? 'bg-white/10 text-[#D4A520] border-l-4 border-[#D4A520]' : 'text-white/70 hover:bg-white/5 hover:text-white'">
+      <iconify-icon icon="lucide:bar-chart-3"></iconify-icon>
+      <span class="font-medium">Analytics</span>
+    </a>
+
+    <p class="text-xs font-semibold text-white/40 px-3 py-2 uppercase tracking-wider mt-8">Storefront</p>
+
+    <a :href="reviewsHref" 
+       class="flex items-center gap-3 px-3 py-3 rounded-lg transition-all" 
+       :class="activeItem === 'reviews' ? 'bg-white/10 text-[#D4A520] border-l-4 border-[#D4A520]' : 'text-white/70 hover:bg-white/5 hover:text-white'">
+      <iconify-icon icon="lucide:message-square"></iconify-icon>
+      <span class="font-medium">Reviews</span>
+    </a>
+  </nav>
+  <div class="p-4 mt-auto">
+    <button @click="$emit('upgrade')" class="w-full bg-[#D4A520] hover:brightness-110 text-white text-xs font-bold py-2 rounded-lg transition-all uppercase tracking-wide">Upgrade Plan</button>
+  </div>
+</aside>
+</div>
+<!-- /component: DashboardSidebar (3e4d5170-0fd6-49b5-8819-3230c98e99b7) -->
+
+    <!-- Main Content Area -->
+    <main class="flex-1 ml-64 min-h-screen flex flex-col relative">
+      
+      <!-- Admin Header -->
+      <!-- component: DashboardHeader (87403f5a-a910-4ccc-9453-3a69605a2a11) -->
+<div v-scope="{ ...{&quot;vendorName&quot;:&quot;Admin Central&quot;,&quot;userName&quot;:&quot;Super Administrator&quot;,&quot;userAvatarUrl&quot;:&quot;https://api.dicebear.com/7.x/avataaars/svg?seed=Admin&quot;,&quot;hasNotifications&quot;:true}, $emit() {} }">
+<header class="sticky top-0 bg-white/80 backdrop-blur-md border-b border-gray-100 z-40 px-8 py-4"><div class="flex items-center justify-between"><div class="flex items-center gap-4"><div><h1 class="text-2xl font-bold text-gray-800 tracking-tight">Dashboard Overview</h1><p class="text-sm text-gray-500 font-medium">Welcome back, <span class="text-[#1B5E3F] font-semibold underline decoration-[#D4A520]">{{ vendorName }}</span></p></div></div><div class="flex items-center gap-6"><div class="relative hidden lg:block"><iconify-icon icon="lucide:search" class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></iconify-icon><input type="text" placeholder="Search products, orders..." @input="$emit('search', { query: $event.target.value })" class="pl-10 pr-4 py-2 w-80 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#1B5E3F]/20 focus:border-[#1B5E3F] transition-all"></div><div class="flex items-center gap-3"><button @click="$emit('notificationClick')" class="p-2 hover:bg-gray-100 rounded-full relative"><iconify-icon icon="lucide:bell" class="text-2xl text-gray-600"></iconify-icon><span v-if="hasNotifications" class="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full border-2 border-white"></span></button><div class="h-8 w-[1px] bg-gray-200 mx-2"></div><div class="flex items-center gap-3 group cursor-pointer" @click="$emit('profileClick')"><img :src="userAvatarUrl" alt="Vendor Avatar" class="w-10 h-10 rounded-full border-2 border-[#D4A520] bg-gray-100 p-0.5"><div class="hidden md:block"><p class="text-sm font-bold text-gray-800 leading-none">{{ userName }}</p><p class="text-[10px] text-gray-500 font-medium">Pro Vendor</p></div><iconify-icon icon="lucide:chevron-down" class="text-gray-400"></iconify-icon></div></div></div></div></header>
+</div>
+<!-- /component: DashboardHeader (87403f5a-a910-4ccc-9453-3a69605a2a11) -->
+
+      <div class="p-8 flex-1">
+        <!-- Analytics Page Header -->
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+          <div>
+            <h2 class="text-3xl font-bold text-gray-800 tracking-tight">Platform Analytics</h2>
+            <p class="text-sm text-gray-500 font-medium">Marketplace performance and vendor insights overview.</p>
+          </div>
+          <div class="flex items-center gap-3">
+            <button id="export-pdf-btn" class="flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 rounded-xl text-xs font-bold text-gray-600 hover:bg-gray-50">
+              <iconify-icon icon="lucide:file-text"></iconify-icon>
+              PDF Export
+            </button>
+            <button id="export-csv-btn" class="flex items-center gap-2 px-6 py-2.5 bg-golden-yellow text-white text-xs font-bold rounded-xl shadow-lg shadow-amber-500/10 hover:brightness-110 active:scale-95 transition-all">
+              <iconify-icon icon="lucide:download"></iconify-icon>
+              Download CSV
+            </button>
+          </div>
+        </div>
+
+        <!-- KPI Cards Section -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          <!-- component: KPICard (caafade4-ddb0-479f-9bdb-d79b134cd835) -->
+<div v-scope="{ ...{&quot;label&quot;:&quot;Total Revenue&quot;,&quot;value&quot;:&quot;GH₵ 8.4M&quot;,&quot;trendLabel&quot;:&quot;+12.4% vs last mo&quot;,&quot;trendIcon&quot;:&quot;lucide:trending-up&quot;,&quot;trendClass&quot;:&quot;text-green-600&quot;,&quot;iconName&quot;:&quot;lucide:dollar-sign&quot;,&quot;iconBgClass&quot;:&quot;bg-[#1B5E3F]&quot;}, $emit() {} }">
+<div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-shadow group">
+  <div class="flex justify-between items-start mb-4">
+    <div :class="['p-3 rounded-xl text-white group-hover:scale-110 transition-transform', iconBgClass]">
+      <iconify-icon :icon="iconName" class="text-2xl"></iconify-icon>
+    </div>
+    <span class="text-xs font-bold text-gray-400 uppercase tracking-wider">{{ label }}</span>
+  </div>
+  <h3 class="text-3xl font-bold text-gray-800">{{ value }}</h3>
+  <div :class="['mt-4 flex items-center text-sm font-semibold', trendClass]">
+    <iconify-icon :icon="trendIcon" class="mr-1"></iconify-icon>
+    <span>{{ trendLabel }}</span>
+  </div>
+</div>
+</div>
+<!-- /component: KPICard (caafade4-ddb0-479f-9bdb-d79b134cd835) -->
+          
+          <!-- component: KPICard (caafade4-ddb0-479f-9bdb-d79b134cd835) -->
+<div v-scope="{ ...{&quot;label&quot;:&quot;Total Users&quot;,&quot;value&quot;:&quot;142,302&quot;,&quot;trendLabel&quot;:&quot;+842 this week&quot;,&quot;trendIcon&quot;:&quot;lucide:trending-up&quot;,&quot;trendClass&quot;:&quot;text-green-600&quot;,&quot;iconName&quot;:&quot;lucide:users&quot;,&quot;iconBgClass&quot;:&quot;bg-blue-500&quot;}, $emit() {} }">
+<div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-shadow group">
+  <div class="flex justify-between items-start mb-4">
+    <div :class="['p-3 rounded-xl text-white group-hover:scale-110 transition-transform', iconBgClass]">
+      <iconify-icon :icon="iconName" class="text-2xl"></iconify-icon>
+    </div>
+    <span class="text-xs font-bold text-gray-400 uppercase tracking-wider">{{ label }}</span>
+  </div>
+  <h3 class="text-3xl font-bold text-gray-800">{{ value }}</h3>
+  <div :class="['mt-4 flex items-center text-sm font-semibold', trendClass]">
+    <iconify-icon :icon="trendIcon" class="mr-1"></iconify-icon>
+    <span>{{ trendLabel }}</span>
+  </div>
+</div>
+</div>
+<!-- /component: KPICard (caafade4-ddb0-479f-9bdb-d79b134cd835) -->
+            
+          <!-- component: KPICard (caafade4-ddb0-479f-9bdb-d79b134cd835) -->
+<div v-scope="{ ...{&quot;label&quot;:&quot;Active Vendors&quot;,&quot;value&quot;:&quot;1,204&quot;,&quot;trendLabel&quot;:&quot;+12 new approvals&quot;,&quot;trendIcon&quot;:&quot;lucide:trending-up&quot;,&quot;trendClass&quot;:&quot;text-green-600&quot;,&quot;iconName&quot;:&quot;lucide:store&quot;,&quot;iconBgClass&quot;:&quot;bg-emerald-500&quot;}, $emit() {} }">
+<div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-shadow group">
+  <div class="flex justify-between items-start mb-4">
+    <div :class="['p-3 rounded-xl text-white group-hover:scale-110 transition-transform', iconBgClass]">
+      <iconify-icon :icon="iconName" class="text-2xl"></iconify-icon>
+    </div>
+    <span class="text-xs font-bold text-gray-400 uppercase tracking-wider">{{ label }}</span>
+  </div>
+  <h3 class="text-3xl font-bold text-gray-800">{{ value }}</h3>
+  <div :class="['mt-4 flex items-center text-sm font-semibold', trendClass]">
+    <iconify-icon :icon="trendIcon" class="mr-1"></iconify-icon>
+    <span>{{ trendLabel }}</span>
+  </div>
+</div>
+</div>
+<!-- /component: KPICard (caafade4-ddb0-479f-9bdb-d79b134cd835) -->
+            
+          <!-- component: KPICard (caafade4-ddb0-479f-9bdb-d79b134cd835) -->
+<div v-scope="{ ...{&quot;label&quot;:&quot;Avg. Conv. Rate&quot;,&quot;value&quot;:&quot;3.42%&quot;,&quot;trendLabel&quot;:&quot;-0.4% from peak&quot;,&quot;trendIcon&quot;:&quot;lucide:trending-down&quot;,&quot;trendClass&quot;:&quot;text-amber-500&quot;,&quot;iconName&quot;:&quot;lucide:mouse-pointer-2&quot;,&quot;iconBgClass&quot;:&quot;bg-amber-500&quot;}, $emit() {} }">
+<div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-shadow group">
+  <div class="flex justify-between items-start mb-4">
+    <div :class="['p-3 rounded-xl text-white group-hover:scale-110 transition-transform', iconBgClass]">
+      <iconify-icon :icon="iconName" class="text-2xl"></iconify-icon>
+    </div>
+    <span class="text-xs font-bold text-gray-400 uppercase tracking-wider">{{ label }}</span>
+  </div>
+  <h3 class="text-3xl font-bold text-gray-800">{{ value }}</h3>
+  <div :class="['mt-4 flex items-center text-sm font-semibold', trendClass]">
+    <iconify-icon :icon="trendIcon" class="mr-1"></iconify-icon>
+    <span>{{ trendLabel }}</span>
+  </div>
+</div>
+</div>
+<!-- /component: KPICard (caafade4-ddb0-479f-9bdb-d79b134cd835) -->
+        </div>
+
+        <!-- Main Charts Section -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
+          <!-- Revenue Trend Chart -->
+          <div class="lg:col-span-2 bg-white rounded-3xl p-8 shadow-sm border border-gray-100">
+            <div class="flex items-center justify-between mb-8">
+              <div>
+                <h3 class="text-lg font-bold text-gray-800">Revenue Growth</h3>
+                <p class="text-sm text-gray-500">Platform-wide revenue trends over the last 12 months.</p>
+              </div>
+              <div class="flex items-center gap-2">
+                <select class="bg-gray-50 border border-gray-200 text-xs font-bold rounded-lg px-3 py-1.5 focus:outline-none">
+                  <option>Current Year (2024)</option>
+                  <option>Previous Year (2023)</option>
+                </select>
+              </div>
+            </div>
+            
+            <!-- Revenue Chart Simulation -->
+            <div class="h-80 flex items-end justify-between gap-4 pt-10 px-2">
+              <div class="flex-1 flex flex-col items-center gap-4 group">
+                <div class="w-full bg-emerald-50 rounded-t-xl relative h-[45%] chart-bar-hover transition-all duration-300">
+                  <div class="absolute bottom-0 left-0 w-full h-full royal-green rounded-t-xl opacity-30"></div>
+                  <div class="absolute bottom-0 left-0 w-full h-[60%] royal-green rounded-t-xl"></div>
+                </div>
+                <span class="text-[10px] font-bold text-gray-400">JAN</span>
+              </div>
+              <div class="flex-1 flex flex-col items-center gap-4 group">
+                <div class="w-full bg-emerald-50 rounded-t-xl relative h-[55%] chart-bar-hover transition-all duration-300">
+                   <div class="absolute bottom-0 left-0 w-full h-[75%] royal-green rounded-t-xl"></div>
+                </div>
+                <span class="text-[10px] font-bold text-gray-400">FEB</span>
+              </div>
+              <div class="flex-1 flex flex-col items-center gap-4 group">
+                <div class="w-full bg-emerald-50 rounded-t-xl relative h-[40%] chart-bar-hover transition-all duration-300">
+                   <div class="absolute bottom-0 left-0 w-full h-[50%] royal-green rounded-t-xl"></div>
+                </div>
+                <span class="text-[10px] font-bold text-gray-400">MAR</span>
+              </div>
+              <div class="flex-1 flex flex-col items-center gap-4 group">
+                <div class="w-full bg-emerald-50 rounded-t-xl relative h-[70%] chart-bar-hover transition-all duration-300">
+                   <div class="absolute bottom-0 left-0 w-full h-[85%] royal-green rounded-t-xl"></div>
+                </div>
+                <span class="text-[10px] font-bold text-gray-400">APR</span>
+              </div>
+              <div class="flex-1 flex flex-col items-center gap-4 group">
+                <div class="w-full bg-emerald-50 rounded-t-xl relative h-[65%] chart-bar-hover transition-all duration-300">
+                   <div class="absolute bottom-0 left-0 w-full h-[80%] royal-green rounded-t-xl"></div>
+                </div>
+                <span class="text-[10px] font-bold text-gray-400">MAY</span>
+              </div>
+              <div class="flex-1 flex flex-col items-center gap-4 group">
+                <div class="w-full bg-emerald-50 rounded-t-xl relative h-[95%] chart-bar-hover transition-all duration-300">
+                   <div class="absolute bottom-0 left-0 w-full h-[95%] golden-yellow rounded-t-xl shadow-lg"></div>
+                   <div class="absolute -top-10 left-1/2 -translate-x-1/2 bg-gray-800 text-white text-[10px] font-bold px-2 py-1 rounded hidden group-hover:block whitespace-nowrap">GH₵ 1.2M</div>
+                </div>
+                <span class="text-[10px] font-bold text-gray-800">JUN</span>
+              </div>
+              <div class="flex-1 flex flex-col items-center gap-4 group">
+                <div class="w-full bg-emerald-50 rounded-t-xl relative h-[50%] chart-bar-hover transition-all duration-300 opacity-30">
+                   <div class="absolute bottom-0 left-0 w-full h-[60%] royal-green rounded-t-xl"></div>
+                </div>
+                <span class="text-[10px] font-bold text-gray-400">JUL</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Revenue Breakdown by Category -->
+          <div class="bg-white rounded-3xl p-8 shadow-sm border border-gray-100">
+            <h3 class="text-lg font-bold text-gray-800 mb-2">Category Split</h3>
+            <p class="text-sm text-gray-500 mb-8">Sales distribution across top sectors.</p>
+            
+            <div class="space-y-6">
+              <div class="space-y-2">
+                <div class="flex justify-between text-xs font-bold uppercase">
+                  <span class="text-gray-600">Electronics</span>
+                  <span class="text-royal-green">45%</span>
+                </div>
+                <div class="w-full bg-gray-100 h-2 rounded-full overflow-hidden">
+                  <div class="royal-green h-full rounded-full" style="width: 45%"></div>
+                </div>
+              </div>
+              <div class="space-y-2">
+                <div class="flex justify-between text-xs font-bold uppercase">
+                  <span class="text-gray-600">Fashion</span>
+                  <span class="text-royal-green">28%</span>
+                </div>
+                <div class="w-full bg-gray-100 h-2 rounded-full overflow-hidden">
+                  <div class="royal-green h-full rounded-full" style="width: 28%"></div>
+                </div>
+              </div>
+              <div class="space-y-2">
+                <div class="flex justify-between text-xs font-bold uppercase">
+                  <span class="text-gray-600">Home & Decor</span>
+                  <span class="text-royal-green">15%</span>
+                </div>
+                <div class="w-full bg-gray-100 h-2 rounded-full overflow-hidden">
+                  <div class="golden-yellow h-full rounded-full" style="width: 15%"></div>
+                </div>
+              </div>
+              <div class="space-y-2">
+                <div class="flex justify-between text-xs font-bold uppercase">
+                  <span class="text-gray-600">Groceries</span>
+                  <span class="text-royal-green">12%</span>
+                </div>
+                <div class="w-full bg-gray-100 h-2 rounded-full overflow-hidden">
+                  <div class="bg-emerald-400 h-full rounded-full" style="width: 12%"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-10 pt-6 border-t border-gray-50 flex items-center justify-center">
+              <div class="flex items-center gap-4">
+                <div class="flex items-center gap-1">
+                  <span class="w-2 h-2 rounded-full royal-green"></span>
+                  <span class="text-[10px] font-bold text-gray-400">Top Performing</span>
+                </div>
+                <div class="flex items-center gap-1">
+                  <span class="w-2 h-2 rounded-full golden-yellow"></span>
+                  <span class="text-[10px] font-bold text-gray-400">Growth Focus</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bottom Section: Rankings & Insights -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+          <!-- Vendor Performance Ranking -->
+          <div class="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden">
+            <div class="p-6 flex items-center justify-between border-b border-gray-50">
+              <h3 class="text-lg font-bold text-gray-800">Top Performing Vendors</h3>
+              <button class="text-xs font-bold text-royal-green hover:underline decoration-golden-yellow">Full Ranking</button>
+            </div>
+            <div class="overflow-x-auto">
+              <table class="w-full text-left">
+                <thead class="bg-gray-50 border-b border-gray-100">
+                  <tr>
+                    <th class="px-6 py-4 text-[10px] font-bold text-gray-400 uppercase tracking-widest">Vendor</th>
+                    <th class="px-6 py-4 text-[10px] font-bold text-gray-400 uppercase tracking-widest">Sales Vol.</th>
+                    <th class="px-6 py-4 text-[10px] font-bold text-gray-400 uppercase tracking-widest">Rating</th>
+                    <th class="px-6 py-4 text-[10px] font-bold text-gray-400 uppercase tracking-widest text-right">Revenue</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-100">
+                  <tr class="hover:bg-gray-50 transition-colors group cursor-pointer">
+                    <td class="px-6 py-4">
+                      <div class="flex items-center gap-3">
+                        <img src="https://api.dicebear.com/7.x/initials/svg?seed=KE" class="w-8 h-8 rounded-full border border-gray-100">
+                        <span class="text-sm font-bold text-gray-800 group-hover:text-royal-green">Kofi’s Electronics</span>
+                      </div>
+                    </td>
+                    <td class="px-6 py-4 text-xs font-medium text-gray-600">4,821 units</td>
+                    <td class="px-6 py-4">
+                      <div class="flex items-center gap-1 text-golden-yellow">
+                        <iconify-icon icon="lucide:star"></iconify-icon>
+                        <span class="text-xs font-bold">4.9</span>
+                      </div>
+                    </td>
+                    <td class="px-6 py-4 text-xs font-bold text-gray-800 text-right">GH₵ 1.2M</td>
+                  </tr>
+                  <tr class="hover:bg-gray-50 transition-colors group cursor-pointer">
+                    <td class="px-6 py-4">
+                      <div class="flex items-center gap-3">
+                        <img src="https://api.dicebear.com/7.x/initials/svg?seed=AM" class="w-8 h-8 rounded-full border border-gray-100">
+                        <span class="text-sm font-bold text-gray-800">Accra Mall Tech</span>
+                      </div>
+                    </td>
+                    <td class="px-6 py-4 text-xs font-medium text-gray-600">3,104 units</td>
+                    <td class="px-6 py-4">
+                      <div class="flex items-center gap-1 text-golden-yellow">
+                        <iconify-icon icon="lucide:star"></iconify-icon>
+                        <span class="text-xs font-bold">4.8</span>
+                      </div>
+                    </td>
+                    <td class="px-6 py-4 text-xs font-bold text-gray-800 text-right">GH₵ 840K</td>
+                  </tr>
+                  <tr class="hover:bg-gray-50 transition-colors group cursor-pointer">
+                    <td class="px-6 py-4">
+                      <div class="flex items-center gap-3">
+                        <img src="https://api.dicebear.com/7.x/initials/svg?seed=AD" class="w-8 h-8 rounded-full border border-gray-100">
+                        <span class="text-sm font-bold text-gray-800">Ama’s Decor</span>
+                      </div>
+                    </td>
+                    <td class="px-6 py-4 text-xs font-medium text-gray-600">2,450 units</td>
+                    <td class="px-6 py-4">
+                      <div class="flex items-center gap-1 text-golden-yellow">
+                        <iconify-icon icon="lucide:star"></iconify-icon>
+                        <span class="text-xs font-bold">4.9</span>
+                      </div>
+                    </td>
+                    <td class="px-6 py-4 text-xs font-bold text-gray-800 text-right">GH₵ 520K</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Customer & Market Insights -->
+          <div class="bg-white rounded-3xl p-8 shadow-sm border border-gray-100">
+            <div class="flex items-center justify-between mb-8">
+              <h3 class="text-lg font-bold text-gray-800">Customer Insights</h3>
+              <div class="flex items-center gap-1 bg-green-50 text-royal-green px-2 py-1 rounded-full text-[10px] font-bold">
+                <iconify-icon icon="lucide:sparkles"></iconify-icon>
+                AI OPTIMIZED
+              </div>
+            </div>
+            <div class="space-y-6">
+              <div class="flex items-start gap-4 p-4 rounded-2xl bg-gray-50 border border-gray-100">
+                <div class="w-10 h-10 royal-green rounded-xl flex items-center justify-center text-white shrink-0 shadow-lg shadow-emerald-900/10">
+                  <iconify-icon icon="lucide:trending-up" class="text-xl"></iconify-icon>
+                </div>
+                <div>
+                  <h4 class="text-sm font-bold text-gray-800 mb-1">Rising Demand: Smart Home</h4>
+                  <p class="text-xs text-gray-500 leading-relaxed">Interest in AI-powered home lighting increased by 22% this week in the Greater Accra region.</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-4 p-4 rounded-2xl bg-gray-50 border border-gray-100">
+                <div class="w-10 h-10 bg-amber-500 rounded-xl flex items-center justify-center text-white shrink-0 shadow-lg shadow-amber-500/10">
+                  <iconify-icon icon="lucide:users" class="text-xl"></iconify-icon>
+                </div>
+                <div>
+                  <h4 class="text-sm font-bold text-gray-800 mb-1">New User Peak Hours</h4>
+                  <p class="text-xs text-gray-500 leading-relaxed">Peak registrations are occurring between 7 PM - 10 PM. Consider scheduled marketing blasts.</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-4 p-4 rounded-2xl bg-gray-50 border border-gray-100">
+                <div class="w-10 h-10 bg-blue-500 rounded-xl flex items-center justify-center text-white shrink-0 shadow-lg shadow-blue-500/10">
+                  <iconify-icon icon="lucide:map-pin" class="text-xl"></iconify-icon>
+                </div>
+                <div>
+                  <h4 class="text-sm font-bold text-gray-800 mb-1">Emerging Market: Kumasi</h4>
+                  <p class="text-xs text-gray-500 leading-relaxed">Order volume in Kumasi has grown 18.5% MoM, surpassing early projections.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Best Selling Products Grid -->
+        <div class="bg-white rounded-3xl p-8 shadow-sm border border-gray-100 mb-8">
+          <div class="flex items-center justify-between mb-8">
+            <h3 class="text-lg font-bold text-gray-800">Best Selling Products</h3>
+            <div class="flex gap-2">
+              <button class="w-8 h-8 rounded-lg bg-gray-50 flex items-center justify-center text-gray-400 hover:text-royal-green transition-colors">
+                <iconify-icon icon="lucide:chevron-left"></iconify-icon>
+              </button>
+              <button class="w-8 h-8 rounded-lg bg-gray-50 flex items-center justify-center text-gray-400 hover:text-royal-green transition-colors">
+                <iconify-icon icon="lucide:chevron-right"></iconify-icon>
+              </button>
+            </div>
+          </div>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
+            <div class="space-y-3 group cursor-pointer">
+              <div class="aspect-square bg-gray-50 rounded-2xl overflow-hidden border border-gray-100">
+                <img src="https://vgbujcuwptvheqijyjbe.supabase.co/storage/v1/object/public/hmac-uploads/uploads/ef5bc30d-cbeb-42a5-88a1-362daf4d51a4/1780139198921-867f52d6/ChatGPT_Image_May_29__2026__11_28_10_AM.png" class="w-full h-full object-cover group-hover:scale-110 transition-transform">
+              </div>
+              <div>
+                <h4 class="text-xs font-bold text-gray-800 truncate">Xiaomi Monitor 27"</h4>
+                <p class="text-[10px] text-emerald-600 font-bold uppercase">842 Sold</p>
+              </div>
+            </div>
+            <div class="space-y-3 group cursor-pointer">
+              <div class="aspect-square bg-gray-50 rounded-2xl overflow-hidden border border-gray-100 flex items-center justify-center">
+                <iconify-icon icon="lucide:smartphone" class="text-5xl text-gray-200"></iconify-icon>
+              </div>
+              <div>
+                <h4 class="text-xs font-bold text-gray-800 truncate">iPhone 15 Pro Max</h4>
+                <p class="text-[10px] text-emerald-600 font-bold uppercase">614 Sold</p>
+              </div>
+            </div>
+            <div class="space-y-3 group cursor-pointer">
+              <div class="aspect-square bg-gray-50 rounded-2xl overflow-hidden border border-gray-100 flex items-center justify-center">
+                <iconify-icon icon="lucide:headphones" class="text-5xl text-gray-200"></iconify-icon>
+              </div>
+              <div>
+                <h4 class="text-xs font-bold text-gray-800 truncate">Sony WH-1000XM5</h4>
+                <p class="text-[10px] text-emerald-600 font-bold uppercase">520 Sold</p>
+              </div>
+            </div>
+            <div class="space-y-3 group cursor-pointer">
+              <div class="aspect-square bg-gray-50 rounded-2xl overflow-hidden border border-gray-100 flex items-center justify-center">
+                <iconify-icon icon="lucide:laptop" class="text-5xl text-gray-200"></iconify-icon>
+              </div>
+              <div>
+                <h4 class="text-xs font-bold text-gray-800 truncate">MacBook Air M2</h4>
+                <p class="text-[10px] text-emerald-600 font-bold uppercase">492 Sold</p>
+              </div>
+            </div>
+            <div class="space-y-3 group cursor-pointer">
+              <div class="aspect-square bg-gray-50 rounded-2xl overflow-hidden border border-gray-100 flex items-center justify-center">
+                <iconify-icon icon="lucide:watch" class="text-5xl text-gray-200"></iconify-icon>
+              </div>
+              <div>
+                <h4 class="text-xs font-bold text-gray-800 truncate">Samsung Watch 6</h4>
+                <p class="text-[10px] text-emerald-600 font-bold uppercase">388 Sold</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer Section -->
+      <footer class="px-8 py-6 border-t border-gray-100 text-center">
+        <p class="text-xs text-gray-400 font-medium">© 2024 ANITINN Marketplace. Built for Ghana's Digital Future. System version v2.1.0-Admin</p>
+      </footer>
+
+    </main>
+  </div>
+{% endblock %}

@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vendor Orders Management - ANITINN</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap">
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #F9FAFB;
+    }
+    .royal-green { background-color: #1B5E3F; }
+    .text-royal-green { color: #1B5E3F; }
+    .border-royal-green { border-color: #1B5E3F; }
+    .golden-yellow { background-color: #D4A520; }
+    .hover-golden-yellow:hover { background-color: #F4C430; }
+    .sidebar-scroll::-webkit-scrollbar {
+      width: 4px;
+    }
+    .sidebar-scroll::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+    }
+    .table-container {
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    }
+    .status-pending { background-color: #FFFBEB; color: #92400E; border: 1px solid #FEF3C7; }
+    .status-processing { background-color: #EFF6FF; color: #1E40AF; border: 1px solid #DBEAFE; }
+    .status-shipped { background-color: #F5F3FF; color: #5B21B6; border: 1px solid #EDE9FE; }
+    .status-delivered { background-color: #ECFDF5; color: #065F46; border: 1px solid #D1FAE5; }
+    .status-cancelled { background-color: #FEF2F2; color: #991B1B; border: 1px solid #FEE2E2; }
+  </style>
+  <style>sd-component { display: block; }</style>
+  <script src="https://cdn.jsdelivr.net/npm/petite-vue@0.4.1/dist/petite-vue.iife.js" defer init></script>
+</head>
+<body>
+  <div class="min-h-screen flex">
+    <!-- Sidebar Component -->
+    <!-- component: DashboardSidebar (3e4d5170-0fd6-49b5-8819-3230c98e99b7) -->
+<div v-scope="{ ...{&quot;activeItem&quot;:&quot;orders&quot;,&quot;dashboardHref&quot;:&quot;/&quot;,&quot;productsHref&quot;:&quot;/vendor/products/&quot;,&quot;ordersHref&quot;:&quot;/vendor/orders/&quot;,&quot;analyticsHref&quot;:&quot;/vendor/analytics/&quot;,&quot;reviewsHref&quot;:&quot;/vendor/reviews/&quot;,&quot;orderBadgeCount&quot;:12}, $emit() {} }">
+<aside class="w-64 bg-[#1B5E3F] text-white fixed h-full flex flex-col z-50">
+  <div class="p-6 flex items-center gap-3">
+    <img src="https://vgbujcuwptvheqijyjbe.supabase.co/storage/v1/object/public/hmac-uploads/uploads/ef5bc30d-cbeb-42a5-88a1-362daf4d51a4/1780139179048-642ea9dd/ChatGPT_Image_May_29__2026__11_28_10_AM.png" alt="Anitinn Logo" class="w-10 h-10 rounded-full border border-white/20">
+    <span class="font-bold text-xl tracking-tight">ANITINN</span>
+  </div>
+  <nav class="flex-1 px-4 space-y-1 overflow-y-auto mt-4" style="scrollbar-width: thin; scrollbar-color: rgba(255, 255, 255, 0.1) transparent;">
+    <p class="text-xs font-semibold text-white/40 px-3 py-2 uppercase tracking-wider">Main Menu</p>
+    
+    <a :href="dashboardHref" 
+       class="flex items-center gap-3 px-3 py-3 rounded-lg transition-all" 
+       :class="activeItem === 'dashboard' ? 'bg-white/10 text-[#D4A520] border-l-4 border-[#D4A520]' : 'text-white/70 hover:bg-white/5 hover:text-white'">
+      <iconify-icon icon="lucide:layout-dashboard"></iconify-icon>
+      <span class="font-medium">Dashboard</span>
+    </a>
+
+    <a :href="productsHref" 
+       class="flex items-center gap-3 px-3 py-3 rounded-lg transition-all" 
+       :class="activeItem === 'products' ? 'bg-white/10 text-[#D4A520] border-l-4 border-[#D4A520]' : 'text-white/70 hover:bg-white/5 hover:text-white'">
+      <iconify-icon icon="lucide:box"></iconify-icon>
+      <span class="font-medium">Products</span>
+    </a>
+
+    <a :href="ordersHref" 
+       class="flex items-center gap-3 px-3 py-3 rounded-lg transition-all" 
+       :class="activeItem === 'orders' ? 'bg-white/10 text-[#D4A520] border-l-4 border-[#D4A520]' : 'text-white/70 hover:bg-white/5 hover:text-white'">
+      <iconify-icon icon="lucide:shopping-cart"></iconify-icon>
+      <span class="font-medium">Orders</span>
+      <span v-if="orderBadgeCount > 0" class="ml-auto bg-[#D4A520] text-white text-[10px] px-1.5 py-0.5 rounded-full">{{ orderBadgeCount }}</span>
+    </a>
+
+    <a :href="analyticsHref" 
+       class="flex items-center gap-3 px-3 py-3 rounded-lg transition-all" 
+       :class="activeItem === 'analytics' ? 'bg-white/10 text-[#D4A520] border-l-4 border-[#D4A520]' : 'text-white/70 hover:bg-white/5 hover:text-white'">
+      <iconify-icon icon="lucide:bar-chart-3"></iconify-icon>
+      <span class="font-medium">Analytics</span>
+    </a>
+
+    <p class="text-xs font-semibold text-white/40 px-3 py-2 uppercase tracking-wider mt-8">Storefront</p>
+
+    <a :href="reviewsHref" 
+       class="flex items-center gap-3 px-3 py-3 rounded-lg transition-all" 
+       :class="activeItem === 'reviews' ? 'bg-white/10 text-[#D4A520] border-l-4 border-[#D4A520]' : 'text-white/70 hover:bg-white/5 hover:text-white'">
+      <iconify-icon icon="lucide:message-square"></iconify-icon>
+      <span class="font-medium">Reviews</span>
+    </a>
+  </nav>
+  <div class="p-4 mt-auto">
+    <button @click="$emit('upgrade')" class="w-full bg-[#D4A520] hover:brightness-110 text-white text-xs font-bold py-2 rounded-lg transition-all uppercase tracking-wide">Upgrade Plan</button>
+  </div>
+</aside>
+</div>
+<!-- /component: DashboardSidebar (3e4d5170-0fd6-49b5-8819-3230c98e99b7) -->
+
+    <!-- Main Content -->
+    <div class="flex-1 ml-64 flex flex-col">
+      <!-- Header Component -->
+      <!-- component: DashboardHeader (87403f5a-a910-4ccc-9453-3a69605a2a11) -->
+<div v-scope="{ ...{&quot;vendorName&quot;:&quot;Kofi Mensah&quot;,&quot;userName&quot;:&quot;Kofi Mensah&quot;,&quot;userAvatarUrl&quot;:&quot;https://api.dicebear.com/7.x/avataaars/svg?seed=Kofi&quot;,&quot;hasNotifications&quot;:true}, $emit() {} }">
+<header class="sticky top-0 bg-white/80 backdrop-blur-md border-b border-gray-100 z-40 px-8 py-4"><div class="flex items-center justify-between"><div class="flex items-center gap-4"><div><h1 class="text-2xl font-bold text-gray-800 tracking-tight">Dashboard Overview</h1><p class="text-sm text-gray-500 font-medium">Welcome back, <span class="text-[#1B5E3F] font-semibold underline decoration-[#D4A520]">{{ vendorName }}</span></p></div></div><div class="flex items-center gap-6"><div class="relative hidden lg:block"><iconify-icon icon="lucide:search" class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></iconify-icon><input type="text" placeholder="Search products, orders..." @input="$emit('search', { query: $event.target.value })" class="pl-10 pr-4 py-2 w-80 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#1B5E3F]/20 focus:border-[#1B5E3F] transition-all"></div><div class="flex items-center gap-3"><button @click="$emit('notificationClick')" class="p-2 hover:bg-gray-100 rounded-full relative"><iconify-icon icon="lucide:bell" class="text-2xl text-gray-600"></iconify-icon><span v-if="hasNotifications" class="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full border-2 border-white"></span></button><div class="h-8 w-[1px] bg-gray-200 mx-2"></div><div class="flex items-center gap-3 group cursor-pointer" @click="$emit('profileClick')"><img :src="userAvatarUrl" alt="Vendor Avatar" class="w-10 h-10 rounded-full border-2 border-[#D4A520] bg-gray-100 p-0.5"><div class="hidden md:block"><p class="text-sm font-bold text-gray-800 leading-none">{{ userName }}</p><p class="text-[10px] text-gray-500 font-medium">Pro Vendor</p></div><iconify-icon icon="lucide:chevron-down" class="text-gray-400"></iconify-icon></div></div></div></div></header>
+</div>
+<!-- /component: DashboardHeader (87403f5a-a910-4ccc-9453-3a69605a2a11) -->
+
+      <main class="p-8 flex-1">
+        <!-- Page Header -->
+        <div class="mb-8 flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div>
+            <h1 class="text-2xl font-bold text-gray-900 tracking-tight">Orders Management</h1>
+            <p class="text-sm text-gray-500 font-medium mt-1">Manage your incoming orders and fulfillment status</p>
+          </div>
+          <div class="flex items-center gap-3">
+            <button class="flex items-center gap-2 px-4 py-2.5 border border-gray-200 bg-white text-gray-700 font-semibold rounded-xl hover:bg-gray-50 transition-all text-sm shadow-sm">
+              <iconify-icon icon="lucide:download" class="text-lg"></iconify-icon>
+              Export to CSV
+            </button>
+          </div>
+        </div>
+
+        <!-- Controls Section -->
+        <div class="bg-white rounded-2xl p-6 mb-6 shadow-sm border border-gray-100">
+          <div class="flex flex-col lg:flex-row gap-6">
+            <!-- Search & Filter Controls -->
+            <div class="flex-1 space-y-4">
+              <div class="relative">
+                <iconify-icon icon="lucide:search" class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-xl"></iconify-icon>
+                <input type="text" placeholder="Search by Order ID, Customer Name, or Product..." class="w-full pl-12 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-royal-green/20 focus:border-royal-green transition-all">
+              </div>
+              
+              <div class="flex flex-wrap items-center gap-2">
+                <span class="text-xs font-bold text-gray-400 uppercase tracking-widest mr-2">Filter by Status:</span>
+                <button class="px-4 py-1.5 rounded-full royal-green text-white text-xs font-bold shadow-md">All Orders</button>
+                <button class="px-4 py-1.5 rounded-full bg-gray-50 text-gray-600 border border-gray-100 text-xs font-bold hover:bg-gray-100 transition-all">Pending</button>
+                <button class="px-4 py-1.5 rounded-full bg-gray-50 text-gray-600 border border-gray-100 text-xs font-bold hover:bg-gray-100 transition-all">Processing</button>
+                <button class="px-4 py-1.5 rounded-full bg-gray-50 text-gray-600 border border-gray-100 text-xs font-bold hover:bg-gray-100 transition-all">Shipped</button>
+                <button class="px-4 py-1.5 rounded-full bg-gray-50 text-gray-600 border border-gray-100 text-xs font-bold hover:bg-gray-100 transition-all">Delivered</button>
+                <button class="px-4 py-1.5 rounded-full bg-gray-50 text-gray-600 border border-gray-100 text-xs font-bold hover:bg-gray-100 transition-all">Cancelled</button>
+              </div>
+            </div>
+
+            <!-- Bulk Actions -->
+            <div class="lg:w-72 flex flex-col justify-end">
+              <div class="p-4 rounded-xl border border-dashed border-gray-200 bg-gray-50/50 flex flex-col gap-3">
+                <span class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Bulk Actions (0 selected)</span>
+                <select class="w-full px-3 py-2 bg-white border border-gray-200 rounded-lg text-sm text-gray-600 focus:outline-none focus:border-royal-green">
+                  <option>Choose action...</option>
+                  <option>Mark as Shipped</option>
+                  <option>Mark as Processing</option>
+                  <option>Mark as Cancelled</option>
+                  <option>Print Invoice</option>
+                </select>
+                <button class="w-full py-2 bg-gray-200 text-gray-400 font-bold rounded-lg text-xs cursor-not-allowed">Apply to selected</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Main Table Section -->
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse">
+              <thead class="bg-gray-50 border-b border-gray-100">
+                <tr>
+                  <th class="px-6 py-4 w-10">
+                    <input type="checkbox" class="rounded border-gray-300 text-royal-green focus:ring-royal-green cursor-pointer">
+                  </th>
+                  <th class="px-6 py-4 text-xs font-bold text-gray-500 uppercase tracking-widest">Order ID</th>
+                  <th class="px-6 py-4 text-xs font-bold text-gray-500 uppercase tracking-widest">Customer</th>
+                  <th class="px-6 py-4 text-xs font-bold text-gray-500 uppercase tracking-widest">Product</th>
+                  <th class="px-6 py-4 text-xs font-bold text-gray-500 uppercase tracking-widest">Status</th>
+                  <th class="px-6 py-4 text-xs font-bold text-gray-500 uppercase tracking-widest">Amount</th>
+                  <th class="px-6 py-4 text-xs font-bold text-gray-500 uppercase tracking-widest">Created Date</th>
+                  <th class="px-6 py-4 text-xs font-bold text-gray-500 uppercase tracking-widest text-center">Actions</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-gray-100">
+                <!-- Row 1 -->
+                <tr class="hover:bg-gray-50/80 transition-colors group">
+                  <td class="px-6 py-4">
+                    <input type="checkbox" class="rounded border-gray-300 text-royal-green focus:ring-royal-green cursor-pointer">
+                  </td>
+                  <td class="px-6 py-4"><a href="#" class="text-sm font-bold text-royal-green hover:underline">ORD-2024-001</a></td>
+                  <td class="px-6 py-4">
+                    <div class="flex items-center gap-3">
+                      <div class="w-8 h-8 rounded-full royal-green text-white flex items-center justify-center font-bold text-xs shadow-sm">JK</div>
+                      <span class="text-sm font-semibold text-gray-700">John Kwame</span>
+                    </div>
+                  </td>
+                  <td class="px-6 py-4 text-sm text-gray-600">Premium Laptop</td>
+                  <td class="px-6 py-4"><span class="px-3 py-1 text-[10px] font-bold rounded-full status-pending uppercase">Pending</span></td>
+                  <td class="px-6 py-4 text-sm font-bold text-gray-800">GHS 2,500</td>
+                  <td class="px-6 py-4 text-sm text-gray-500">2024-01-15</td>
+                  <td class="px-6 py-4">
+                    <div class="flex items-center justify-center gap-2">
+                      <button title="View Details" class="p-2 rounded-lg hover:bg-gray-100 text-gray-400 hover:text-royal-green transition-all">
+                        <iconify-icon icon="lucide:eye" class="text-lg"></iconify-icon>
+                      </button>
+                      <button title="Update Status" class="p-2 rounded-lg hover:bg-gray-100 text-gray-400 hover:text-royal-green transition-all">
+                        <iconify-icon icon="lucide:edit-3" class="text-lg"></iconify-icon>
+                      </button>
+                      <button title="Contact Customer" class="p-2 rounded-lg hover:bg-gray-100 text-gray-400 hover:text-royal-green transition-all">
+                        <iconify-icon icon="lucide:phone" class="text-lg"></iconify-icon>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+                <!-- Row 2 -->
+                <tr class="hover:bg-gray-50/80 transition-colors group">
+                  <td class="px-6 py-4">
+                    <input type="checkbox" class="rounded border-gray-300 text-royal-green focus:ring-royal-green cursor-pointer">
+                  </td>
+                  <td class="px-6 py-4"><a href="#" class="text-sm font-bold text-royal-green hover:underline">ORD-2024-002</a></td>
+                  <td class="px-6 py-4">
+                    <div class="flex items-center gap-3">
+                      <div class="w-8 h-8 rounded-full bg-blue-500 text-white flex items-center justify-center font-bold text-xs shadow-sm">AM</div>
+                      <span class="text-sm font-semibold text-gray-700">Abena Mensah</span>
+                    </div>
+                  </td>
+                  <td class="px-6 py-4 text-sm text-gray-600">Wireless Headphones</td>
+                  <td class="px-6 py-4"><span class="px-3 py-1 text-[10px] font-bold rounded-full status-processing uppercase">Processing</span></td>
+                  <td class="px-6 py-4 text-sm font-bold text-gray-800">GHS 350</td>
+                  <td class="px-6 py-4 text-sm text-gray-500">2024-01-14</td>
+                  <td class="px-6 py-4">
+                    <div class="flex items-center justify-center gap-2">
+                      <button title="View Details" class="p-2 rounded-lg hover:bg-gray-100 text-gray-400 hover:text-royal-green transition-all">
+                        <iconify-icon icon="lucide:eye" class="text-lg"></iconify-icon>
+                      </button>
+                      <button title="Update Status" class="p-2 rounded-lg hover:bg-gray-100 text-gray-400 hover:text-royal-green transition-all">
+                        <iconify-icon icon="lucide:edit-3" class="text-lg"></iconify-icon>
+                      </button>
+                      <button title="Contact Customer" class="p-2 rounded-lg hover:bg-gray-100 text-gray-400 hover:text-royal-green transition-all">
+                        <iconify-icon icon="lucide:phone" class="text-lg"></iconify-icon>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+                <!-- Row 3 -->
+                <tr class="hover:bg-gray-50/80 transition-colors group">
+                  <td class="px-6 py-4">
+                    <input type="checkbox" class="rounded border-gray-300 text-royal-green focus:ring-royal-green cursor-pointer">
+                  </td>
+                  <td class="px-6 py-4"><a href="#" class="text-sm font-bold text-royal-green hover:underline">ORD-2024-003</a></td>
+                  <td class="px-6 py-4">
+                    <div class="flex items-center gap-3">
+                      <div class="w-8 h-8 rounded-full bg-purple-500 text-white flex items-center justify-center font-bold text-xs shadow-sm">KA</div>
+                      <span class="text-sm font-semibold text-gray-700">Kofi Asante</span>
+                    </div>
+                  </td>
+                  <td class="px-6 py-4 text-sm text-gray-600">USB-C Cable</td>
+                  <td class="px-6 py-4"><span class="px-3 py-1 text-[10px] font-bold rounded-full status-shipped uppercase">Shipped</span></td>
+                  <td class="px-6 py-4 text-sm font-bold text-gray-800">GHS 85</td>
+                  <td class="px-6 py-4 text-sm text-gray-500">2024-01-13</td>
+                  <td class="px-6 py-4">
+                    <div class="flex items-center justify-center gap-2">
+                      <button title="View Details" class="p-2 rounded-lg hover:bg-gray-100 text-gray-400 hover:text-royal-green transition-all">
+                        <iconify-icon icon="lucide:eye" class="text-lg"></iconify-icon>
+                      </button>
+                      <button title="Update Status" class="p-2 rounded-lg hover:bg-gray-100 text-gray-400 hover:text-royal-green transition-all">
+                        <iconify-icon icon="lucide:edit-3" class="text-lg"></iconify-icon>
+                      </button>
+                      <button title="Contact Customer" class="p-2 rounded-lg hover:bg-gray-100 text-gray-400 hover:text-royal-green transition-all">
+                        <iconify-icon icon="lucide:phone" class="text-lg"></iconify-icon>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+                <!-- Row 4 -->
+                <tr class="hover:bg-gray-50/80 transition-colors group">
+                  <td class="px-6 py-4">
+                    <input type="checkbox" class="rounded border-gray-300 text-royal-green focus:ring-royal-green cursor-pointer">
+                  </td>
+                  <td class="px-6 py-4"><a href="#" class="text-sm font-bold text-royal-green hover:underline">ORD-2024-004</a></td>
+                  <td class="px-6 py-4">
+                    <div class="flex items-center gap-3">
+                      <div class="w-8 h-8 rounded-full bg-emerald-500 text-white flex items-center justify-center font-bold text-xs shadow-sm">AB</div>
+                      <span class="text-sm font-semibold text-gray-700">Ama Boateng</span>
+                    </div>
+                  </td>
+                  <td class="px-6 py-4 text-sm text-gray-600">Smart Watch</td>
+                  <td class="px-6 py-4"><span class="px-3 py-1 text-[10px] font-bold rounded-full status-delivered uppercase">Delivered</span></td>
+                  <td class="px-6 py-4 text-sm font-bold text-gray-800">GHS 450</td>
+                  <td class="px-6 py-4 text-sm text-gray-500">2024-01-12</td>
+                  <td class="px-6 py-4">
+                    <div class="flex items-center justify-center gap-2">
+                      <button title="View Details" class="p-2 rounded-lg hover:bg-gray-100 text-gray-400 hover:text-royal-green transition-all">
+                        <iconify-icon icon="lucide:eye" class="text-lg"></iconify-icon>
+                      </button>
+                      <button title="Update Status" class="p-2 rounded-lg hover:bg-gray-100 text-gray-400 hover:text-royal-green transition-all">
+                        <iconify-icon icon="lucide:edit-3" class="text-lg"></iconify-icon>
+                      </button>
+                      <button title="Contact Customer" class="p-2 rounded-lg hover:bg-gray-100 text-gray-400 hover:text-royal-green transition-all">
+                        <iconify-icon icon="lucide:phone" class="text-lg"></iconify-icon>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+                <!-- Row 5 -->
+                <tr class="hover:bg-gray-50/80 transition-colors group">
+                  <td class="px-6 py-4">
+                    <input type="checkbox" class="rounded border-gray-300 text-royal-green focus:ring-royal-green cursor-pointer">
+                  </td>
+                  <td class="px-6 py-4"><a href="#" class="text-sm font-bold text-royal-green hover:underline">ORD-2024-005</a></td>
+                  <td class="px-6 py-4">
+                    <div class="flex items-center gap-3">
+                      <div class="w-8 h-8 rounded-full bg-orange-500 text-white flex items-center justify-center font-bold text-xs shadow-sm">KO</div>
+                      <span class="text-sm font-semibold text-gray-700">Kwesi Osei</span>
+                    </div>
+                  </td>
+                  <td class="px-6 py-4 text-sm text-gray-600">Phone Case Bundle</td>
+                  <td class="px-6 py-4"><span class="px-3 py-1 text-[10px] font-bold rounded-full status-processing uppercase">Processing</span></td>
+                  <td class="px-6 py-4 text-sm font-bold text-gray-800">GHS 120</td>
+                  <td class="px-6 py-4 text-sm text-gray-500">2024-01-11</td>
+                  <td class="px-6 py-4">
+                    <div class="flex items-center justify-center gap-2">
+                      <button title="View Details" class="p-2 rounded-lg hover:bg-gray-100 text-gray-400 hover:text-royal-green transition-all">
+                        <iconify-icon icon="lucide:eye" class="text-lg"></iconify-icon>
+                      </button>
+                      <button title="Update Status" class="p-2 rounded-lg hover:bg-gray-100 text-gray-400 hover:text-royal-green transition-all">
+                        <iconify-icon icon="lucide:edit-3" class="text-lg"></iconify-icon>
+                      </button>
+                      <button title="Contact Customer" class="p-2 rounded-lg hover:bg-gray-100 text-gray-400 hover:text-royal-green transition-all">
+                        <iconify-icon icon="lucide:phone" class="text-lg"></iconify-icon>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+                <!-- Row 6 -->
+                <tr class="hover:bg-gray-50/80 transition-colors group">
+                  <td class="px-6 py-4">
+                    <input type="checkbox" class="rounded border-gray-300 text-royal-green focus:ring-royal-green cursor-pointer">
+                  </td>
+                  <td class="px-6 py-4"><a href="#" class="text-sm font-bold text-royal-green hover:underline">ORD-2024-006</a></td>
+                  <td class="px-6 py-4">
+                    <div class="flex items-center gap-3">
+                      <div class="w-8 h-8 rounded-full bg-cyan-500 text-white flex items-center justify-center font-bold text-xs shadow-sm">YA</div>
+                      <span class="text-sm font-semibold text-gray-700">Yaa Asumadu</span>
+                    </div>
+                  </td>
+                  <td class="px-6 py-4 text-sm text-gray-600">Gaming Monitor</td>
+                  <td class="px-6 py-4"><span class="px-3 py-1 text-[10px] font-bold rounded-full status-pending uppercase">Pending</span></td>
+                  <td class="px-6 py-4 text-sm font-bold text-gray-800">GHS 1,200</td>
+                  <td class="px-6 py-4 text-sm text-gray-500">2024-01-10</td>
+                  <td class="px-6 py-4">
+                    <div class="flex items-center justify-center gap-2">
+                      <button title="View Details" class="p-2 rounded-lg hover:bg-gray-100 text-gray-400 hover:text-royal-green transition-all">
+                        <iconify-icon icon="lucide:eye" class="text-lg"></iconify-icon>
+                      </button>
+                      <button title="Update Status" class="p-2 rounded-lg hover:bg-gray-100 text-gray-400 hover:text-royal-green transition-all">
+                        <iconify-icon icon="lucide:edit-3" class="text-lg"></iconify-icon>
+                      </button>
+                      <button title="Contact Customer" class="p-2 rounded-lg hover:bg-gray-100 text-gray-400 hover:text-royal-green transition-all">
+                        <iconify-icon icon="lucide:phone" class="text-lg"></iconify-icon>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+                <!-- Row 7 -->
+                <tr class="hover:bg-gray-50/80 transition-colors group">
+                  <td class="px-6 py-4">
+                    <input type="checkbox" class="rounded border-gray-300 text-royal-green focus:ring-royal-green cursor-pointer">
+                  </td>
+                  <td class="px-6 py-4"><a href="#" class="text-sm font-bold text-royal-green hover:underline">ORD-2024-007</a></td>
+                  <td class="px-6 py-4">
+                    <div class="flex items-center gap-3">
+                      <div class="w-8 h-8 rounded-full bg-amber-500 text-white flex items-center justify-center font-bold text-xs shadow-sm">ND</div>
+                      <span class="text-sm font-semibold text-gray-700">Nana Darko</span>
+                    </div>
+                  </td>
+                  <td class="px-6 py-4 text-sm text-gray-600">Keyboard & Mouse</td>
+                  <td class="px-6 py-4"><span class="px-3 py-1 text-[10px] font-bold rounded-full status-shipped uppercase">Shipped</span></td>
+                  <td class="px-6 py-4 text-sm font-bold text-gray-800">GHS 280</td>
+                  <td class="px-6 py-4 text-sm text-gray-500">2024-01-09</td>
+                  <td class="px-6 py-4">
+                    <div class="flex items-center justify-center gap-2">
+                      <button title="View Details" class="p-2 rounded-lg hover:bg-gray-100 text-gray-400 hover:text-royal-green transition-all">
+                        <iconify-icon icon="lucide:eye" class="text-lg"></iconify-icon>
+                      </button>
+                      <button title="Update Status" class="p-2 rounded-lg hover:bg-gray-100 text-gray-400 hover:text-royal-green transition-all">
+                        <iconify-icon icon="lucide:edit-3" class="text-lg"></iconify-icon>
+                      </button>
+                      <button title="Contact Customer" class="p-2 rounded-lg hover:bg-gray-100 text-gray-400 hover:text-royal-green transition-all">
+                        <iconify-icon icon="lucide:phone" class="text-lg"></iconify-icon>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+                <!-- Row 8 -->
+                <tr class="hover:bg-gray-50/80 transition-colors group">
+                  <td class="px-6 py-4">
+                    <input type="checkbox" class="rounded border-gray-300 text-royal-green focus:ring-royal-green cursor-pointer">
+                  </td>
+                  <td class="px-6 py-4"><a href="#" class="text-sm font-bold text-royal-green hover:underline">ORD-2024-008</a></td>
+                  <td class="px-6 py-4">
+                    <div class="flex items-center gap-3">
+                      <div class="w-8 h-8 rounded-full bg-pink-500 text-white flex items-center justify-center font-bold text-xs shadow-sm">AO</div>
+                      <span class="text-sm font-semibold text-gray-700">Afia Owusu</span>
+                    </div>
+                  </td>
+                  <td class="px-6 py-4 text-sm text-gray-600">Webcam Pro</td>
+                  <td class="px-6 py-4"><span class="px-3 py-1 text-[10px] font-bold rounded-full status-delivered uppercase">Delivered</span></td>
+                  <td class="px-6 py-4 text-sm font-bold text-gray-800">GHS 180</td>
+                  <td class="px-6 py-4 text-sm text-gray-500">2024-01-08</td>
+                  <td class="px-6 py-4">
+                    <div class="flex items-center justify-center gap-2">
+                      <button title="View Details" class="p-2 rounded-lg hover:bg-gray-100 text-gray-400 hover:text-royal-green transition-all">
+                        <iconify-icon icon="lucide:eye" class="text-lg"></iconify-icon>
+                      </button>
+                      <button title="Update Status" class="p-2 rounded-lg hover:bg-gray-100 text-gray-400 hover:text-royal-green transition-all">
+                        <iconify-icon icon="lucide:edit-3" class="text-lg"></iconify-icon>
+                      </button>
+                      <button title="Contact Customer" class="p-2 rounded-lg hover:bg-gray-100 text-gray-400 hover:text-royal-green transition-all">
+                        <iconify-icon icon="lucide:phone" class="text-lg"></iconify-icon>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+                <!-- Row 9 -->
+                <tr class="hover:bg-gray-50/80 transition-colors group">
+                  <td class="px-6 py-4">
+                    <input type="checkbox" class="rounded border-gray-300 text-royal-green focus:ring-royal-green cursor-pointer">
+                  </td>
+                  <td class="px-6 py-4"><a href="#" class="text-sm font-bold text-royal-green hover:underline">ORD-2024-009</a></td>
+                  <td class="px-6 py-4">
+                    <div class="flex items-center gap-3">
+                      <div class="w-8 h-8 rounded-full bg-slate-500 text-white flex items-center justify-center font-bold text-xs shadow-sm">EM</div>
+                      <span class="text-sm font-semibold text-gray-700">Ekow Mensah</span>
+                    </div>
+                  </td>
+                  <td class="px-6 py-4 text-sm text-gray-600">Power Bank</td>
+                  <td class="px-6 py-4"><span class="px-3 py-1 text-[10px] font-bold rounded-full status-cancelled uppercase">Cancelled</span></td>
+                  <td class="px-6 py-4 text-sm font-bold text-gray-800">GHS 95</td>
+                  <td class="px-6 py-4 text-sm text-gray-500">2024-01-07</td>
+                  <td class="px-6 py-4">
+                    <div class="flex items-center justify-center gap-2">
+                      <button title="View Details" class="p-2 rounded-lg hover:bg-gray-100 text-gray-400 hover:text-royal-green transition-all">
+                        <iconify-icon icon="lucide:eye" class="text-lg"></iconify-icon>
+                      </button>
+                      <button title="Update Status" class="p-2 rounded-lg hover:bg-gray-100 text-gray-400 hover:text-royal-green transition-all">
+                        <iconify-icon icon="lucide:edit-3" class="text-lg"></iconify-icon>
+                      </button>
+                      <button title="Contact Customer" class="p-2 rounded-lg hover:bg-gray-100 text-gray-400 hover:text-royal-green transition-all">
+                        <iconify-icon icon="lucide:phone" class="text-lg"></iconify-icon>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+                <!-- Row 10 -->
+                <tr class="hover:bg-gray-50/80 transition-colors group">
+                  <td class="px-6 py-4">
+                    <input type="checkbox" class="rounded border-gray-300 text-royal-green focus:ring-royal-green cursor-pointer">
+                  </td>
+                  <td class="px-6 py-4"><a href="#" class="text-sm font-bold text-royal-green hover:underline">ORD-2024-010</a></td>
+                  <td class="px-6 py-4">
+                    <div class="flex items-center gap-3">
+                      <div class="w-8 h-8 rounded-full bg-violet-500 text-white flex items-center justify-center font-bold text-xs shadow-sm">EO</div>
+                      <span class="text-sm font-semibold text-gray-700">Esta Owusu</span>
+                    </div>
+                  </td>
+                  <td class="px-6 py-4 text-sm text-gray-600">Screen Protector Pack</td>
+                  <td class="px-6 py-4"><span class="px-3 py-1 text-[10px] font-bold rounded-full status-processing uppercase">Processing</span></td>
+                  <td class="px-6 py-4 text-sm font-bold text-gray-800">GHS 45</td>
+                  <td class="px-6 py-4 text-sm text-gray-500">2024-01-06</td>
+                  <td class="px-6 py-4">
+                    <div class="flex items-center justify-center gap-2">
+                      <button title="View Details" class="p-2 rounded-lg hover:bg-gray-100 text-gray-400 hover:text-royal-green transition-all">
+                        <iconify-icon icon="lucide:eye" class="text-lg"></iconify-icon>
+                      </button>
+                      <button title="Update Status" class="p-2 rounded-lg hover:bg-gray-100 text-gray-400 hover:text-royal-green transition-all">
+                        <iconify-icon icon="lucide:edit-3" class="text-lg"></iconify-icon>
+                      </button>
+                      <button title="Contact Customer" class="p-2 rounded-lg hover:bg-gray-100 text-gray-400 hover:text-royal-green transition-all">
+                        <iconify-icon icon="lucide:phone" class="text-lg"></iconify-icon>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Pagination Footer -->
+          <div class="px-6 py-5 bg-gray-50 border-t border-gray-100 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-4 text-xs font-semibold text-gray-500">
+              <span>Showing 1-10 of 245 orders</span>
+              <div class="flex items-center gap-2">
+                <span>Show</span>
+                <select class="bg-white border border-gray-200 rounded-md px-2 py-1 focus:outline-none">
+                  <option>10</option>
+                  <option>25</option>
+                  <option>50</option>
+                  <option>100</option>
+                </select>
+                <span>per page</span>
+              </div>
+            </div>
+            
+            <div class="flex items-center gap-2">
+              <button class="p-2 rounded-lg border border-gray-200 bg-white text-gray-400 hover:bg-gray-50 disabled:opacity-50 cursor-not-allowed">
+                <iconify-icon icon="lucide:chevron-left" class="text-lg"></iconify-icon>
+              </button>
+              <div class="flex items-center gap-1">
+                <button class="w-9 h-9 rounded-lg royal-green text-white font-bold text-xs shadow-sm">1</button>
+                <button class="w-9 h-9 rounded-lg border border-gray-100 bg-white text-gray-600 font-bold text-xs hover:bg-gray-50">2</button>
+                <button class="w-9 h-9 rounded-lg border border-gray-100 bg-white text-gray-600 font-bold text-xs hover:bg-gray-50">3</button>
+                <span class="px-2 text-gray-400">...</span>
+                <button class="w-9 h-9 rounded-lg border border-gray-100 bg-white text-gray-600 font-bold text-xs hover:bg-gray-50">25</button>
+              </div>
+              <button class="p-2 rounded-lg border border-gray-200 bg-white text-gray-600 hover:bg-gray-50">
+                <iconify-icon icon="lucide:chevron-right" class="text-lg"></iconify-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    // Search interactive counter simulation
+    const searchInput = document.querySelector('input[type="text"]');
+    searchInput.addEventListener('input', (e) => {
+      console.log('Searching for:', e.target.value);
+    });
+  </script>
+</body>
+</html>

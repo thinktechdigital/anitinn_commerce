@@ -1,0 +1,237 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Marketplace{% endblock %}
+
+{% block extra_head %}
+<style>
+    :root {
+      --royal-green: #1B5E3F;
+      --royal-green-dark: #144a32;
+      --golden-yellow: #D4A520;
+      --warm-white: #fcfbf8;
+    }
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--warm-white);
+      color: #1f2937;
+    }
+    .royal-green { background-color: var(--royal-green); }
+    .text-royal-green { color: var(--royal-green); }
+    .bg-golden-yellow { background-color: var(--golden-yellow); }
+    .text-golden-yellow { color: var(--golden-yellow); }
+    .border-royal-green { border-color: var(--royal-green); }
+    .border-golden-yellow { border-color: var(--golden-yellow); }
+    
+    .custom-shadow {
+      box-shadow: 0 10px 30px -10px rgba(27, 94, 63, 0.1);
+    }
+    .category-card:hover .icon-bg {
+      background-color: var(--golden-yellow);
+      color: white;
+      transform: translateY(-5px);
+    }
+    .hero-gradient {
+      background: linear-gradient(135deg, #1B5E3F 0%, #144a32 100%);
+    }
+</style>
+{% endblock %}
+
+{% block body %}
+<div class="min-h-screen flex flex-col">
+    <!-- Top Promotional Bar -->
+    <div class="royal-green text-white py-2 text-center text-xs font-semibold tracking-wide">
+      🎉 FREE DELIVERY on all orders over GH₵ 500! Shop the new Tech Collection today.
+    </div>
+
+    <!-- Navigation -->
+    <header class="sticky top-0 bg-white/90 backdrop-blur-md border-b border-gray-100 z-50">
+      <div class="max-w-7xl mx-auto px-4 h-20 flex items-center justify-between gap-8">
+        <!-- Logo -->
+        <a id="nav-logo-link" href="{% url 'pages:marketplace' %}" class="flex items-center gap-2 flex-shrink-0">
+          <img src="https://vgbujcuwptvheqijyjbe.supabase.co/storage/v1/object/public/hmac-uploads/uploads/ef5bc30d-cbeb-42a5-88a1-362daf4d51a4/1780139179048-642ea9dd/ChatGPT_Image_May_29__2026__11_28_10_AM.png" alt="Anitinn Logo" class="w-10 h-10 rounded-full border border-gray-100 shadow-sm">
+          <span class="font-bold text-2xl tracking-tight text-royal-green uppercase">Anitinn</span>
+        </a>
+
+        <!-- Search Bar -->
+        <form method="GET" action="{% url 'pages:catalog' %}" class="flex-1 max-w-2xl relative group">
+          <iconify-icon icon="lucide:search" class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-royal-green transition-colors"></iconify-icon>
+          <input type="text" name="q" placeholder="Search for products, brands or vendors..." class="w-full pl-12 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-royal-green/10 focus:border-royal-green transition-all">
+        </form>
+
+        <!-- Right Actions -->
+        <div class="flex items-center gap-6">
+          {% if request.user.is_authenticated %}
+          <a id="nav-profile-link" href="{% url 'pages:profile' %}" class="hidden md:flex flex-col items-center gap-0.5 text-gray-600 hover:text-royal-green transition-colors">
+            <iconify-icon icon="lucide:user" class="text-xl"></iconify-icon>
+            <span class="text-[10px] font-bold uppercase">{{ request.user.username }}</span>
+          </a>
+          {% else %}
+          <a id="nav-profile-link" href="{% url 'pages:login' %}" class="hidden md:flex flex-col items-center gap-0.5 text-gray-600 hover:text-royal-green transition-colors">
+            <iconify-icon icon="lucide:user" class="text-xl"></iconify-icon>
+            <span class="text-[10px] font-bold uppercase">Account</span>
+          </a>
+          {% endif %}
+          
+          <a id="nav-cart-link" href="{% url 'pages:cart' %}" class="flex flex-col items-center gap-0.5 text-gray-600 hover:text-royal-green transition-colors relative">
+            <iconify-icon icon="lucide:shopping-cart" class="text-xl"></iconify-icon>
+            <span class="text-[10px] font-bold uppercase">Cart</span>
+            {% if request.user.is_authenticated and request.user.cart.items.count > 0 %}
+            <span class="absolute -top-1 -right-1 bg-golden-yellow text-white text-[9px] w-4 h-4 flex items-center justify-center rounded-full font-bold border-2 border-white">{{ request.user.cart.items.count }}</span>
+            {% endif %}
+          </a>
+          <a id="nav-catalog-btn" href="{% url 'pages:catalog' %}" class="royal-green text-white px-6 py-3 rounded-2xl font-bold text-sm hover:brightness-110 transition-all shadow-lg shadow-emerald-900/10">
+            Shop Now
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <main class="flex-1 overflow-x-hidden">
+      <!-- Hero Section -->
+      <section class="max-w-7xl mx-auto px-4 py-8">
+        <div class="hero-gradient rounded-[2.5rem] overflow-hidden flex flex-col lg:flex-row min-h-[540px] relative">
+          <div class="absolute top-0 right-0 w-1/3 h-full bg-white/5 skew-x-12 transform translate-x-20"></div>
+          
+          <div class="flex-1 p-12 lg:p-20 flex flex-col justify-center relative z-10">
+            <span class="inline-block bg-golden-yellow/20 text-golden-yellow px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest mb-6 border border-golden-yellow/30">
+              Ghana's Premium AI Marketplace
+            </span>
+            <h1 class="text-5xl lg:text-7xl font-bold text-white leading-tight mb-6">
+              Elevate Your <span class="text-golden-yellow">Shopping</span> Experience
+            </h1>
+            <p class="text-white/80 text-lg mb-10 max-w-lg">
+              Discover authentic products from vetted local vendors, powered by our smart AI engine to find exactly what you need.
+            </p>
+            <div class="flex flex-wrap gap-4">
+              <a id="hero-shop-cta" href="{% url 'pages:catalog' %}" class="bg-golden-yellow hover:scale-105 transition-transform text-white px-10 py-4 rounded-2xl font-extrabold text-lg flex items-center gap-2">
+                Explore Catalog
+                <iconify-icon icon="lucide:arrow-right"></iconify-icon>
+              </a>
+              <a id="hero-vendor-cta" href="{% url 'pages:register' %}" class="bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white px-10 py-4 rounded-2xl font-bold text-lg">
+                Become a Vendor
+              </a>
+            </div>
+          </div>
+
+          <div class="flex-1 relative min-h-[400px] lg:min-h-0">
+            <img src="https://vgbujcuwptvheqijyjbe.supabase.co/storage/v1/object/public/hmac-uploads/uploads/ef5bc30d-cbeb-42a5-88a1-362daf4d51a4/1780139198921-867f52d6/ChatGPT_Image_May_29__2026__11_28_10_AM.png" alt="Featured Tech" class="absolute inset-0 w-full h-full object-cover p-8 lg:p-12 drop-shadow-2xl">
+          </div>
+        </div>
+      </section>
+
+      <!-- Categories Section -->
+      <section class="max-w-7xl mx-auto px-4 py-16">
+        <div class="flex items-end justify-between mb-10">
+          <div>
+            <h2 class="text-3xl font-bold text-gray-800 tracking-tight">Shop by Category</h2>
+            <p class="text-gray-500 mt-1">Everything you need, organized for you</p>
+          </div>
+          <a href="{% url 'pages:catalog' %}" class="text-royal-green font-bold text-sm hover:underline flex items-center gap-1">
+            View All <iconify-icon icon="lucide:chevron-right"></iconify-icon>
+          </a>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
+          {% for category in categories %}
+          <a href="{% url 'pages:catalog' %}?category={{ category.slug }}" class="group flex flex-col items-center gap-4 p-6 bg-white rounded-3xl border border-gray-100 custom-shadow transition-all hover:border-golden-yellow">
+            <div class="w-16 h-16 rounded-2xl royal-green flex items-center justify-center text-white transition-all group-hover:bg-golden-yellow group-hover:-translate-y-2">
+              <iconify-icon icon="{{ category.icon }}" class="text-3xl"></iconify-icon>
+            </div>
+            <span class="font-bold text-gray-700 text-sm">{{ category.name }}</span>
+          </a>
+          {% empty %}
+          <p class="text-sm text-gray-500 font-medium col-span-full text-center">No categories created yet.</p>
+          {% endfor %}
+        </div>
+      </section>
+
+      <!-- Featured Products Section -->
+      <section class="bg-gray-50 py-16">
+        <div class="max-w-7xl mx-auto px-4">
+          <div class="flex items-end justify-between mb-10">
+            <div>
+              <h2 class="text-3xl font-bold text-gray-800 tracking-tight">Featured Products</h2>
+              <p class="text-gray-500 mt-1">Handpicked for quality and value</p>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {% for product in hot_products %}
+            <div class="bg-white rounded-3xl overflow-hidden group border border-gray-100 custom-shadow flex flex-col">
+              <a id="product-card-{{ product.id }}" href="{% url 'pages:product_detail' product.id %}" class="relative h-64 overflow-hidden block">
+                {% if product.image_url %}
+                <img src="{{ product.image_url }}" alt="{{ product.name }}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                {% else %}
+                <img src="https://images.unsplash.com/photo-1546435770-a3e426bf472b?q=80&w=2065&auto=format&fit=crop" alt="Placeholder" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                {% endif %}
+                
+                {% if product.compare_at_price and product.compare_at_price > product.price %}
+                <span class="absolute top-4 left-4 bg-red-500 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase">Sale</span>
+                {% endif %}
+              </a>
+              <div class="p-6 flex flex-col flex-1">
+                <h3 class="text-lg font-bold text-gray-800 mb-1 group-hover:text-royal-green transition-colors">{{ product.name }}</h3>
+                <p class="text-sm text-gray-500 mb-4">By <span class="font-semibold text-royal-green">{{ product.vendor.store_name }}</span></p>
+                <div class="mt-auto flex items-center justify-between">
+                  <div>
+                    <span class="text-xl font-bold text-gray-800">GH₵ {{ product.price }}</span>
+                    {% if product.compare_at_price and product.compare_at_price > product.price %}
+                    <span class="text-sm text-gray-400 line-through ml-2">GH₵ {{ product.compare_at_price }}</span>
+                    {% endif %}
+                  </div>
+                  <form method="POST" action="{% url 'pages:add_to_cart' product.id %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="quantity" value="1">
+                    <button type="submit" class="p-3 royal-green text-white rounded-2xl hover:bg-golden-yellow transition-all shadow-md">
+                      <iconify-icon icon="lucide:plus"></iconify-icon>
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+            {% empty %}
+            <div class="col-span-full py-12 text-center text-gray-500 font-medium">
+              No featured products listed yet.
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white pt-20 pb-10">
+      <div class="max-w-7xl mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
+          <div>
+            <div class="flex items-center gap-2 mb-6">
+              <img src="https://vgbujcuwptvheqijyjbe.supabase.co/storage/v1/object/public/hmac-uploads/uploads/ef5bc30d-cbeb-42a5-88a1-362daf4d51a4/1780139179048-642ea9dd/ChatGPT_Image_May_29__2026__11_28_10_AM.png" alt="Anitinn Logo" class="w-10 h-10 rounded-full border border-white/20">
+              <span class="font-bold text-2xl tracking-tight text-white uppercase">Anitinn</span>
+            </div>
+            <p class="text-gray-400 text-sm leading-relaxed mb-8">
+              Ghana's first AI-powered multi-vendor marketplace connecting you to quality products and trusted local sellers.
+            </p>
+          </div>
+          <div>
+            <h4 class="font-bold text-lg mb-6 text-golden-yellow">Quick Links</h4>
+            <ul class="space-y-4 text-gray-400 text-sm">
+              <li><a id="footer-shop" href="{% url 'pages:catalog' %}" class="hover:text-white transition-colors">Shop Products</a></li>
+              <li><a id="footer-help" href="{% url 'pages:help' %}" class="hover:text-white transition-colors">Help Center</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="font-bold text-lg mb-6 text-golden-yellow">Account</h4>
+            <ul class="space-y-4 text-gray-400 text-sm">
+              <li><a id="footer-track" href="{% url 'pages:order_history' %}" class="hover:text-white transition-colors">Order History</a></li>
+              <li><a id="footer-contact" href="{% url 'pages:profile' %}" class="hover:text-white transition-colors">My Profile</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="border-t border-white/10 pt-10 text-center">
+          <p class="text-gray-500 text-xs">© 2024 ANITINN Marketplace. Built for Ghana with 💚</p>
+        </div>
+      </div>
+    </footer>
+</div>
+{% endblock %}

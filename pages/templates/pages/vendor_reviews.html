@@ -1,0 +1,310 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Product Reviews | Vendor Portal{% endblock %}
+
+{% block extra_head %}
+<style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #fcfbf8;
+    }
+    .royal-green { background-color: #1B5E3F; }
+    .golden-yellow { background-color: #D4A520; }
+    .text-royal-green { color: #1B5E3F; }
+    .text-golden-yellow { color: #D4A520; }
+    .border-royal-green { border-color: #1B5E3F; }
+    .border-golden-yellow { border-color: #D4A520; }
+  </style>
+<style>sd-component { display: block; }</style>
+{% endblock %}
+
+{% block body %}
+<div class="flex min-h-screen">
+    <!-- Sidebar Component -->
+    <div v-scope="{ ...{&quot;activeItem&quot;:&quot;reviews&quot;,&quot;dashboardHref&quot;:&quot;/&quot;,&quot;productsHref&quot;:&quot;/vendor/products/&quot;,&quot;ordersHref&quot;:&quot;/vendor/orders/&quot;,&quot;analyticsHref&quot;:&quot;/vendor/analytics/&quot;,&quot;reviewsHref&quot;:&quot;/vendor/reviews/&quot;,&quot;orderBadgeCount&quot;:12}, $emit() {} }">
+      <aside class="w-64 bg-[#1B5E3F] text-white fixed h-full flex flex-col z-50">
+        <div class="p-6 flex items-center gap-3">
+          <img src="https://vgbujcuwptvheqijyjbe.supabase.co/storage/v1/object/public/hmac-uploads/uploads/ef5bc30d-cbeb-42a5-88a1-362daf4d51a4/1780139179048-642ea9dd/ChatGPT_Image_May_29__2026__11_28_10_AM.png" alt="Anitinn Logo" class="w-10 h-10 rounded-full border border-white/20">
+          <span class="font-bold text-xl tracking-tight">ANITINN</span>
+        </div>
+        <nav class="flex-1 px-4 space-y-1 overflow-y-auto mt-4" style="scrollbar-width: thin; scrollbar-color: rgba(255, 255, 255, 0.1) transparent;">
+          <p class="text-xs font-semibold text-white/40 px-3 py-2 uppercase tracking-wider">Main Menu</p>
+          
+          <a :href="dashboardHref" 
+             class="flex items-center gap-3 px-3 py-3 rounded-lg transition-all" 
+             :class="activeItem === 'dashboard' ? 'bg-white/10 text-[#D4A520] border-l-4 border-[#D4A520]' : 'text-white/70 hover:bg-white/5 hover:text-white'">
+            <iconify-icon icon="lucide:layout-dashboard"></iconify-icon>
+            <span class="font-medium">Dashboard</span>
+          </a>
+
+          <a :href="productsHref" 
+             class="flex items-center gap-3 px-3 py-3 rounded-lg transition-all" 
+             :class="activeItem === 'products' ? 'bg-white/10 text-[#D4A520] border-l-4 border-[#D4A520]' : 'text-white/70 hover:bg-white/5 hover:text-white'">
+            <iconify-icon icon="lucide:box"></iconify-icon>
+            <span class="font-medium">Products</span>
+          </a>
+
+          <a :href="ordersHref" 
+             class="flex items-center gap-3 px-3 py-3 rounded-lg transition-all" 
+             :class="activeItem === 'orders' ? 'bg-white/10 text-[#D4A520] border-l-4 border-[#D4A520]' : 'text-white/70 hover:bg-white/5 hover:text-white'">
+            <iconify-icon icon="lucide:shopping-cart"></iconify-icon>
+            <span class="font-medium">Orders</span>
+            <span v-if="orderBadgeCount > 0" class="ml-auto bg-[#D4A520] text-white text-[10px] px-1.5 py-0.5 rounded-full">{{ orderBadgeCount }}</span>
+          </a>
+
+          <a :href="analyticsHref" 
+             class="flex items-center gap-3 px-3 py-3 rounded-lg transition-all" 
+             :class="activeItem === 'analytics' ? 'bg-white/10 text-[#D4A520] border-l-4 border-[#D4A520]' : 'text-white/70 hover:bg-white/5 hover:text-white'">
+            <iconify-icon icon="lucide:bar-chart-3"></iconify-icon>
+            <span class="font-medium">Analytics</span>
+          </a>
+
+          <p class="text-xs font-semibold text-white/40 px-3 py-2 uppercase tracking-wider mt-8">Storefront</p>
+
+          <a :href="reviewsHref" 
+             class="flex items-center gap-3 px-3 py-3 rounded-lg transition-all" 
+             :class="activeItem === 'reviews' ? 'bg-white/10 text-[#D4A520] border-l-4 border-[#D4A520]' : 'text-white/70 hover:bg-white/5 hover:text-white'">
+            <iconify-icon icon="lucide:message-square"></iconify-icon>
+            <span class="font-medium">Reviews</span>
+          </a>
+        </nav>
+        <div class="p-4 mt-auto">
+          <button class="w-full bg-[#D4A520] hover:brightness-110 text-white text-xs font-bold py-2 rounded-lg transition-all uppercase tracking-wide">Upgrade Plan</button>
+        </div>
+      </aside>
+    </div>
+
+    <!-- Main Content -->
+    <main class="flex-1 ml-64 min-h-screen flex flex-col relative">
+      <!-- Header Component -->
+      <div v-scope="{ ...{&quot;vendorName&quot;:&quot;Kofi's Electronics&quot;,&quot;userName&quot;:&quot;Kofi Mensah&quot;,&quot;userAvatarUrl&quot;:&quot;https://api.dicebear.com/7.x/avataaars/svg?seed=Kofi&quot;,&quot;hasNotifications&quot;:true}, $emit() {} }">
+        <header class="sticky top-0 bg-white/80 backdrop-blur-md border-b border-gray-100 z-40 px-8 py-4">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-4">
+              <div>
+                <h1 class="text-2xl font-bold text-gray-800 tracking-tight">Customer Reviews</h1>
+                <p class="text-sm text-gray-500 font-medium">Read and respond to feedback left by your buyers</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-6">
+              <div class="relative hidden lg:block">
+                <iconify-icon icon="lucide:search" class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></iconify-icon>
+                <input type="text" placeholder="Search reviews..." class="pl-10 pr-4 py-2 w-80 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#1B5E3F]/20 focus:border-[#1B5E3F] transition-all">
+              </div>
+              <div class="flex items-center gap-3">
+                <button class="p-2 hover:bg-gray-100 rounded-full relative">
+                  <iconify-icon icon="lucide:bell" class="text-2xl text-gray-600"></iconify-icon>
+                  <span v-if="hasNotifications" class="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full border-2 border-white"></span>
+                </button>
+                <div class="h-8 w-[1px] bg-gray-200 mx-2"></div>
+                <div class="flex items-center gap-3 group cursor-pointer">
+                  <img :src="userAvatarUrl" alt="Vendor Avatar" class="w-10 h-10 rounded-full border-2 border-[#D4A520] bg-gray-100 p-0.5">
+                  <div class="hidden md:block">
+                    <p class="text-sm font-bold text-gray-800 leading-none">{{ userName }}</p>
+                    <p class="text-[10px] text-gray-500 font-medium">Pro Vendor</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </header>
+      </div>
+
+      <!-- Main Reviews Container -->
+      <div class="p-8 flex-1 space-y-8">
+        <!-- KPI Header Section -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 flex items-center gap-4">
+            <div class="p-4 bg-emerald-50 rounded-2xl text-royal-green">
+              <iconify-icon icon="lucide:star" class="text-3xl"></iconify-icon>
+            </div>
+            <div>
+              <span class="text-[10px] font-bold text-gray-400 uppercase tracking-widest block">Average Rating</span>
+              <h3 class="text-3xl font-extrabold text-gray-800 flex items-baseline gap-1 mt-1">
+                4.8 <span class="text-sm text-gray-400 font-semibold">/ 5.0</span>
+              </h3>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 flex items-center gap-4">
+            <div class="p-4 bg-amber-50 rounded-2xl text-golden-yellow">
+              <iconify-icon icon="lucide:message-square" class="text-3xl"></iconify-icon>
+            </div>
+            <div>
+              <span class="text-[10px] font-bold text-gray-400 uppercase tracking-widest block">Total Reviews</span>
+              <h3 class="text-3xl font-extrabold text-gray-800 mt-1">242</h3>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 flex items-center gap-4">
+            <div class="p-4 bg-blue-50 rounded-2xl text-blue-600">
+              <iconify-icon icon="lucide:check-circle-2" class="text-3xl"></iconify-icon>
+            </div>
+            <div>
+              <span class="text-[10px] font-bold text-gray-400 uppercase tracking-widest block">Response Rate</span>
+              <h3 class="text-3xl font-extrabold text-gray-800 mt-1">95.4%</h3>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <!-- Rating Breakdown (Col span 1) -->
+          <div class="bg-white rounded-3xl p-8 border border-gray-100 shadow-sm space-y-6">
+            <h3 class="text-lg font-bold text-gray-800">Rating Distribution</h3>
+            
+            <div class="space-y-4">
+              <!-- 5 Stars -->
+              <div class="flex items-center gap-4">
+                <span class="text-xs font-bold text-gray-500 w-10 flex items-center gap-1">5 <iconify-icon icon="mdi:star" class="text-golden-yellow text-sm"></iconify-icon></span>
+                <div class="flex-1 h-3 bg-gray-100 rounded-full overflow-hidden">
+                  <div class="h-full bg-royal-green rounded-full" style="width: 82%"></div>
+                </div>
+                <span class="text-xs font-bold text-gray-400 w-8 text-right">82%</span>
+              </div>
+
+              <!-- 4 Stars -->
+              <div class="flex items-center gap-4">
+                <span class="text-xs font-bold text-gray-500 w-10 flex items-center gap-1">4 <iconify-icon icon="mdi:star" class="text-golden-yellow text-sm"></iconify-icon></span>
+                <div class="flex-1 h-3 bg-gray-100 rounded-full overflow-hidden">
+                  <div class="h-full bg-royal-green rounded-full opacity-80" style="width: 12%"></div>
+                </div>
+                <span class="text-xs font-bold text-gray-400 w-8 text-right">12%</span>
+              </div>
+
+              <!-- 3 Stars -->
+              <div class="flex items-center gap-4">
+                <span class="text-xs font-bold text-gray-500 w-10 flex items-center gap-1">3 <iconify-icon icon="mdi:star" class="text-golden-yellow text-sm"></iconify-icon></span>
+                <div class="flex-1 h-3 bg-gray-100 rounded-full overflow-hidden">
+                  <div class="h-full bg-royal-green rounded-full opacity-60" style="width: 4%"></div>
+                </div>
+                <span class="text-xs font-bold text-gray-400 w-8 text-right">4%</span>
+              </div>
+
+              <!-- 2 Stars -->
+              <div class="flex items-center gap-4">
+                <span class="text-xs font-bold text-gray-500 w-10 flex items-center gap-1">2 <iconify-icon icon="mdi:star" class="text-golden-yellow text-sm"></iconify-icon></span>
+                <div class="flex-1 h-3 bg-gray-100 rounded-full overflow-hidden">
+                  <div class="h-full bg-amber-500 rounded-full" style="width: 1%"></div>
+                </div>
+                <span class="text-xs font-bold text-gray-400 w-8 text-right">1%</span>
+              </div>
+
+              <!-- 1 Star -->
+              <div class="flex items-center gap-4">
+                <span class="text-xs font-bold text-gray-500 w-10 flex items-center gap-1">1 <iconify-icon icon="mdi:star" class="text-golden-yellow text-sm"></iconify-icon></span>
+                <div class="flex-1 h-3 bg-gray-100 rounded-full overflow-hidden">
+                  <div class="h-full bg-red-500 rounded-full" style="width: 1%"></div>
+                </div>
+                <span class="text-xs font-bold text-gray-400 w-8 text-right">1%</span>
+              </div>
+            </div>
+
+            <!-- Divider -->
+            <div class="h-[1px] bg-gray-100"></div>
+
+            <div class="p-5 rounded-2xl bg-emerald-50/50 border border-emerald-100/50 text-center space-y-3">
+              <h4 class="text-sm font-bold text-royal-green">AI Sentiment Analysis</h4>
+              <p class="text-xs text-gray-500 font-medium leading-normal">
+                Feedback is overwhelmingly <b>positive (94%)</b>. Customers highly appreciate the <b>fast delivery speed</b> and product <b>packaging quality</b>.
+              </p>
+            </div>
+          </div>
+
+          <!-- Reviews List (Col span 2) -->
+          <div class="lg:col-span-2 space-y-6">
+            <div class="bg-white rounded-3xl p-8 border border-gray-100 shadow-sm space-y-6">
+              <div class="flex justify-between items-center">
+                <h3 class="text-lg font-bold text-gray-800">Recent Customer Reviews</h3>
+                <div class="flex gap-2">
+                  <select class="px-3 py-1.5 bg-gray-50 border border-gray-200 rounded-xl text-xs font-bold text-gray-500 focus:outline-none">
+                    <option>All Ratings</option>
+                    <option>5 Stars</option>
+                    <option>4 Stars</option>
+                    <option>3 Stars or less</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Review Item 1 -->
+              <div class="p-6 rounded-2xl bg-gray-50 border border-gray-100 space-y-4">
+                <div class="flex items-start justify-between">
+                  <div class="flex gap-3">
+                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Ama" class="w-10 h-10 rounded-full border border-gray-200 bg-white">
+                    <div>
+                      <h4 class="text-sm font-bold text-gray-800">Ama Boateng</h4>
+                      <p class="text-[10px] font-bold text-gray-400 uppercase mt-0.5">Verified Buyer · Bought: <b>Xiaomi Monitor 27" Pro</b></p>
+                    </div>
+                  </div>
+                  <div class="flex flex-col items-end">
+                    <div class="flex text-golden-yellow">
+                      <iconify-icon icon="mdi:star"></iconify-icon>
+                      <iconify-icon icon="mdi:star"></iconify-icon>
+                      <iconify-icon icon="mdi:star"></iconify-icon>
+                      <iconify-icon icon="mdi:star"></iconify-icon>
+                      <iconify-icon icon="mdi:star"></iconify-icon>
+                    </div>
+                    <span class="text-[10px] text-gray-400 font-semibold mt-1">2 hours ago</span>
+                  </div>
+                </div>
+                
+                <p class="text-sm text-gray-600 leading-normal font-medium pl-13">
+                  Absolutely stellar! The display is so crisp and clear. Using it for coding and gaming, and it handles everything like a champ. Shipping to Kumasi was exceptionally quick. Highly recommended vendor!
+                </p>
+
+                <!-- Seller Reply -->
+                <div class="ml-13 p-4 rounded-xl bg-white border border-gray-100 space-y-2">
+                  <div class="flex items-center gap-2">
+                    <span class="text-xs font-bold text-royal-green">Your Response</span>
+                    <span class="text-[10px] text-gray-400 font-semibold">1 hour ago</span>
+                  </div>
+                  <p class="text-xs text-gray-500 font-medium">
+                    Thank you Ama! We appreciate your kind words and are thrilled that you love the Xiaomi monitor. Have fun gaming!
+                  </p>
+                </div>
+              </div>
+
+              <!-- Review Item 2 -->
+              <div class="p-6 rounded-2xl bg-gray-50 border border-gray-100 space-y-4">
+                <div class="flex items-start justify-between">
+                  <div class="flex gap-3">
+                    <div class="w-10 h-10 rounded-full bg-royal-green text-white flex items-center justify-center font-extrabold text-sm shadow-sm">JK</div>
+                    <div>
+                      <h4 class="text-sm font-bold text-gray-800">John Kwame</h4>
+                      <p class="text-[10px] font-bold text-gray-400 uppercase mt-0.5">Verified Buyer · Bought: <b>Samsung Galaxy A55 5G</b></p>
+                    </div>
+                  </div>
+                  <div class="flex flex-col items-end">
+                    <div class="flex text-golden-yellow">
+                      <iconify-icon icon="mdi:star"></iconify-icon>
+                      <iconify-icon icon="mdi:star"></iconify-icon>
+                      <iconify-icon icon="mdi:star"></iconify-icon>
+                      <iconify-icon icon="mdi:star"></iconify-icon>
+                      <iconify-icon icon="mdi:star-outline" class="text-gray-300"></iconify-icon>
+                    </div>
+                    <span class="text-[10px] text-gray-400 font-semibold mt-1">Yesterday</span>
+                  </div>
+                </div>
+                
+                <p class="text-sm text-gray-600 leading-normal font-medium pl-13">
+                  Great phone, solid battery life. The delivery took a day longer than advertised to Accra, but the packaging was perfect and phone works beautifully.
+                </p>
+
+                <!-- Simulated Respond Action Form -->
+                <div class="ml-13 space-y-2">
+                  <input type="text" placeholder="Write a response to John..." class="w-full px-4 py-2.5 bg-white border border-gray-200 rounded-xl text-xs focus:outline-none focus:border-royal-green">
+                  <button class="px-4 py-2 royal-green hover:brightness-110 text-white text-[10px] font-bold rounded-lg uppercase tracking-wider transition-all">Submit Response</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <footer class="p-8 text-center mt-auto border-t border-gray-100 bg-white/50">
+        <p class="text-xs text-gray-400 font-medium">© 2024 ANITINN Marketplace. Ghana’s #1 AI-Powered Platform.</p>
+      </footer>
+    </main>
+  </div>
+{% endblock %}

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join ANITINN | Ghana's Premium Marketplace</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .royal-green { background-color: #1B5E3F; }
+        .royal-green-text { color: #1B5E3F; }
+        .golden-yellow { background-color: #D4A520; }
+        .golden-yellow-text { color: #D4A520; }
+        .warm-white { background-color: #FDFBF7; }
+        .progress-step-active { background-color: #1B5E3F; width: 40px; }
+        .progress-step-inactive { background-color: #E5E7EB; width: 12px; }
+        .glass-overlay { background: linear-gradient(180deg, rgba(27, 94, 63, 0) 0%, rgba(27, 94, 63, 0.9) 100%); }
+    </style>
+</head>
+<body>
+    <div class="min-h-screen flex warm-white">
+        <!-- Left Side: Ghana Marketplace Theme Sidebar -->
+        <div class="hidden lg:flex lg:w-5/12 relative">
+            <img src="https://vgbujcuwptvheqijyjbe.supabase.co/storage/v1/object/public/hmac-uploads/uploads/ef5bc30d-cbeb-42a5-88a1-362daf4d51a4/1780139198921-867f52d6/ChatGPT_Image_May_29__2026__11_28_10_AM.png" 
+                 alt="Ghana Marketplace" 
+                 class="absolute inset-0 w-full h-full object-cover">
+            <div class="absolute inset-0 glass-overlay flex flex-col justify-end p-12 text-white">
+                <img src="https://vgbujcuwptvheqijyjbe.supabase.co/storage/v1/object/public/hmac-uploads/uploads/ef5bc30d-cbeb-42a5-88a1-362daf4d51a4/1780139179048-642ea9dd/ChatGPT_Image_May_29__2026__11_28_10_AM.png" 
+                     alt="Anitinn Logo" class="w-16 h-16 rounded-full border-2 border-white/30 mb-6">
+                <h1 class="text-4xl font-extrabold mb-4 leading-tight">Empowering Ghanaian Businesses with AI</h1>
+                <p class="text-lg text-white/80 max-w-md">Join thousands of vendors and buyers in Ghana's most advanced marketplace ecosystem.</p>
+                <div class="mt-12 flex gap-4">
+                    <div class="flex -space-x-3">
+                        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Kofi" class="w-10 h-10 rounded-full border-2 border-white">
+                        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Ama" class="w-10 h-10 rounded-full border-2 border-white">
+                        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Kwesi" class="w-10 h-10 rounded-full border-2 border-white">
+                    </div>
+                    <p class="text-sm text-white/70 flex items-center">Joined by over 5k+ Ghanaians this month</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Side: Registration Form -->
+        <div class="w-full lg:w-7/12 flex flex-col items-center justify-center p-8 md:p-12 xl:p-24 overflow-y-auto">
+            <div class="w-full max-w-xl">
+                <!-- Top Header & Progress -->
+                <div class="mb-8 flex justify-between items-center">
+                    <div>
+                        <p class="text-sm font-bold royal-green-text uppercase tracking-widest mb-1">Create Account</p>
+                        <h2 class="text-3xl font-extrabold text-gray-900">Welcome to ANITINN</h2>
+                    </div>
+                    <div class="flex gap-1.5">
+                        <div class="h-2 progress-step-active rounded-full"></div>
+                        <div class="h-2 progress-step-inactive rounded-full"></div>
+                        <div class="h-2 progress-step-inactive rounded-full"></div>
+                    </div>
+                </div>
+
+                <p class="text-gray-500 mb-8 font-medium">Step 1 of 3: Primary Account Setup</p>
+
+                <!-- Social Signups -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+                    <button class="flex items-center justify-center gap-3 px-6 py-3 border border-gray-200 rounded-xl hover:bg-gray-50 transition-all font-semibold text-gray-700" id="cta-google-signup">
+                        <iconify-icon icon="logos:google-icon" class="text-xl"></iconify-icon>
+                        Sign up with Google
+                    </button>
+                    <button class="flex items-center justify-center gap-3 px-6 py-3 border border-gray-200 rounded-xl hover:bg-gray-50 transition-all font-semibold text-gray-700" id="cta-github-signup">
+                        <iconify-icon icon="mdi:github" class="text-xl"></iconify-icon>
+                        Sign up with GitHub
+                    </button>
+                </div>
+
+                <div class="relative flex items-center justify-center mb-8">
+                    <div class="w-full border-t border-gray-200"></div>
+                    <span class="absolute bg-white px-4 text-sm font-bold text-gray-400 uppercase tracking-tighter">Or use email</span>
+                </div>
+
+                {% if messages %}
+                <div class="mb-6 space-y-2">
+                    {% for message in messages %}
+                    <div class="p-4 rounded-xl text-sm font-medium {% if message.tags == 'error' %}bg-red-50 border border-red-200 text-red-700{% else %}bg-green-50 border border-green-200 text-green-700{% endif %}">
+                        {{ message }}
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+
+                {% if form.errors %}
+                <div class="p-4 mb-6 rounded-xl bg-red-50 border border-red-200 text-red-700 text-sm font-medium">
+                    {% for field in form %}
+                        {% for error in field.errors %}
+                            <p><strong>{{ field.label }}:</strong> {{ error }}</p>
+                        {% endfor %}
+                    {% endfor %}
+                    {% for error in form.non_field_errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+                {% endif %}
+
+                <!-- Main Form -->
+                <form class="space-y-6" method="POST">
+                    {% csrf_token %}
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="space-y-2">
+                            <label class="text-sm font-bold text-gray-700 ml-1">Username</label>
+                            <input type="text" name="username" placeholder="johndoe" required
+                                   value="{{ form.username.value|default:'' }}"
+                                   class="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#1B5E3F]/20 focus:border-[#1B5E3F] transition-all">
+                        </div>
+                        <div class="space-y-2">
+                            <label class="text-sm font-bold text-gray-700 ml-1">Email Address</label>
+                            <input type="email" name="email" placeholder="kofi.mensah@gmail.com" required
+                                   value="{{ form.email.value|default:'' }}"
+                                   class="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#1B5E3F]/20 focus:border-[#1B5E3F] transition-all">
+                        </div>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="space-y-2 relative">
+                            <label class="text-sm font-bold text-gray-700 ml-1">Password</label>
+                            <input type="password" name="password" placeholder="••••••••" required
+                                   class="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#1B5E3F]/20 focus:border-[#1B5E3F] transition-all">
+                            <!-- Strength Indicator -->
+                            <div class="flex gap-1 mt-2">
+                                <div class="h-1 w-1/4 rounded-full royal-green"></div>
+                                <div class="h-1 w-1/4 rounded-full royal-green"></div>
+                                <div class="h-1 w-1/4 rounded-full royal-green"></div>
+                                <div class="h-1 w-1/4 rounded-full bg-gray-200"></div>
+                            </div>
+                            <p class="text-[10px] font-bold royal-green-text uppercase tracking-tighter">Password Strength: Good</p>
+                        </div>
+                        
+                        <div class="space-y-2">
+                            <label class="text-sm font-bold text-gray-700 ml-1">Confirm Password</label>
+                            <input type="password" name="password_confirm" placeholder="••••••••" required
+                                   class="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#1B5E3F]/20 focus:border-[#1B5E3F] transition-all">
+                        </div>
+                    </div>
+
+                    <!-- Role Selector -->
+                    <div class="space-y-3">
+                        <label class="text-sm font-bold text-gray-700 ml-1">Account Role</label>
+                        <div class="grid grid-cols-2 gap-4">
+                            <label class="relative flex flex-col p-4 border border-gray-200 rounded-xl cursor-pointer hover:border-[#1B5E3F] transition-all peer-checked:border-[#1B5E3F] peer-checked:bg-[#1B5E3F]/5 group">
+                                <input type="radio" name="role" value="BUYER" class="sr-only peer" checked>
+                                <div class="flex justify-between items-start mb-2">
+                                    <iconify-icon icon="lucide:user" class="text-2xl text-gray-400 group-hover:text-[#1B5E3F] peer-checked:text-[#1B5E3F]"></iconify-icon>
+                                    <div class="w-4 h-4 rounded-full border border-gray-300 flex items-center justify-center peer-checked:border-[#1B5E3F] peer-checked:after:bg-[#1B5E3F] after:w-2 after:h-2 after:rounded-full"></div>
+                                </div>
+                                <span class="text-sm font-bold text-gray-900">Buyer</span>
+                                <span class="text-xs text-gray-500">Shop from verified vendors</span>
+                            </label>
+                            
+                            <label class="relative flex flex-col p-4 border border-gray-200 rounded-xl cursor-pointer hover:border-[#1B5E3F] transition-all group">
+                                <input type="radio" name="role" value="VENDOR" class="sr-only peer">
+                                <div class="flex justify-between items-start mb-2">
+                                    <iconify-icon icon="lucide:store" class="text-2xl text-gray-400 group-hover:text-[#1B5E3F]"></iconify-icon>
+                                    <div class="w-4 h-4 rounded-full border border-gray-300 flex items-center justify-center"></div>
+                                </div>
+                                <span class="text-sm font-bold text-gray-900">Vendor</span>
+                                <span class="text-xs text-gray-500">Sell your premium products</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3 mt-4">
+                        <input type="checkbox" id="terms" required class="mt-1 w-4 h-4 rounded border-gray-300 royal-green-text focus:ring-[#1B5E3F]">
+                        <label for="terms" class="text-xs font-medium text-gray-600 leading-normal">
+                            I agree to the ANITINN <a href="/terms/" class="royal-green-text font-bold underline decoration-golden-yellow">Terms of Service</a> and <a href="/privacy/" class="royal-green-text font-bold underline decoration-golden-yellow">Privacy Policy</a>.
+                        </label>
+                    </div>
+
+                    <button type="submit" 
+                            class="w-full royal-green text-white font-bold py-4 rounded-xl shadow-lg shadow-[#1B5E3F]/20 hover:scale-[1.02] active:scale-[0.98] transition-all text-lg"
+                            id="cta-submit-registration">
+                        Create Account
+                    </button>
+                </form>
+
+                <p class="mt-8 text-center text-sm font-medium text-gray-600">
+                    Already have an account? 
+                    <a href="/login/" class="royal-green-text font-bold hover:underline decoration-golden-yellow ml-1" id="nav-login-link">Log in here</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

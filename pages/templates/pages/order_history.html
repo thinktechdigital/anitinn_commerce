@@ -1,0 +1,286 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Order History{% endblock %}
+
+{% block extra_head %}
+<style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #fcfbf8;
+    }
+    .royal-green { background-color: #1B5E3F; }
+    .golden-yellow { background-color: #D4A520; }
+    .text-royal-green { color: #1B5E3F; }
+    .text-golden-yellow { color: #D4A520; }
+    .border-royal-green { border-color: #1B5E3F; }
+    .border-golden-yellow { border-color: #D4A520; }
+
+    /* Custom scrollbar for sidebar */
+    .sidebar-scroll::-webkit-scrollbar {
+      width: 4px;
+    }
+    .sidebar-scroll::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+    }
+    
+    .tab-active {
+      color: #1B5E3F;
+      border-bottom: 2px solid #D4A520;
+    }
+  </style>
+<style>sd-component { display: block; }</style>
+{% endblock %}
+
+{% block body %}
+<div class="flex min-h-screen">
+    <!-- Sidebar (Shared Component) -->
+    <!-- component: DashboardSidebar (3e4d5170-0fd6-49b5-8819-3230c98e99b7) -->
+<div v-scope="{ ...{&quot;activeItem&quot;:&quot;orders&quot;,&quot;dashboardHref&quot;:&quot;https://draft-350b631c-027c-4633-adae-919ebf5899ee.preview.superdesign.dev&quot;,&quot;productsHref&quot;:&quot;https://draft-436483be-607a-49d5-99a3-ffa52a93fe34.preview.superdesign.dev&quot;,&quot;ordersHref&quot;:&quot;#&quot;,&quot;analyticsHref&quot;:&quot;#analytics&quot;,&quot;reviewsHref&quot;:&quot;#reviews&quot;,&quot;orderBadgeCount&quot;:12}, $emit() {} }">
+<aside class="w-64 bg-[#1B5E3F] text-white fixed h-full flex flex-col z-50">
+  <div class="p-6 flex items-center gap-3">
+    <img src="https://vgbujcuwptvheqijyjbe.supabase.co/storage/v1/object/public/hmac-uploads/uploads/ef5bc30d-cbeb-42a5-88a1-362daf4d51a4/1780139179048-642ea9dd/ChatGPT_Image_May_29__2026__11_28_10_AM.png" alt="Anitinn Logo" class="w-10 h-10 rounded-full border border-white/20">
+    <span class="font-bold text-xl tracking-tight">ANITINN</span>
+  </div>
+  <nav class="flex-1 px-4 space-y-1 overflow-y-auto mt-4" style="scrollbar-width: thin; scrollbar-color: rgba(255, 255, 255, 0.1) transparent;">
+    <p class="text-xs font-semibold text-white/40 px-3 py-2 uppercase tracking-wider">Main Menu</p>
+    
+    <a :href="dashboardHref" 
+       class="flex items-center gap-3 px-3 py-3 rounded-lg transition-all" 
+       :class="activeItem === 'dashboard' ? 'bg-white/10 text-[#D4A520] border-l-4 border-[#D4A520]' : 'text-white/70 hover:bg-white/5 hover:text-white'">
+      <iconify-icon icon="lucide:layout-dashboard"></iconify-icon>
+      <span class="font-medium">Dashboard</span>
+    </a>
+
+    <a :href="productsHref" 
+       class="flex items-center gap-3 px-3 py-3 rounded-lg transition-all" 
+       :class="activeItem === 'products' ? 'bg-white/10 text-[#D4A520] border-l-4 border-[#D4A520]' : 'text-white/70 hover:bg-white/5 hover:text-white'">
+      <iconify-icon icon="lucide:box"></iconify-icon>
+      <span class="font-medium">Products</span>
+    </a>
+
+    <a :href="ordersHref" 
+       class="flex items-center gap-3 px-3 py-3 rounded-lg transition-all" 
+       :class="activeItem === 'orders' ? 'bg-white/10 text-[#D4A520] border-l-4 border-[#D4A520]' : 'text-white/70 hover:bg-white/5 hover:text-white'">
+      <iconify-icon icon="lucide:shopping-cart"></iconify-icon>
+      <span class="font-medium">Orders</span>
+      <span v-if="orderBadgeCount > 0" class="ml-auto bg-[#D4A520] text-white text-[10px] px-1.5 py-0.5 rounded-full">{{ orderBadgeCount }}</span>
+    </a>
+
+    <a :href="analyticsHref" 
+       class="flex items-center gap-3 px-3 py-3 rounded-lg transition-all" 
+       :class="activeItem === 'analytics' ? 'bg-white/10 text-[#D4A520] border-l-4 border-[#D4A520]' : 'text-white/70 hover:bg-white/5 hover:text-white'">
+      <iconify-icon icon="lucide:bar-chart-3"></iconify-icon>
+      <span class="font-medium">Analytics</span>
+    </a>
+
+    <p class="text-xs font-semibold text-white/40 px-3 py-2 uppercase tracking-wider mt-8">Storefront</p>
+
+    <a :href="reviewsHref" 
+       class="flex items-center gap-3 px-3 py-3 rounded-lg transition-all" 
+       :class="activeItem === 'reviews' ? 'bg-white/10 text-[#D4A520] border-l-4 border-[#D4A520]' : 'text-white/70 hover:bg-white/5 hover:text-white'">
+      <iconify-icon icon="lucide:message-square"></iconify-icon>
+      <span class="font-medium">Reviews</span>
+    </a>
+  </nav>
+  <div class="p-4 mt-auto">
+    <button @click="$emit('upgrade')" class="w-full bg-[#D4A520] hover:brightness-110 text-white text-xs font-bold py-2 rounded-lg transition-all uppercase tracking-wide">Upgrade Plan</button>
+  </div>
+</aside>
+</div>
+<!-- /component: DashboardSidebar (3e4d5170-0fd6-49b5-8819-3230c98e99b7) -->
+
+    <!-- Main Content -->
+    <main class="flex-1 ml-64 min-h-screen flex flex-col relative">
+      <!-- Header (Shared Component) -->
+      <!-- component: DashboardHeader (87403f5a-a910-4ccc-9453-3a69605a2a11) -->
+<div v-scope="{ ...{&quot;vendorName&quot;:&quot;Ama Mensah&quot;,&quot;userName&quot;:&quot;Ama Mensah&quot;,&quot;userAvatarUrl&quot;:&quot;https://api.dicebear.com/7.x/avataaars/svg?seed=Ama&quot;,&quot;hasNotifications&quot;:true}, $emit() {} }">
+<header class="sticky top-0 bg-white/80 backdrop-blur-md border-b border-gray-100 z-40 px-8 py-4"><div class="flex items-center justify-between"><div class="flex items-center gap-4"><div><h1 class="text-2xl font-bold text-gray-800 tracking-tight">Dashboard Overview</h1><p class="text-sm text-gray-500 font-medium">Welcome back, <span class="text-[#1B5E3F] font-semibold underline decoration-[#D4A520]">{{ vendorName }}</span></p></div></div><div class="flex items-center gap-6"><div class="relative hidden lg:block"><iconify-icon icon="lucide:search" class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></iconify-icon><input type="text" placeholder="Search products, orders..." @input="$emit('search', { query: $event.target.value })" class="pl-10 pr-4 py-2 w-80 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#1B5E3F]/20 focus:border-[#1B5E3F] transition-all"></div><div class="flex items-center gap-3"><button @click="$emit('notificationClick')" class="p-2 hover:bg-gray-100 rounded-full relative"><iconify-icon icon="lucide:bell" class="text-2xl text-gray-600"></iconify-icon><span v-if="hasNotifications" class="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full border-2 border-white"></span></button><div class="h-8 w-[1px] bg-gray-200 mx-2"></div><div class="flex items-center gap-3 group cursor-pointer" @click="$emit('profileClick')"><img :src="userAvatarUrl" alt="Vendor Avatar" class="w-10 h-10 rounded-full border-2 border-[#D4A520] bg-gray-100 p-0.5"><div class="hidden md:block"><p class="text-sm font-bold text-gray-800 leading-none">{{ userName }}</p><p class="text-[10px] text-gray-500 font-medium">Pro Vendor</p></div><iconify-icon icon="lucide:chevron-down" class="text-gray-400"></iconify-icon></div></div></div></div></header>
+</div>
+<!-- /component: DashboardHeader (87403f5a-a910-4ccc-9453-3a69605a2a11) -->
+
+      <!-- Order History Content -->
+      <div class="p-8 flex-1">
+        <!-- Page Title & Stats -->
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+          <div>
+            <h2 class="text-3xl font-bold text-gray-800 tracking-tight">My Orders</h2>
+            <p class="text-sm text-gray-500 font-medium mt-1">Track, manage and reorder your favorite products.</p>
+          </div>
+          <div class="flex items-center gap-3">
+            <a id="cta-back-to-shop" href="https://draft-436483be-607a-49d5-99a3-ffa52a93fe34.preview.superdesign.dev" class="px-6 py-2.5 royal-green text-white text-sm font-bold rounded-xl shadow-sm hover:brightness-110 transition-all flex items-center gap-2">
+              <iconify-icon icon="lucide:shopping-bag"></iconify-icon>
+              Continue Shopping
+            </a>
+          </div>
+        </div>
+
+        <!-- Order Filters & Search Bar -->
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 mb-8 overflow-hidden">
+          <div class="flex flex-col lg:flex-row items-center justify-between p-4 gap-4">
+            <div class="flex items-center gap-6 overflow-x-auto w-full lg:w-auto scrollbar-hide">
+              <button class="text-sm font-bold whitespace-nowrap px-2 py-3 tab-active">All Orders</button>
+              <button class="text-sm font-semibold text-gray-400 whitespace-nowrap px-2 py-3 hover:text-royal-green transition-colors">Ongoing</button>
+              <button class="text-sm font-semibold text-gray-400 whitespace-nowrap px-2 py-3 hover:text-royal-green transition-colors">Completed</button>
+              <button class="text-sm font-semibold text-gray-400 whitespace-nowrap px-2 py-3 hover:text-royal-green transition-colors">Cancelled</button>
+              <button class="text-sm font-semibold text-gray-400 whitespace-nowrap px-2 py-3 hover:text-royal-green transition-colors">Returns</button>
+            </div>
+            <div class="flex items-center gap-3 w-full lg:w-auto">
+              <div class="relative flex-1 lg:w-64">
+                <iconify-icon icon="lucide:search" class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></iconify-icon>
+                <input type="text" placeholder="Search by ID or product..." class="w-full pl-10 pr-4 py-2 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-royal-green/20 focus:border-royal-green">
+              </div>
+              <button class="p-2.5 bg-gray-50 border border-gray-200 rounded-xl text-gray-600 hover:bg-gray-100 transition-colors">
+                <iconify-icon icon="lucide:sliders-horizontal" class="text-lg"></iconify-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recent Activity Cards (Active Orders) -->
+        <div class="mb-10">
+          <h3 class="text-sm font-bold text-gray-400 uppercase tracking-widest mb-4">Active Shipments</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Order Card 1 -->
+            <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 hover:shadow-md transition-shadow relative overflow-hidden group">
+              <div class="absolute top-0 right-0 w-32 h-32 bg-golden-yellow/5 rounded-full -mr-16 -mt-16 transition-transform group-hover:scale-110"></div>
+              <div class="flex items-start justify-between mb-4 relative z-10">
+                <div class="flex items-center gap-3">
+                  <div class="w-12 h-12 rounded-xl bg-blue-50 flex items-center justify-center">
+                    <iconify-icon icon="lucide:truck" class="text-2xl text-blue-600"></iconify-icon>
+                  </div>
+                  <div>
+                    <p class="text-xs font-bold text-royal-green">ORDER #84745</p>
+                    <p class="text-[10px] text-gray-400 font-bold uppercase">Expected Thursday, 24 Oct</p>
+                  </div>
+                </div>
+                <span class="px-2 py-1 text-[10px] font-bold rounded-full bg-blue-100 text-blue-700 uppercase">On Delivery</span>
+              </div>
+              <div class="flex items-center gap-4 mb-5">
+                <img src="https://vgbujcuwptvheqijyjbe.supabase.co/storage/v1/object/public/hmac-uploads/uploads/ef5bc30d-cbeb-42a5-88a1-362daf4d51a4/1780139198921-867f52d6/ChatGPT_Image_May_29__2026__11_28_10_AM.png" alt="Product" class="w-14 h-14 rounded-lg object-cover border border-gray-100">
+                <div>
+                  <h4 class="text-sm font-bold text-gray-800">Xiaomi Monitor 27" Ultra-Slim</h4>
+                  <p class="text-xs text-gray-500">Seller: Kofi's Electronics</p>
+                </div>
+              </div>
+              <div class="flex items-center gap-3">
+                <a id="track-shipment-84745" href="https://draft-04a7174c-2549-4f59-aa37-4ff423f5244c.preview.superdesign.dev" class="flex-1 text-center py-2.5 bg-gray-50 hover:bg-gray-100 text-gray-700 text-xs font-bold rounded-lg border border-gray-200 transition-all">Track Shipment</a>
+                <a id="view-order-84745" href="#" class="flex-1 text-center py-2.5 royal-green text-white text-xs font-bold rounded-lg hover:brightness-110 transition-all shadow-sm">Order Details</a>
+              </div>
+            </div>
+
+            <!-- Order Card 2 -->
+            <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 hover:shadow-md transition-shadow relative overflow-hidden group">
+              <div class="absolute top-0 right-0 w-32 h-32 bg-amber-500/5 rounded-full -mr-16 -mt-16 transition-transform group-hover:scale-110"></div>
+              <div class="flex items-start justify-between mb-4 relative z-10">
+                <div class="flex items-center gap-3">
+                  <div class="w-12 h-12 rounded-xl bg-amber-50 flex items-center justify-center">
+                    <iconify-icon icon="lucide:package-check" class="text-2xl text-amber-600"></iconify-icon>
+                  </div>
+                  <div>
+                    <p class="text-xs font-bold text-royal-green">ORDER #84792</p>
+                    <p class="text-[10px] text-gray-400 font-bold uppercase">Order Processing</p>
+                  </div>
+                </div>
+                <span class="px-2 py-1 text-[10px] font-bold rounded-full bg-amber-100 text-amber-700 uppercase">Preparing</span>
+              </div>
+              <div class="flex items-center gap-4 mb-5">
+                <div class="w-14 h-14 rounded-lg bg-gray-100 flex items-center justify-center">
+                   <iconify-icon icon="lucide:smartphone" class="text-2xl text-gray-400"></iconify-icon>
+                </div>
+                <div>
+                  <h4 class="text-sm font-bold text-gray-800">Samsung Galaxy A55 5G</h4>
+                  <p class="text-xs text-gray-500">Seller: Anitinn Global</p>
+                </div>
+              </div>
+              <div class="flex items-center gap-3">
+                <button class="flex-1 text-center py-2.5 bg-gray-50 text-gray-400 text-xs font-bold rounded-lg border border-gray-200 cursor-not-allowed" disabled>Track Soon</button>
+                <a id="view-order-84792" href="#" class="flex-1 text-center py-2.5 royal-green text-white text-xs font-bold rounded-lg hover:brightness-110 transition-all shadow-sm">Order Details</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Full Order History Table -->
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+          <div class="px-6 py-5 border-b border-gray-50 flex items-center justify-between">
+            <h3 class="text-lg font-bold text-gray-800">Past Orders</h3>
+            <button class="text-xs font-bold text-golden-yellow uppercase hover:underline">Download History</button>
+          </div>
+          
+          <!-- Shared OrderTable Component -->
+          <!-- component: OrderTable (9d90ae4f-7ed6-4c2f-b156-1035d1aa7d4b) -->
+<div v-scope="{ ...{&quot;orders&quot;:[{&quot;id&quot;:&quot;#84732&quot;,&quot;total&quot;:&quot;4,500&quot;,&quot;status&quot;:&quot;Completed&quot;,&quot;product&quot;:&quot;Sony WH-1000XM4 Noise Cancelling&quot;,&quot;customer&quot;:&quot;Ama Mensah&quot;},{&quot;id&quot;:&quot;#84721&quot;,&quot;total&quot;:&quot;1,200&quot;,&quot;status&quot;:&quot;Cancelled&quot;,&quot;product&quot;:&quot;Keychron K2 Mechanical Keyboard&quot;,&quot;customer&quot;:&quot;Ama Mensah&quot;},{&quot;id&quot;:&quot;#84688&quot;,&quot;total&quot;:&quot;850&quot;,&quot;status&quot;:&quot;Completed&quot;,&quot;product&quot;:&quot;Logitech MX Master 3S Mouse&quot;,&quot;customer&quot;:&quot;Ama Mensah&quot;},{&quot;id&quot;:&quot;#84612&quot;,&quot;total&quot;:&quot;2,100&quot;,&quot;status&quot;:&quot;Completed&quot;,&quot;product&quot;:&quot;Dell 24\&quot; UltraSharp Monitor&quot;,&quot;customer&quot;:&quot;Ama Mensah&quot;},{&quot;id&quot;:&quot;#84550&quot;,&quot;total&quot;:&quot;12,500&quot;,&quot;status&quot;:&quot;Completed&quot;,&quot;product&quot;:&quot;MacBook Pro 14\&quot; M2 Pro&quot;,&quot;customer&quot;:&quot;Ama Mensah&quot;}]}, $emit() {} }">
+<table class="w-full text-left">
+  <thead class="bg-gray-50 border-y border-gray-100">
+    <tr>
+      <th class="px-6 py-4 text-xs font-bold text-gray-500 uppercase tracking-wider">Order ID</th>
+      <th class="px-6 py-4 text-xs font-bold text-gray-500 uppercase tracking-wider">Product</th>
+      <th class="px-6 py-4 text-xs font-bold text-gray-500 uppercase tracking-wider">Customer</th>
+      <th class="px-6 py-4 text-xs font-bold text-gray-500 uppercase tracking-wider">Status</th>
+      <th class="px-6 py-4 text-xs font-bold text-gray-500 uppercase tracking-wider">Total</th>
+    </tr>
+  </thead>
+  <tbody class="divide-y divide-gray-100">
+    <tr v-for="order in orders" :key="order.id" @click="$emit('orderClick', { orderId: order.id })" class="hover:bg-gray-50/50 transition-colors cursor-pointer">
+      <td class="px-6 py-4">
+        <span class="text-xs font-bold" style="color: #1B5E3F">{{ order.id }}</span>
+      </td>
+      <td class="px-6 py-4">
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 rounded-lg bg-gray-100 flex items-center justify-center p-1">
+            <iconify-icon icon="lucide:package" class="text-gray-600"></iconify-icon>
+          </div>
+          <p class="text-xs font-medium text-gray-800">{{ order.product }}</p>
+        </div>
+      </td>
+      <td class="px-6 py-4">
+        <p class="text-xs font-medium text-gray-600">{{ order.customer }}</p>
+      </td>
+      <td class="px-6 py-4">
+        <span class="px-2 py-1 text-[10px] font-bold rounded-full" :class="{
+          'bg-blue-100 text-blue-700': order.status === 'On Delivery',
+          'bg-green-100 text-green-700': order.status === 'Completed',
+          'bg-red-100 text-red-700': order.status === 'Cancelled'
+        }">
+          {{ order.status }}
+        </span>
+      </td>
+      <td class="px-6 py-4 text-xs font-bold text-gray-800">GH₵ {{ order.total }}</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<!-- /component: OrderTable (9d90ae4f-7ed6-4c2f-b156-1035d1aa7d4b) -->
+
+          <!-- Table Pagination (Simplified) -->
+          <div class="px-6 py-4 bg-gray-50 flex items-center justify-between">
+            <p class="text-xs text-gray-500 font-medium">Showing 1 - 5 of 24 orders</p>
+            <div class="flex items-center gap-2">
+              <button class="p-1.5 rounded-lg border border-gray-200 bg-white text-gray-400 hover:text-gray-600">
+                <iconify-icon icon="lucide:chevron-left"></iconify-icon>
+              </button>
+              <span class="text-xs font-bold text-royal-green px-2">1</span>
+              <button class="p-1.5 rounded-lg border border-gray-200 bg-white text-gray-600 hover:border-royal-green">
+                <iconify-icon icon="lucide:chevron-right"></iconify-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <footer class="px-8 py-6 text-center mt-auto border-t border-gray-100">
+        <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+          <p class="text-xs text-gray-400 font-medium">© 2024 ANITINN Marketplace. All rights reserved.</p>
+          <div class="flex items-center gap-6">
+            <a id="footer-help" href="https://draft-e9033bf7-c598-4a0a-a0f9-58a47f2e6cdc.preview.superdesign.dev" class="text-xs text-gray-400 hover:text-royal-green">Help Center</a>
+            <a id="footer-privacy" href="#" class="text-xs text-gray-400 hover:text-royal-green">Privacy Policy</a>
+            <a id="footer-terms" href="#" class="text-xs text-gray-400 hover:text-royal-green">Terms of Service</a>
+          </div>
+        </div>
+      </footer>
+    </main>
+  </div>
+{% endblock %}

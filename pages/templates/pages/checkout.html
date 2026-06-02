@@ -1,0 +1,200 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Checkout{% endblock %}
+
+{% block extra_head %}
+<style>
+    :root {
+      --royal-green: #1B5E3F;
+      --golden-yellow: #D4A520;
+    }
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #fcfbf8;
+      color: #1a1a1a;
+    }
+    .royal-green { background-color: var(--royal-green); }
+    .text-royal-green { color: var(--royal-green); }
+    .border-royal-green { border-color: var(--royal-green); }
+    .golden-yellow { background-color: var(--golden-yellow); }
+    .text-golden-yellow { color: var(--golden-yellow); }
+    
+    .custom-radio:checked + label {
+      border-color: var(--royal-green);
+      background-color: #f0fdf4;
+    }
+</style>
+{% endblock %}
+
+{% block body %}
+<div class="min-h-screen flex flex-col">
+    <!-- Simplified Checkout Header -->
+    <header class="bg-white border-b border-gray-100 py-4 px-6 md:px-12 sticky top-0 z-50">
+      <div class="max-w-7xl mx-auto flex items-center justify-between">
+        <a href="{% url 'pages:marketplace' %}" id="nav-logo-link" class="flex items-center gap-2">
+          <img src="https://vgbujcuwptvheqijyjbe.supabase.co/storage/v1/object/public/hmac-uploads/uploads/ef5bc30d-cbeb-42a5-88a1-362daf4d51a4/1780139179048-642ea9dd/ChatGPT_Image_May_29__2026__11_28_10_AM.png" alt="Anitinn Logo" class="w-10 h-10 rounded-full">
+          <span class="font-bold text-xl tracking-tight text-royal-green">ANITINN</span>
+        </a>
+        <div class="flex items-center gap-2 text-gray-400 font-medium">
+          <iconify-icon icon="lucide:lock" class="text-lg text-royal-green"></iconify-icon>
+          <span class="text-sm uppercase tracking-widest hidden sm:inline">Secure Checkout</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Checkout Content -->
+    <main class="flex-1 py-12 px-6 md:px-12">
+      {% if messages %}
+      <div class="max-w-7xl mx-auto mb-6 space-y-2">
+          {% for message in messages %}
+          <div class="p-4 rounded-xl text-sm font-medium {% if message.tags == 'error' %}bg-red-50 border border-red-200 text-red-700{% else %}bg-green-50 border border-green-200 text-green-700{% endif %}">
+              {{ message }}
+          </div>
+          {% endfor %}
+      </div>
+      {% endif %}
+
+      <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12">
+        <!-- Left Column: Checkout steps & Forms -->
+        <div class="lg:col-span-7 space-y-8">
+          
+          <form method="POST" action="{% url 'pages:checkout' %}" class="space-y-8">
+            {% csrf_token %}
+            
+            <!-- Shipping Addresses selection -->
+            <section class="bg-white rounded-3xl p-8 shadow-sm border border-gray-100">
+              <h2 class="text-2xl font-bold text-gray-800 mb-6">Select Shipping Address</h2>
+              
+              {% if addresses %}
+              <div class="space-y-4">
+                {% for addr in addresses %}
+                <label class="flex items-start p-4 border border-gray-200 rounded-2xl cursor-pointer hover:border-royal-green transition-all block">
+                  <input type="radio" name="address" value="{{ addr.id }}" {% if addr.is_default %}checked{% endif %} class="mt-1 accent-royal-green mr-4">
+                  <div>
+                    <span class="font-bold text-gray-800">{{ addr.address_type }}</span>
+                    <p class="text-sm text-gray-600">{{ addr.street_address }}, {{ addr.city }}, {{ addr.region }}, {{ addr.country }}</p>
+                  </div>
+                </label>
+                {% endfor %}
+              </div>
+              {% else %}
+              <p class="text-sm text-gray-500 font-semibold">No addresses saved. Please add an address below or in your Profile first.</p>
+              {% endif %}
+            </section>
+
+            <!-- Payment Method -->
+            <section class="bg-white rounded-3xl p-8 shadow-sm border border-gray-100">
+              <div class="flex items-center gap-4 mb-8">
+                <div class="w-12 h-12 royal-green rounded-2xl flex items-center justify-center text-white">
+                  <iconify-icon icon="lucide:credit-card" class="text-2xl"></iconify-icon>
+                </div>
+                <div>
+                  <h2 class="text-2xl font-bold text-gray-800">Select Payment Method</h2>
+                  <p class="text-sm text-gray-500 font-medium">Choose your preferred way to pay securely</p>
+                </div>
+              </div>
+
+              <div class="space-y-4">
+                <!-- Mobile Money Option -->
+                <div class="relative">
+                  <input type="radio" name="payment_method" value="Mobile Money" id="pay-momo" class="hidden custom-radio" checked>
+                  <label for="pay-momo" class="flex items-center justify-between p-5 border-2 border-gray-100 rounded-2xl cursor-pointer hover:border-royal-green/30 transition-all">
+                    <div class="flex items-center gap-4">
+                      <div class="w-12 h-12 bg-amber-50 rounded-xl flex items-center justify-center">
+                        <iconify-icon icon="lucide:smartphone" class="text-2xl text-amber-600"></iconify-icon>
+                      </div>
+                      <div>
+                        <p class="font-bold text-gray-800">Mobile Money (MoMo)</p>
+                        <p class="text-xs text-gray-500 font-medium">MTN MoMo, Telecel Cash, AirtelTigo Money</p>
+                      </div>
+                    </div>
+                  </label>
+                </div>
+
+                <!-- Card Option -->
+                <div class="relative">
+                  <input type="radio" name="payment_method" value="Visa/Mastercard" id="pay-card" class="hidden custom-radio">
+                  <label for="pay-card" class="flex items-center justify-between p-5 border-2 border-gray-100 rounded-2xl cursor-pointer hover:border-royal-green/30 transition-all">
+                    <div class="flex items-center gap-4">
+                      <div class="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center">
+                        <iconify-icon icon="lucide:credit-card" class="text-2xl text-blue-600"></iconify-icon>
+                      </div>
+                      <div>
+                        <p class="font-bold text-gray-800">Credit / Debit Card</p>
+                        <p class="text-xs text-gray-500 font-medium">Visa, Mastercard</p>
+                      </div>
+                    </div>
+                  </label>
+                </div>
+              </div>
+            </section>
+
+            <!-- Action Buttons -->
+            <div class="flex items-center justify-between">
+              <a href="{% url 'pages:cart' %}" id="back-to-cart-link" class="flex items-center gap-2 text-gray-500 font-bold hover:text-royal-green transition-colors">
+                <iconify-icon icon="lucide:arrow-left"></iconify-icon>
+                Back to Cart
+              </a>
+              <button type="submit" id="place-order-btn" class="royal-green text-white font-bold px-10 py-4 rounded-2xl shadow-lg shadow-green-900/10 hover:brightness-110 active:scale-95 transition-all flex items-center gap-3">
+                Place Order
+                <iconify-icon icon="lucide:arrow-right"></iconify-icon>
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Right Column: Order Summary -->
+        <aside class="lg:col-span-5">
+          <div class="sticky top-28 space-y-6">
+            <div class="bg-white rounded-3xl p-8 shadow-sm border border-gray-100">
+              <h3 class="text-xl font-bold text-gray-800 mb-6 flex items-center justify-between">
+                Order Summary
+                <span class="text-sm text-gray-400 font-medium">{{ items.count }} Items</span>
+              </h3>
+
+              <!-- Cart items -->
+              <div class="space-y-4 mb-8">
+                {% for item in items %}
+                <div class="flex items-center gap-4">
+                  <div class="w-16 h-16 rounded-xl bg-gray-50 flex items-center justify-center p-2 border border-gray-100">
+                    <iconify-icon icon="lucide:box" class="text-2xl text-gray-400"></iconify-icon>
+                  </div>
+                  <div class="flex-1">
+                    <p class="text-sm font-bold text-gray-800 line-clamp-1">{{ item.product.name }}</p>
+                    <p class="text-xs text-gray-400 font-medium">Qty: {{ item.quantity }}</p>
+                  </div>
+                  <p class="text-sm font-bold text-royal-green">GH₵ {{ item.product.price }}</p>
+                </div>
+                {% endfor %}
+              </div>
+
+              <!-- Price Breakdown -->
+              <div class="space-y-4 pt-6 border-t border-gray-100">
+                <div class="flex justify-between text-gray-500 font-medium">
+                  <span>Subtotal</span>
+                  <span>GH₵ {{ total }}</span>
+                </div>
+                <div class="flex justify-between items-center pt-4 border-t border-gray-100">
+                  <span class="text-lg font-bold text-gray-800">Total Amount</span>
+                  <p class="text-2xl font-bold text-royal-green">GH₵ {{ total }}</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Protection Badge -->
+            <div class="bg-emerald-50 rounded-2xl p-6 border border-emerald-100 flex items-start gap-4">
+              <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-emerald-600 border border-emerald-100 shadow-sm">
+                <iconify-icon icon="lucide:shield-check" class="text-xl"></iconify-icon>
+              </div>
+              <div>
+                <p class="text-sm font-bold text-emerald-900">Purchase Protection</p>
+                <p class="text-xs text-emerald-700/70 font-medium leading-relaxed mt-1">Your transaction is protected by Anitinn AI. We ensure your funds are only released after delivery confirmation.</p>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </main>
+</div>
+{% endblock %}
