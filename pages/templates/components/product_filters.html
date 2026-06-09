@@ -1,0 +1,14 @@
+<aside class="surface-card p-5">
+  <h2 class="font-black text-gray-900">Filters</h2>
+  <form method="get" class="mt-5 space-y-4">
+    <input name="q" value="{{ request.GET.q }}" class="form-input" placeholder="Search products">
+    <div class="grid gap-2">
+      <label class="text-xs font-black uppercase tracking-widest text-gray-400">Price</label>
+      <div class="grid grid-cols-2 gap-2">
+        <input name="min_price" value="{{ request.GET.min_price }}" class="form-input" placeholder="Min">
+        <input name="max_price" value="{{ request.GET.max_price }}" class="form-input" placeholder="Max">
+      </div>
+    </div>
+    <button class="btn-primary w-full">Apply Filters</button>
+  </form>
+</aside>

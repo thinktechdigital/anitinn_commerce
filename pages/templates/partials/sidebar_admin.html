@@ -1,0 +1,19 @@
+<aside class="fixed inset-y-0 left-0 hidden lg:flex w-64 bg-[#1B5E3F] text-white flex-col z-40">
+  <div class="p-6 flex items-center gap-3">
+    <span class="w-10 h-10 rounded-full bg-white/10 grid place-items-center font-black">A</span>
+    <span class="font-black text-xl tracking-tight">ADMIN</span>
+  </div>
+  <nav class="flex-1 px-4 space-y-1 overflow-y-auto">
+    <p class="text-xs font-bold text-white/40 px-3 py-2 uppercase tracking-wider">Platform</p>
+    <a href="{% url 'pages:admin_dashboard' %}" class="flex items-center gap-3 px-3 py-3 rounded-xl {% if active_nav == 'dashboard' %}bg-white/10 text-golden-yellow{% else %}text-white/75 hover:bg-white/5{% endif %}"><iconify-icon icon="lucide:layout-dashboard"></iconify-icon>Dashboard</a>
+    <a href="{% url 'pages:admin_users' %}" class="flex items-center gap-3 px-3 py-3 rounded-xl {% if active_nav == 'users' %}bg-white/10 text-golden-yellow{% else %}text-white/75 hover:bg-white/5{% endif %}"><iconify-icon icon="lucide:users"></iconify-icon>Users</a>
+    <a href="{% url 'pages:admin_vendors' %}" class="flex items-center gap-3 px-3 py-3 rounded-xl {% if active_nav == 'vendors' %}bg-white/10 text-golden-yellow{% else %}text-white/75 hover:bg-white/5{% endif %}"><iconify-icon icon="lucide:store"></iconify-icon>Vendors</a>
+    <a href="{% url 'pages:admin_moderation' %}" class="flex items-center gap-3 px-3 py-3 rounded-xl {% if active_nav == 'moderation' %}bg-white/10 text-golden-yellow{% else %}text-white/75 hover:bg-white/5{% endif %}"><iconify-icon icon="lucide:shield-check"></iconify-icon>Moderation</a>
+    <a href="{% url 'pages:admin_orders' %}" class="flex items-center gap-3 px-3 py-3 rounded-xl {% if active_nav == 'orders' %}bg-white/10 text-golden-yellow{% else %}text-white/75 hover:bg-white/5{% endif %}"><iconify-icon icon="lucide:package"></iconify-icon>Orders</a>
+    <a href="{% url 'pages:admin_analytics' %}" class="flex items-center gap-3 px-3 py-3 rounded-xl {% if active_nav == 'reports' %}bg-white/10 text-golden-yellow{% else %}text-white/75 hover:bg-white/5{% endif %}"><iconify-icon icon="lucide:bar-chart-3"></iconify-icon>Reports</a>
+    <a href="{% url 'pages:admin_categories' %}" class="flex items-center gap-3 px-3 py-3 rounded-xl {% if active_nav == 'content' %}bg-white/10 text-golden-yellow{% else %}text-white/75 hover:bg-white/5{% endif %}"><iconify-icon icon="lucide:tags"></iconify-icon>Content</a>
+    <a href="{% url 'pages:admin_support' %}" class="flex items-center gap-3 px-3 py-3 rounded-xl {% if active_nav == 'support' %}bg-white/10 text-golden-yellow{% else %}text-white/75 hover:bg-white/5{% endif %}"><iconify-icon icon="lucide:life-buoy"></iconify-icon>Disputes</a>
+    <a href="{% url 'pages:admin_payouts' %}" class="flex items-center gap-3 px-3 py-3 rounded-xl {% if active_nav == 'payouts' %}bg-white/10 text-golden-yellow{% else %}text-white/75 hover:bg-white/5{% endif %}"><iconify-icon icon="lucide:wallet"></iconify-icon>Payouts</a>
+    <a href="{% url 'pages:admin_settings' %}" class="flex items-center gap-3 px-3 py-3 rounded-xl {% if active_nav == 'settings' %}bg-white/10 text-golden-yellow{% else %}text-white/75 hover:bg-white/5{% endif %}"><iconify-icon icon="lucide:settings"></iconify-icon>Settings</a>
+  </nav>
+</aside>

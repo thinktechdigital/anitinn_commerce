@@ -1,0 +1,21 @@
+{% extends "layouts/buyer_base.html" %}
+{% block title %}Buyer Home{% endblock %}
+{% block buyer_content %}
+<section class="grid gap-8">
+  <div class="hero-gradient rounded-3xl p-8 md:p-10 text-white">
+    <p class="text-sm font-black uppercase tracking-widest text-golden-yellow">Welcome Back</p>
+    <h1 class="mt-3 text-3xl md:text-5xl font-black">Shop trusted vendors across Ghana.</h1>
+    <div class="mt-6 max-w-2xl">{% include "components/product_search.html" %}</div>
+  </div>
+  <div class="grid md:grid-cols-4 gap-5">
+    {% include "components/kpi_card.html" with label="Recent Orders" value=recent_orders_count|default:"0" icon="lucide:package" %}
+    {% include "components/kpi_card.html" with label="Wishlist Items" value=wishlist_count|default:"0" icon="lucide:heart" icon_bg="golden-yellow" %}
+    {% include "components/kpi_card.html" with label="Messages" value=messages_count|default:"0" icon="lucide:message-square" %}
+    {% include "components/kpi_card.html" with label="Notifications" value=notifications_count|default:"0" icon="lucide:bell" icon_bg="golden-yellow" %}
+  </div>
+  <section>
+    <div class="flex items-end justify-between mb-5"><h2 class="text-2xl font-black text-gray-900">Recommended Products</h2><a class="font-bold text-royal-green" href="{% url 'pages:catalog' %}">View catalog</a></div>
+    {% include "components/product_grid.html" with products=products %}
+  </section>
+</section>
+{% endblock %}

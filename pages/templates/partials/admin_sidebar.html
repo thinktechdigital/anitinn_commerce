@@ -1,0 +1,66 @@
+{% with current=request.resolver_match.url_name %}
+<aside class="w-full lg:w-64 bg-[#1B5E3F] text-white lg:fixed lg:h-full flex flex-col z-50">
+  <div class="p-6 flex items-center gap-3">
+    <img src="/media/logo.png" alt="Anitinn Logo" class="w-10 h-10 rounded-full border border-white/20">
+    <span class="font-bold text-xl tracking-tight">ANITINN</span>
+  </div>
+
+  <nav class="flex-1 px-4 pb-4 lg:pb-0 lg:space-y-1 overflow-y-auto lg:mt-4 grid grid-cols-2 sm:grid-cols-3 gap-2 lg:block" style="scrollbar-width: thin; scrollbar-color: rgba(255, 255, 255, 0.1) transparent;">
+    <p class="col-span-2 sm:col-span-3 text-xs font-semibold text-white/40 px-3 py-2 uppercase tracking-wider">Admin Console</p>
+
+    <a id="nav-admin-dashboard" href="{% url 'pages:admin_dashboard' %}" class="flex items-center gap-3 px-3 py-3 rounded-lg transition-all {% if current == 'admin_dashboard' %}bg-white/10 text-[#D4A520] border-l-4 border-[#D4A520]{% else %}text-white/70 hover:bg-white/5 hover:text-white{% endif %}">
+      <iconify-icon icon="lucide:layout-dashboard"></iconify-icon>
+      <span class="font-medium">Dashboard</span>
+    </a>
+    <a id="nav-admin-users" href="{% url 'pages:admin_users' %}" class="flex items-center gap-3 px-3 py-3 rounded-lg transition-all {% if current == 'admin_users' %}bg-white/10 text-[#D4A520] border-l-4 border-[#D4A520]{% else %}text-white/70 hover:bg-white/5 hover:text-white{% endif %}">
+      <iconify-icon icon="lucide:users"></iconify-icon>
+      <span class="font-medium">Users</span>
+    </a>
+    <a id="nav-admin-vendors" href="{% url 'pages:admin_vendors' %}" class="flex items-center gap-3 px-3 py-3 rounded-lg transition-all {% if current == 'admin_vendors' %}bg-white/10 text-[#D4A520] border-l-4 border-[#D4A520]{% else %}text-white/70 hover:bg-white/5 hover:text-white{% endif %}">
+      <iconify-icon icon="lucide:store"></iconify-icon>
+      <span class="font-medium">Vendors</span>
+    </a>
+    <a id="nav-admin-moderation" href="{% url 'pages:admin_moderation' %}" class="flex items-center gap-3 px-3 py-3 rounded-lg transition-all {% if current == 'admin_moderation' %}bg-white/10 text-[#D4A520] border-l-4 border-[#D4A520]{% else %}text-white/70 hover:bg-white/5 hover:text-white{% endif %}">
+      <iconify-icon icon="lucide:shield-check"></iconify-icon>
+      <span class="font-medium">Product Moderation</span>
+    </a>
+    <a id="nav-admin-orders" href="{% url 'pages:admin_orders' %}" class="flex items-center gap-3 px-3 py-3 rounded-lg transition-all {% if current == 'admin_orders' %}bg-white/10 text-[#D4A520] border-l-4 border-[#D4A520]{% else %}text-white/70 hover:bg-white/5 hover:text-white{% endif %}">
+      <iconify-icon icon="lucide:shopping-cart"></iconify-icon>
+      <span class="font-medium">Orders</span>
+    </a>
+    <a id="nav-admin-analytics" href="{% url 'pages:admin_analytics' %}" class="flex items-center gap-3 px-3 py-3 rounded-lg transition-all {% if current == 'admin_analytics' %}bg-white/10 text-[#D4A520] border-l-4 border-[#D4A520]{% else %}text-white/70 hover:bg-white/5 hover:text-white{% endif %}">
+      <iconify-icon icon="lucide:bar-chart-3"></iconify-icon>
+      <span class="font-medium">Analytics</span>
+    </a>
+    <a id="nav-admin-categories" href="{% url 'pages:admin_categories' %}" class="flex items-center gap-3 px-3 py-3 rounded-lg transition-all {% if current == 'admin_categories' %}bg-white/10 text-[#D4A520] border-l-4 border-[#D4A520]{% else %}text-white/70 hover:bg-white/5 hover:text-white{% endif %}">
+      <iconify-icon icon="lucide:tags"></iconify-icon>
+      <span class="font-medium">Categories</span>
+    </a>
+
+    <p class="col-span-2 sm:col-span-3 text-xs font-semibold text-white/40 px-3 py-2 uppercase tracking-wider lg:mt-6">Operations</p>
+    <a id="nav-admin-support" href="{% url 'pages:admin_support' %}" class="flex items-center gap-3 px-3 py-3 rounded-lg transition-all {% if current == 'admin_support' %}bg-white/10 text-[#D4A520] border-l-4 border-[#D4A520]{% else %}text-white/70 hover:bg-white/5 hover:text-white{% endif %}">
+      <iconify-icon icon="lucide:life-buoy"></iconify-icon>
+      <span class="font-medium">Support</span>
+    </a>
+    <a id="nav-admin-payouts" href="{% url 'pages:admin_payouts' %}" class="flex items-center gap-3 px-3 py-3 rounded-lg transition-all {% if current == 'admin_payouts' %}bg-white/10 text-[#D4A520] border-l-4 border-[#D4A520]{% else %}text-white/70 hover:bg-white/5 hover:text-white{% endif %}">
+      <iconify-icon icon="lucide:wallet"></iconify-icon>
+      <span class="font-medium">Payouts</span>
+    </a>
+    <a id="nav-admin-activity" href="{% url 'pages:admin_activity' %}" class="flex items-center gap-3 px-3 py-3 rounded-lg transition-all {% if current == 'admin_activity' %}bg-white/10 text-[#D4A520] border-l-4 border-[#D4A520]{% else %}text-white/70 hover:bg-white/5 hover:text-white{% endif %}">
+      <iconify-icon icon="lucide:activity"></iconify-icon>
+      <span class="font-medium">Activity</span>
+    </a>
+    <a id="nav-admin-settings" href="{% url 'pages:admin_settings' %}" class="flex items-center gap-3 px-3 py-3 rounded-lg transition-all {% if current == 'admin_settings' %}bg-white/10 text-[#D4A520] border-l-4 border-[#D4A520]{% else %}text-white/70 hover:bg-white/5 hover:text-white{% endif %}">
+      <iconify-icon icon="lucide:settings"></iconify-icon>
+      <span class="font-medium">Settings</span>
+    </a>
+  </nav>
+
+  <div class="p-4 mt-auto">
+    <a id="nav-admin-logout" href="{% url 'pages:logout' %}" class="flex items-center gap-3 px-3 py-3 text-white/50 hover:text-red-300 transition-colors">
+      <iconify-icon icon="lucide:log-out"></iconify-icon>
+      <span class="font-medium">Logout</span>
+    </a>
+  </div>
+</aside>
+{% endwith %}

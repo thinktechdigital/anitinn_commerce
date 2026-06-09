@@ -1,0 +1,15 @@
+{% extends "layouts/base.html" %}
+{% block body %}
+<div class="min-h-screen bg-[#fcfbf8] flex flex-col">
+  {% include "partials/navbar.html" with active_nav=active_nav|default:"marketplace" %}
+  <div class="flex-1">
+    {% block buyer_shell %}
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      {% include "partials/breadcrumbs.html" %}
+      {% block buyer_content %}{% endblock %}
+    </div>
+    {% endblock %}
+  </div>
+  {% include "partials/footer.html" %}
+</div>
+{% endblock %}

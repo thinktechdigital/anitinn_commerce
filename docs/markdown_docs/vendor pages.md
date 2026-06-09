@@ -1,0 +1,11 @@
+vendor_dashboard
+vendor_products
+vendor_product_form
+vendors_order_management
+vendor_order_detail
+vendor_reviews
+vendor_analytics
+vendor_coupons
+vendor_payouts
+vendor_settings
+store_detail

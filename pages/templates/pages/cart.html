@@ -28,7 +28,7 @@
             <div class="flex justify-between items-center h-20">
                 <div class="flex items-center gap-8">
                     <a id="logo-link" href="{% url 'pages:marketplace' %}" class="flex items-center gap-3">
-                        <img src="https://vgbujcuwptvheqijyjbe.supabase.co/storage/v1/object/public/hmac-uploads/uploads/ef5bc30d-cbeb-42a5-88a1-362daf4d51a4/1780139179048-642ea9dd/ChatGPT_Image_May_29__2026__11_28_10_AM.png" alt="Anitinn Logo" class="w-10 h-10 rounded-full border border-gray-100 shadow-sm">
+                        <img src="/media/logo.png" alt="Anitinn Logo" class="w-10 h-10 rounded-full border border-gray-100 shadow-sm">
                         <span class="font-bold text-2xl tracking-tighter text-royal-green">ANITINN</span>
                     </a>
                     <nav class="hidden md:flex items-center gap-6">
@@ -142,6 +142,17 @@
                             <div class="flex justify-between text-green-600">
                                 <span class="text-sm">Discount</span>
                                 <span class="font-semibold">- GH₵ {{ discount }}</span>
+                            </div>
+                            {% endif %}
+                            <form method="POST" action="{% url 'pages:apply_coupon' %}" class="flex gap-2">
+                                {% csrf_token %}
+                                <input name="coupon_code" value="{{ coupon.code|default:'' }}" placeholder="Coupon code" class="flex-1 px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-royal-green">
+                                <button class="px-4 py-3 rounded-xl royal-green text-white text-sm font-bold">{% if coupon %}Update{% else %}Apply{% endif %}</button>
+                            </form>
+                            {% if coupon_discount > 0 %}
+                            <div class="flex justify-between text-green-600">
+                                <span class="text-sm">Coupon {{ coupon.code }}</span>
+                                <span class="font-semibold">- GH₵ {{ coupon_discount }}</span>
                             </div>
                             {% endif %}
                             <div class="py-4 border-t border-gray-100">

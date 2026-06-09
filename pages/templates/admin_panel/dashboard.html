@@ -1,0 +1,18 @@
+{% extends "layouts/admin_base.html" %}
+{% block title %}Admin Dashboard{% endblock %}
+{% block admin_title %}Admin Dashboard{% endblock %}
+{% block admin_content %}
+<div class="grid gap-8">
+  <div class="grid md:grid-cols-4 gap-5">
+    {% include "components/kpi_card.html" with label="Total Users" value=users_count|default:"0" icon="lucide:users" %}
+    {% include "components/kpi_card.html" with label="Total Vendors" value=vendors_count|default:"0" icon="lucide:store" icon_bg="golden-yellow" %}
+    {% include "components/kpi_card.html" with label="Total Products" value=products_count|default:"0" icon="lucide:box" %}
+    {% include "components/kpi_card.html" with label="Total Orders" value=orders_count|default:"0" icon="lucide:package" icon_bg="golden-yellow" %}
+  </div>
+  {% include "components/revenue_chart.html" %}
+  <div class="grid lg:grid-cols-2 gap-6">
+    <section class="surface-card p-6"><h2 class="font-black text-gray-900">Pending Approvals</h2><p class="mt-4 text-gray-500">Vendor requests, product reviews, and refund requests appear here.</p></section>
+    {% include "components/activity_feed.html" with activities=activities %}
+  </div>
+</div>
+{% endblock %}

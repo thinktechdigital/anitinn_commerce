@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "pages/vendor_dashboard.html" %}
 {% load static %}
 
 {% block title %}Manage Product | Vendor Portal{% endblock %}
@@ -23,28 +23,49 @@
     <!-- Sidebar Navigation -->
     <aside class="w-64 bg-[#1B5E3F] text-white fixed h-full flex flex-col z-50">
       <div class="p-6 flex items-center gap-3">
-        <img src="https://vgbujcuwptvheqijyjbe.supabase.co/storage/v1/object/public/hmac-uploads/uploads/ef5bc30d-cbeb-42a5-88a1-362daf4d51a4/1780139179048-642ea9dd/ChatGPT_Image_May_29__2026__11_28_10_AM.png" alt="Anitinn Logo" class="w-10 h-10 rounded-full border border-white/20">
+        <img src="/media/logo.png" alt="Anitinn Logo" class="w-10 h-10 rounded-full border border-white/20">
         <span class="font-bold text-xl tracking-tight">ANITINN</span>
       </div>
-      <nav class="flex-1 px-4 space-y-1 overflow-y-auto mt-4">
+
+      <nav class="flex-1 px-4 space-y-1 sidebar-scroll overflow-y-auto mt-4">
         <p class="text-xs font-semibold text-white/40 px-3 py-2 uppercase tracking-wider">Main Menu</p>
-        <a href="{% url 'pages:vendor_dashboard' %}" class="flex items-center gap-3 px-3 py-3 rounded-lg text-white/70 hover:bg-white/5 hover:text-white">
-          <iconify-icon icon="lucide:layout-dashboard"></iconify-icon>
+        <a id="nav-dashboard" href="{% url 'pages:vendor_dashboard' %}" class="flex items-center gap-3 px-3 py-3 rounded-lg text-white/70 hover:bg-white/5 hover:text-white transition-all">
+          <iconify-icon icon="lucide:layout-dashboard" class="text-xl"></iconify-icon>
           <span class="font-medium">Dashboard</span>
         </a>
-        <a href="{% url 'pages:vendor_products' %}" class="flex items-center gap-3 px-3 py-3 rounded-lg bg-white/10 text-[#D4A520] border-l-4 border-[#D4A520]">
-          <iconify-icon icon="lucide:box"></iconify-icon>
+        <a id="nav-products" href="{% url 'pages:vendor_products' %}" class="flex items-center gap-3 px-3 py-3 rounded-lg bg-white/10 text-golden-yellow border-l-4 border-golden-yellow">
+          <iconify-icon icon="lucide:box" class="text-xl"></iconify-icon>
           <span class="font-medium">Products</span>
         </a>
-        <a href="{% url 'pages:vendor_orders' %}" class="flex items-center gap-3 px-3 py-3 rounded-lg text-white/70 hover:bg-white/5 hover:text-white">
-          <iconify-icon icon="lucide:shopping-cart"></iconify-icon>
-          <span class="font-medium">Orders</span>
+        <a id="nav-catalog" href="{% url 'pages:catalog' %}" class="flex items-center gap-3 px-3 py-3 rounded-lg text-white/70 hover:bg-white/5 hover:text-white transition-all">
+          <iconify-icon icon="lucide:book-open" class="text-xl"></iconify-icon>
+          <span class="font-medium">Catalog</span>
         </a>
-        <a href="{% url 'pages:vendor_settings' %}" class="flex items-center gap-3 px-3 py-3 rounded-lg text-white/70 hover:bg-white/5 hover:text-white">
-          <iconify-icon icon="lucide:settings-2"></iconify-icon>
+        <a id="nav-orders" href="{% url 'pages:vendor_orders' %}" class="flex items-center gap-3 px-3 py-3 rounded-lg text-white/70 hover:bg-white/5 hover:text-white transition-all">
+          <iconify-icon icon="lucide:shopping-cart" class="text-xl"></iconify-icon>
+          <span class="font-medium">Orders</span>
+          <span class="ml-auto bg-golden-yellow text-white text-[10px] px-1.5 py-0.5 rounded-full">12</span>
+        </a>
+        <a id="nav-analytics" href="{% url 'pages:vendor_analytics' %}" class="flex items-center gap-3 px-3 py-3 rounded-lg text-white/70 hover:bg-white/5 hover:text-white transition-all">
+          <iconify-icon icon="lucide:bar-chart-3" class="text-xl"></iconify-icon>
+          <span class="font-medium">Analytics</span>
+        </a>
+
+        <p class="text-xs font-semibold text-white/40 px-3 py-2 uppercase tracking-wider mt-8">Storefront</p>
+        <a id="nav-reviews" href="{% url 'pages:vendor_reviews' %}" class="flex items-center gap-3 px-3 py-3 rounded-lg text-white/70 hover:bg-white/5 hover:text-white transition-all">
+          <iconify-icon icon="lucide:message-square" class="text-xl"></iconify-icon>
+          <span class="font-medium">Reviews</span>
+        </a>
+        <a id="nav-discounts" href="{% url 'pages:vendor_coupons' %}" class="flex items-center gap-3 px-3 py-3 rounded-lg text-white/70 hover:bg-white/5 hover:text-white transition-all">
+          <iconify-icon icon="lucide:ticket" class="text-xl"></iconify-icon>
+          <span class="font-medium">Discounts</span>
+        </a>
+        <a id="nav-settings" href="{% url 'pages:vendor_settings' %}" class="flex items-center gap-3 px-3 py-3 rounded-lg text-white/70 hover:bg-white/5 hover:text-white transition-all">
+          <iconify-icon icon="lucide:settings" class="text-xl"></iconify-icon>
           <span class="font-medium">Store Settings</span>
         </a>
       </nav>
+
       <div class="p-4 mt-auto">
         <a href="{% url 'pages:logout' %}" class="block w-full text-center bg-red-600 hover:bg-red-700 text-white text-xs font-bold py-2 rounded-lg transition-all uppercase tracking-wide">Logout</a>
       </div>
@@ -134,11 +155,12 @@
               <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div class="space-y-2">
                   <label class="text-xs font-black uppercase tracking-wider text-gray-400 block ml-1">Category *</label>
-                  <select name="category" required class="w-full px-5 py-4 bg-gray-50 border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-royal-green/20 focus:border-royal-green transition-all font-semibold text-gray-600">
-                    <option value="">Select a category</option>
-                    {% for cat in form.fields.category.queryset %}
-                    <option value="{{ cat.id }}" {% if form.category.value|stringformat:"s" == cat.id|stringformat:"s" %}selected{% endif %}>{{ cat.name }}</option>
-                    {% endfor %}
+                  <select name="category" required
+                      class="w-full px-5 py-4 bg-gray-50 border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-royal-green/20 focus:border-royal-green transition-all font-semibold text-gray-600">
+                      <option value="">Select a category</option>
+                      {% for cat in form.fields.category.queryset %}
+                      <option value="{{ cat.id }}" {% if form.category.value|stringformat:"s" == cat.id|stringformat:"s" or form.initial.category == cat.id %}selected{% endif %}>{{ cat.name }}</option>
+                      {% endfor %}
                   </select>
                 </div>
 

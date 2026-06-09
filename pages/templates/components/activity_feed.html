@@ -1,0 +1,10 @@
+<section class="surface-card overflow-hidden">
+  <div class="p-5 border-b border-gray-100"><h2 class="font-black text-gray-900">Recent Activity</h2></div>
+  <div class="divide-y divide-gray-100">
+    {% for activity in activities %}
+    <article class="p-5"><p class="font-bold text-gray-900">{{ activity.action }}</p><p class="mt-1 text-sm text-gray-500">{{ activity.message }}</p></article>
+    {% empty %}
+    <p class="p-8 text-center text-gray-500">No activity yet.</p>
+    {% endfor %}
+  </div>
+</section>

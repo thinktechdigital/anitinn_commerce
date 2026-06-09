@@ -1,0 +1,10 @@
+<section class="surface-card overflow-hidden">
+  <div class="p-5 border-b border-gray-100"><h2 class="font-black text-gray-900">Messages</h2></div>
+  <div class="divide-y divide-gray-100">
+    {% for message in messages_list %}
+    <a href="{{ message.url|default:'#' }}" class="block p-5 hover:bg-gray-50"><p class="font-bold text-gray-900">{{ message.subject }}</p><p class="mt-1 text-sm text-gray-500">{{ message.preview }}</p></a>
+    {% empty %}
+    <p class="p-8 text-center text-gray-500">No messages yet.</p>
+    {% endfor %}
+  </div>
+</section>

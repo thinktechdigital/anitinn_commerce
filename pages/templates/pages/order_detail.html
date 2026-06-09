@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Order Details{% endblock %}
+{% block body %}
+<main class="min-h-screen bg-[#fcfbf8] px-6 py-10">
+  <div class="max-w-5xl mx-auto">
+    <a href="{% url 'pages:order_history' %}" class="text-sm font-bold text-royal-green">Back to orders</a>
+    <div class="mt-6 bg-white rounded-3xl p-8 border border-gray-100">
+      <div class="flex flex-wrap justify-between gap-4 border-b border-gray-100 pb-6"><div><p class="text-xs uppercase tracking-widest text-gray-400 font-bold">Order</p><h1 class="text-3xl font-bold">#{{ order.id }}</h1></div><div class="text-right"><p class="text-xs uppercase tracking-widest text-gray-400 font-bold">Status</p><p class="font-bold text-royal-green">{{ order.status }}</p></div></div>
+      <div class="mt-8 space-y-4">{% for item in order.items.all %}<div class="flex justify-between gap-4"><div><p class="font-bold">{{ item.product.name|default:"Deleted product" }}</p><p class="text-sm text-gray-500">Qty {{ item.quantity }}</p></div><p class="font-bold">GH₵ {{ item.price }}</p></div>{% endfor %}</div>
+      <div class="mt-8 grid md:grid-cols-3 gap-4">
+        <div class="bg-gray-50 rounded-2xl p-5"><p class="text-xs font-bold uppercase text-gray-400">Payment</p><p class="font-bold mt-2">{{ order.payment.status|default:"Pending" }}</p></div>
+        <div class="bg-gray-50 rounded-2xl p-5"><p class="text-xs font-bold uppercase text-gray-400">Tracking</p><p class="font-bold mt-2">{{ order.shipment.tracking_number|default:order.tracking_number }}</p></div>
+        <div class="bg-gray-50 rounded-2xl p-5"><p class="text-xs font-bold uppercase text-gray-400">Total</p><p class="font-bold mt-2 text-royal-green">GH₵ {{ order.total_price }}</p></div>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock %}

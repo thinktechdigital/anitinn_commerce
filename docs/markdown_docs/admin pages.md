@@ -1,0 +1,11 @@
+admin_dashboard
+admin_users
+admin_vendors
+admin_orders
+admin_categories
+admin_analytics
+admin_payouts
+admin_support
+admin_activity
+admin_moderation
+admin_settings

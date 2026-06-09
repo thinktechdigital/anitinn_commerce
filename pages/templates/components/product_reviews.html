@@ -1,0 +1,13 @@
+<section class="surface-card p-6">
+  <h2 class="text-xl font-black text-gray-900">Customer Reviews</h2>
+  <div class="mt-5 divide-y divide-gray-100">
+    {% for review in reviews %}
+    <article class="py-4">
+      <div class="flex items-center justify-between"><p class="font-bold text-gray-900">{{ review.user.username }}</p><p class="text-sm font-bold text-golden-yellow">{{ review.rating }}/5</p></div>
+      <p class="mt-2 text-sm text-gray-600">{{ review.comment }}</p>
+    </article>
+    {% empty %}
+    <p class="py-8 text-gray-500">No reviews yet.</p>
+    {% endfor %}
+  </div>
+</section>

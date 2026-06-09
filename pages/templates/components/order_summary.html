@@ -1,0 +1,9 @@
+<section class="surface-card p-6">
+  <h2 class="text-lg font-black text-gray-900">Order Summary</h2>
+  <div class="mt-5 space-y-3">
+    {% for item in items %}
+    <div class="flex justify-between gap-4 text-sm"><span>{{ item.quantity }} x {{ item.product.name }}</span><span class="font-bold">GH₵ {{ item.product.price }}</span></div>
+    {% endfor %}
+  </div>
+  <div class="mt-5 pt-5 border-t border-gray-100 flex justify-between text-lg font-black"><span>Total</span><span class="text-royal-green">GH₵ {{ total }}</span></div>
+</section>

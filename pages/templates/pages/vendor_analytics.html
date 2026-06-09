@@ -37,50 +37,50 @@
 <div v-scope="{ ...{&quot;activeItem&quot;:&quot;analytics&quot;,&quot;dashboardHref&quot;:&quot;/&quot;,&quot;productsHref&quot;:&quot;/vendor/products/&quot;,&quot;ordersHref&quot;:&quot;/vendor/orders/&quot;,&quot;analyticsHref&quot;:&quot;/vendor/analytics/&quot;,&quot;reviewsHref&quot;:&quot;/vendor/reviews/&quot;,&quot;orderBadgeCount&quot;:12}, $emit() {} }">
 <aside class="w-64 bg-[#1B5E3F] text-white fixed h-full flex flex-col z-50">
   <div class="p-6 flex items-center gap-3">
-    <img src="https://vgbujcuwptvheqijyjbe.supabase.co/storage/v1/object/public/hmac-uploads/uploads/ef5bc30d-cbeb-42a5-88a1-362daf4d51a4/1780139179048-642ea9dd/ChatGPT_Image_May_29__2026__11_28_10_AM.png" alt="Anitinn Logo" class="w-10 h-10 rounded-full border border-white/20">
+    <img src="/media/logo.png" alt="Anitinn Logo" class="w-10 h-10 rounded-full border border-white/20">
     <span class="font-bold text-xl tracking-tight">ANITINN</span>
   </div>
-  <nav class="flex-1 px-4 space-y-1 overflow-y-auto mt-4" style="scrollbar-width: thin; scrollbar-color: rgba(255, 255, 255, 0.1) transparent;">
-    <p class="text-xs font-semibold text-white/40 px-3 py-2 uppercase tracking-wider">Main Menu</p>
-    
-    <a :href="dashboardHref" 
-       class="flex items-center gap-3 px-3 py-3 rounded-lg transition-all" 
-       :class="activeItem === 'dashboard' ? 'bg-white/10 text-[#D4A520] border-l-4 border-[#D4A520]' : 'text-white/70 hover:bg-white/5 hover:text-white'">
-      <iconify-icon icon="lucide:layout-dashboard"></iconify-icon>
-      <span class="font-medium">Dashboard</span>
-    </a>
 
-    <a :href="productsHref" 
-       class="flex items-center gap-3 px-3 py-3 rounded-lg transition-all" 
-       :class="activeItem === 'products' ? 'bg-white/10 text-[#D4A520] border-l-4 border-[#D4A520]' : 'text-white/70 hover:bg-white/5 hover:text-white'">
-      <iconify-icon icon="lucide:box"></iconify-icon>
-      <span class="font-medium">Products</span>
-    </a>
+    <nav class="flex-1 px-4 space-y-1 sidebar-scroll overflow-y-auto mt-4">
+      <p class="text-xs font-semibold text-white/40 px-3 py-2 uppercase tracking-wider">Main Menu</p>
+      <a id="nav-dashboard" href="{% url 'pages:vendor_dashboard' %}" class="flex items-center gap-3 px-3 py-3 rounded-lg text-white/70 hover:bg-white/5 hover:text-white transition-all">
+        <iconify-icon icon="lucide:layout-dashboard" class="text-xl"></iconify-icon>
+        <span class="font-medium">Dashboard</span>
+      </a>
+      <a id="nav-products" href="{% url 'pages:vendor_products' %}" class="flex items-center gap-3 px-3 py-3 rounded-lg text-white/70 hover:bg-white/5 hover:text-white transition-all">
+        <iconify-icon icon="lucide:box" class="text-xl"></iconify-icon>
+        <span class="font-medium">Products</span>
+      </a>
+      <a id="nav-catalog" href="{% url 'pages:catalog' %}" class="flex items-center gap-3 px-3 py-3 rounded-lg text-white/70 hover:bg-white/5 hover:text-white transition-all">
+        <iconify-icon icon="lucide:book-open" class="text-xl"></iconify-icon>
+        <span class="font-medium">Catalog</span>
+      </a>
+      <a id="nav-orders" href="{% url 'pages:vendor_orders' %}" class="flex items-center gap-3 px-3 py-3 rounded-lg text-white/70 hover:bg-white/5 hover:text-white transition-all">
+        <iconify-icon icon="lucide:shopping-cart" class="text-xl"></iconify-icon>
+        <span class="font-medium">Orders</span>
+        <span class="ml-auto bg-golden-yellow text-white text-[10px] px-1.5 py-0.5 rounded-full">12</span>
+      </a>
+      <a id="nav-analytics" href="{% url 'pages:vendor_analytics' %}" class="flex items-center gap-3 px-3 py-3 rounded-lg bg-white/10 text-golden-yellow border-l-4 border-golden-yellow">
+        <iconify-icon icon="lucide:bar-chart-3" class="text-xl"></iconify-icon>
+        <span class="font-medium">Analytics</span>
+      </a>
 
-    <a :href="ordersHref" 
-       class="flex items-center gap-3 px-3 py-3 rounded-lg transition-all" 
-       :class="activeItem === 'orders' ? 'bg-white/10 text-[#D4A520] border-l-4 border-[#D4A520]' : 'text-white/70 hover:bg-white/5 hover:text-white'">
-      <iconify-icon icon="lucide:shopping-cart"></iconify-icon>
-      <span class="font-medium">Orders</span>
-      <span v-if="orderBadgeCount > 0" class="ml-auto bg-[#D4A520] text-white text-[10px] px-1.5 py-0.5 rounded-full">{{ orderBadgeCount }}</span>
-    </a>
+      <p class="text-xs font-semibold text-white/40 px-3 py-2 uppercase tracking-wider mt-8">Storefront</p>
+      <a id="nav-reviews" href="{% url 'pages:vendor_reviews' %}" class="flex items-center gap-3 px-3 py-3 rounded-lg text-white/70 hover:bg-white/5 hover:text-white transition-all">
+        <iconify-icon icon="lucide:message-square" class="text-xl"></iconify-icon>
+        <span class="font-medium">Reviews</span>
+      </a>
+      <a id="nav-discounts" href="{% url 'pages:vendor_coupons' %}" class="flex items-center gap-3 px-3 py-3 rounded-lg text-white/70 hover:bg-white/5 hover:text-white transition-all">
+        <iconify-icon icon="lucide:ticket" class="text-xl"></iconify-icon>
+        <span class="font-medium">Discounts</span>
+      </a>
+      <a id="nav-settings" href="{% url 'pages:vendor_settings' %}" class="flex items-center gap-3 px-3 py-3 rounded-lg text-white/70 hover:bg-white/5 hover:text-white transition-all">
+        <iconify-icon icon="lucide:settings" class="text-xl"></iconify-icon>
+        <span class="font-medium">Store Settings</span>
+      </a>
+    </nav>
 
-    <a :href="analyticsHref" 
-       class="flex items-center gap-3 px-3 py-3 rounded-lg transition-all" 
-       :class="activeItem === 'analytics' ? 'bg-white/10 text-[#D4A520] border-l-4 border-[#D4A520]' : 'text-white/70 hover:bg-white/5 hover:text-white'">
-      <iconify-icon icon="lucide:bar-chart-3"></iconify-icon>
-      <span class="font-medium">Analytics</span>
-    </a>
 
-    <p class="text-xs font-semibold text-white/40 px-3 py-2 uppercase tracking-wider mt-8">Storefront</p>
-
-    <a :href="reviewsHref" 
-       class="flex items-center gap-3 px-3 py-3 rounded-lg transition-all" 
-       :class="activeItem === 'reviews' ? 'bg-white/10 text-[#D4A520] border-l-4 border-[#D4A520]' : 'text-white/70 hover:bg-white/5 hover:text-white'">
-      <iconify-icon icon="lucide:message-square"></iconify-icon>
-      <span class="font-medium">Reviews</span>
-    </a>
-  </nav>
   <div class="p-4 mt-auto">
     <button @click="$emit('upgrade')" class="w-full bg-[#D4A520] hover:brightness-110 text-white text-xs font-bold py-2 rounded-lg transition-all uppercase tracking-wide">Upgrade Plan</button>
   </div>
@@ -91,11 +91,39 @@
     <!-- Main Content Area -->
     <main class="flex-1 ml-64 min-h-screen flex flex-col relative">
       <!-- Dashboard Header -->
-      <!-- component: DashboardHeader (87403f5a-a910-4ccc-9453-3a69605a2a11) -->
-<div v-scope="{ ...{&quot;vendorName&quot;:&quot;Kofi's Electronics&quot;,&quot;userName&quot;:&quot;Kofi Mensah&quot;,&quot;userAvatarUrl&quot;:&quot;https://api.dicebear.com/7.x/avataaars/svg?seed=Kofi&quot;,&quot;hasNotifications&quot;:true}, $emit() {} }">
-<header class="sticky top-0 bg-white/80 backdrop-blur-md border-b border-gray-100 z-40 px-8 py-4"><div class="flex items-center justify-between"><div class="flex items-center gap-4"><div><h1 class="text-2xl font-bold text-gray-800 tracking-tight">Dashboard Overview</h1><p class="text-sm text-gray-500 font-medium">Welcome back, <span class="text-[#1B5E3F] font-semibold underline decoration-[#D4A520]">{{ vendorName }}</span></p></div></div><div class="flex items-center gap-6"><div class="relative hidden lg:block"><iconify-icon icon="lucide:search" class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></iconify-icon><input type="text" placeholder="Search products, orders..." @input="$emit('search', { query: $event.target.value })" class="pl-10 pr-4 py-2 w-80 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#1B5E3F]/20 focus:border-[#1B5E3F] transition-all"></div><div class="flex items-center gap-3"><button @click="$emit('notificationClick')" class="p-2 hover:bg-gray-100 rounded-full relative"><iconify-icon icon="lucide:bell" class="text-2xl text-gray-600"></iconify-icon><span v-if="hasNotifications" class="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full border-2 border-white"></span></button><div class="h-8 w-[1px] bg-gray-200 mx-2"></div><div class="flex items-center gap-3 group cursor-pointer" @click="$emit('profileClick')"><img :src="userAvatarUrl" alt="Vendor Avatar" class="w-10 h-10 rounded-full border-2 border-[#D4A520] bg-gray-100 p-0.5"><div class="hidden md:block"><p class="text-sm font-bold text-gray-800 leading-none">{{ userName }}</p><p class="text-[10px] text-gray-500 font-medium">Pro Vendor</p></div><iconify-icon icon="lucide:chevron-down" class="text-gray-400"></iconify-icon></div></div></div></div></header>
-</div>
-<!-- /component: DashboardHeader (87403f5a-a910-4ccc-9453-3a69605a2a11) -->
+      <!-- component: DashboardHeader -->
+      <header class="sticky top-0 bg-white/80 backdrop-blur-md border-b border-gray-100 z-40 px-8 py-4">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-4">
+            <div>
+              <h1 class="text-2xl font-bold text-gray-800 tracking-tight">Store Analytics</h1>
+              <p class="text-sm text-gray-500 font-medium">Welcome back, <span class="text-[#1B5E3F] font-semibold underline decoration-[#D4A520]">{{ vendor.store_name }}</span></p>
+            </div>
+          </div>
+          <div class="flex items-center gap-6">
+            <div class="relative hidden lg:block">
+              <iconify-icon icon="lucide:search" class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></iconify-icon>
+              <form method="GET" action="{% url 'pages:catalog' %}">
+                <input type="text" name="q" placeholder="Search catalog..." class="pl-10 pr-4 py-2 w-80 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#1B5E3F]/20 focus:border-[#1B5E3F] transition-all">
+              </form>
+            </div>
+            <div class="flex items-center gap-3">
+              <a href="{% url 'pages:notifications' %}" class="p-2 hover:bg-gray-100 rounded-full relative">
+                <iconify-icon icon="lucide:bell" class="text-2xl text-gray-600"></iconify-icon>
+                <span class="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full border-2 border-white"></span>
+              </a>
+              <div class="h-8 w-[1px] bg-gray-200 mx-2"></div>
+              <div class="flex items-center gap-3 group cursor-pointer">
+                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed={{ request.user.username }}" alt="Vendor Avatar" class="w-10 h-10 rounded-full border-2 border-[#D4A520] bg-gray-100 p-0.5">
+                <div class="hidden md:block">
+                  <p class="text-sm font-bold text-gray-800 leading-none">{{ request.user.username }}</p>
+                  <p class="text-[10px] text-gray-500 font-medium">Pro Vendor</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
 
       <div class="p-8 flex-1">
         <!-- Analytics Sub-Header -->
@@ -108,87 +136,78 @@
             <!-- Date Range Selector -->
             <div class="flex items-center bg-white border border-gray-200 rounded-xl px-4 py-2 shadow-sm">
               <iconify-icon icon="lucide:calendar" class="text-gray-400 mr-2"></iconify-icon>
-              <span class="text-sm font-semibold text-gray-700">Oct 1, 2024 - Oct 31, 2024</span>
-              <iconify-icon icon="lucide:chevron-down" class="text-gray-400 ml-4"></iconify-icon>
+              <span class="text-sm font-semibold text-gray-700">{% now "N j, Y" %}</span>
             </div>
-            <!-- Export Button -->
-            <button id="export-analytics-btn" class="flex items-center gap-2 px-6 py-2.5 royal-green text-white font-bold rounded-xl shadow-lg shadow-emerald-900/10 hover:brightness-110 active:scale-95 transition-all">
-              <iconify-icon icon="lucide:download"></iconify-icon>
-              Export Report
-            </button>
+            <!-- Local/mock export buttons -->
+            <div class="flex items-center gap-2">
+              <a href="?export=csv" class="flex items-center gap-2 px-4 py-2.5 royal-green text-white font-bold rounded-xl shadow-lg shadow-emerald-900/10 hover:brightness-110 active:scale-95 transition-all"><iconify-icon icon="lucide:file-text"></iconify-icon>CSV</a>
+              <a href="?export=excel" class="flex items-center gap-2 px-4 py-2.5 bg-white border border-gray-200 text-gray-700 font-bold rounded-xl hover:bg-gray-50"><iconify-icon icon="lucide:table"></iconify-icon>Excel</a>
+              <a href="?export=pdf" class="flex items-center gap-2 px-4 py-2.5 bg-white border border-gray-200 text-gray-700 font-bold rounded-xl hover:bg-gray-50"><iconify-icon icon="lucide:file-down"></iconify-icon>PDF</a>
+            </div>
           </div>
         </div>
 
         <!-- Top KPIs -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          <!-- component: KPICard (caafade4-ddb0-479f-9bdb-d79b134cd835) -->
-<div v-scope="{ ...{&quot;label&quot;:&quot;Gross Revenue&quot;,&quot;value&quot;:&quot;GH₵ 125,430&quot;,&quot;trendLabel&quot;:&quot;+12.5% vs last month&quot;,&quot;trendIcon&quot;:&quot;lucide:trending-up&quot;,&quot;trendClass&quot;:&quot;text-green-600&quot;,&quot;iconName&quot;:&quot;lucide:trending-up&quot;,&quot;iconBgClass&quot;:&quot;bg-emerald-600&quot;}, $emit() {} }">
-<div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-shadow group">
-  <div class="flex justify-between items-start mb-4">
-    <div :class="['p-3 rounded-xl text-white group-hover:scale-110 transition-transform', iconBgClass]">
-      <iconify-icon :icon="iconName" class="text-2xl"></iconify-icon>
-    </div>
-    <span class="text-xs font-bold text-gray-400 uppercase tracking-wider">{{ label }}</span>
-  </div>
-  <h3 class="text-3xl font-bold text-gray-800">{{ value }}</h3>
-  <div :class="['mt-4 flex items-center text-sm font-semibold', trendClass]">
-    <iconify-icon :icon="trendIcon" class="mr-1"></iconify-icon>
-    <span>{{ trendLabel }}</span>
-  </div>
-</div>
-</div>
-<!-- /component: KPICard (caafade4-ddb0-479f-9bdb-d79b134cd835) -->
-          <!-- component: KPICard (caafade4-ddb0-479f-9bdb-d79b134cd835) -->
-<div v-scope="{ ...{&quot;label&quot;:&quot;Avg. Order Value&quot;,&quot;value&quot;:&quot;GH₵ 1,240&quot;,&quot;trendLabel&quot;:&quot;-2.1% drop&quot;,&quot;trendIcon&quot;:&quot;lucide:trending-down&quot;,&quot;trendClass&quot;:&quot;text-red-500&quot;,&quot;iconName&quot;:&quot;lucide:shopping-bag&quot;,&quot;iconBgClass&quot;:&quot;bg-[#D4A520]&quot;}, $emit() {} }">
-<div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-shadow group">
-  <div class="flex justify-between items-start mb-4">
-    <div :class="['p-3 rounded-xl text-white group-hover:scale-110 transition-transform', iconBgClass]">
-      <iconify-icon :icon="iconName" class="text-2xl"></iconify-icon>
-    </div>
-    <span class="text-xs font-bold text-gray-400 uppercase tracking-wider">{{ label }}</span>
-  </div>
-  <h3 class="text-3xl font-bold text-gray-800">{{ value }}</h3>
-  <div :class="['mt-4 flex items-center text-sm font-semibold', trendClass]">
-    <iconify-icon :icon="trendIcon" class="mr-1"></iconify-icon>
-    <span>{{ trendLabel }}</span>
-  </div>
-</div>
-</div>
-<!-- /component: KPICard (caafade4-ddb0-479f-9bdb-d79b134cd835) -->
-          <!-- component: KPICard (caafade4-ddb0-479f-9bdb-d79b134cd835) -->
-<div v-scope="{ ...{&quot;label&quot;:&quot;Unique Visitors&quot;,&quot;value&quot;:&quot;12.4k&quot;,&quot;trendLabel&quot;:&quot;+452 today&quot;,&quot;trendIcon&quot;:&quot;lucide:trending-up&quot;,&quot;trendClass&quot;:&quot;text-green-600&quot;,&quot;iconName&quot;:&quot;lucide:users&quot;,&quot;iconBgClass&quot;:&quot;bg-blue-600&quot;}, $emit() {} }">
-<div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-shadow group">
-  <div class="flex justify-between items-start mb-4">
-    <div :class="['p-3 rounded-xl text-white group-hover:scale-110 transition-transform', iconBgClass]">
-      <iconify-icon :icon="iconName" class="text-2xl"></iconify-icon>
-    </div>
-    <span class="text-xs font-bold text-gray-400 uppercase tracking-wider">{{ label }}</span>
-  </div>
-  <h3 class="text-3xl font-bold text-gray-800">{{ value }}</h3>
-  <div :class="['mt-4 flex items-center text-sm font-semibold', trendClass]">
-    <iconify-icon :icon="trendIcon" class="mr-1"></iconify-icon>
-    <span>{{ trendLabel }}</span>
-  </div>
-</div>
-</div>
-<!-- /component: KPICard (caafade4-ddb0-479f-9bdb-d79b134cd835) -->
-          <!-- component: KPICard (caafade4-ddb0-479f-9bdb-d79b134cd835) -->
-<div v-scope="{ ...{&quot;label&quot;:&quot;Conversion Rate&quot;,&quot;value&quot;:&quot;3.2%&quot;,&quot;trendLabel&quot;:&quot;+0.8% increase&quot;,&quot;trendIcon&quot;:&quot;lucide:trending-up&quot;,&quot;trendClass&quot;:&quot;text-green-600&quot;,&quot;iconName&quot;:&quot;lucide:zap&quot;,&quot;iconBgClass&quot;:&quot;bg-purple-600&quot;}, $emit() {} }">
-<div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-shadow group">
-  <div class="flex justify-between items-start mb-4">
-    <div :class="['p-3 rounded-xl text-white group-hover:scale-110 transition-transform', iconBgClass]">
-      <iconify-icon :icon="iconName" class="text-2xl"></iconify-icon>
-    </div>
-    <span class="text-xs font-bold text-gray-400 uppercase tracking-wider">{{ label }}</span>
-  </div>
-  <h3 class="text-3xl font-bold text-gray-800">{{ value }}</h3>
-  <div :class="['mt-4 flex items-center text-sm font-semibold', trendClass]">
-    <iconify-icon :icon="trendIcon" class="mr-1"></iconify-icon>
-    <span>{{ trendLabel }}</span>
-  </div>
-</div>
-</div>
-<!-- /component: KPICard (caafade4-ddb0-479f-9bdb-d79b134cd835) -->
+          <!-- KPI: Gross Revenue -->
+          <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-shadow group">
+            <div class="flex justify-between items-start mb-4">
+              <div class="p-3 rounded-xl text-white bg-emerald-600 group-hover:scale-110 transition-transform">
+                <iconify-icon icon="lucide:trending-up" class="text-2xl"></iconify-icon>
+              </div>
+              <span class="text-xs font-bold text-gray-400 uppercase tracking-wider">Gross Revenue</span>
+            </div>
+            <h3 class="text-3xl font-bold text-gray-800">GH₵ {{ total_sales|floatformat:2 }}</h3>
+            <div class="mt-4 flex items-center text-sm font-semibold text-green-600">
+              <iconify-icon icon="lucide:trending-up" class="mr-1"></iconify-icon>
+              <span>Active Earnings</span>
+            </div>
+          </div>
+
+          <!-- KPI: Avg. Order Value -->
+          <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-shadow group">
+            <div class="flex justify-between items-start mb-4">
+              <div class="p-3 rounded-xl text-white bg-[#D4A520] group-hover:scale-110 transition-transform">
+                <iconify-icon icon="lucide:shopping-bag" class="text-2xl"></iconify-icon>
+              </div>
+              <span class="text-xs font-bold text-gray-400 uppercase tracking-wider">Avg. Order Value</span>
+            </div>
+            <h3 class="text-3xl font-bold text-gray-800">GH₵ {{ avg_order_value|floatformat:2 }}</h3>
+            <div class="mt-4 flex items-center text-sm font-semibold text-green-600">
+              <iconify-icon icon="lucide:trending-up" class="mr-1"></iconify-icon>
+              <span>Per order average</span>
+            </div>
+          </div>
+
+          <!-- KPI: Unique Visitors -->
+          <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-shadow group">
+            <div class="flex justify-between items-start mb-4">
+              <div class="p-3 rounded-xl text-white bg-blue-600 group-hover:scale-110 transition-transform">
+                <iconify-icon icon="lucide:users" class="text-2xl"></iconify-icon>
+              </div>
+              <span class="text-xs font-bold text-gray-400 uppercase tracking-wider">Unique Visitors</span>
+            </div>
+            <h3 class="text-3xl font-bold text-gray-800">{{ unique_visitors }}</h3>
+            <div class="mt-4 flex items-center text-sm font-semibold text-green-600">
+              <iconify-icon icon="lucide:trending-up" class="mr-1"></iconify-icon>
+              <span>Estimated traffic</span>
+            </div>
+          </div>
+
+          <!-- KPI: Conversion Rate -->
+          <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-shadow group">
+            <div class="flex justify-between items-start mb-4">
+              <div class="p-3 rounded-xl text-white bg-purple-600 group-hover:scale-110 transition-transform">
+                <iconify-icon icon="lucide:zap" class="text-2xl"></iconify-icon>
+              </div>
+              <span class="text-xs font-bold text-gray-400 uppercase tracking-wider">Conversion Rate</span>
+            </div>
+            <h3 class="text-3xl font-bold text-gray-800">{{ conversion_rate|floatformat:1 }}%</h3>
+            <div class="mt-4 flex items-center text-sm font-semibold text-green-600">
+              <iconify-icon icon="lucide:trending-up" class="mr-1"></iconify-icon>
+              <span>Visitor to order ratio</span>
+            </div>
+          </div>
         </div>
 
         <!-- Main Charts Section -->
@@ -263,20 +282,20 @@
               <div class="space-y-2">
                 <div class="flex items-center justify-between text-xs font-bold uppercase tracking-wider">
                   <span class="text-gray-500">Returning Customers</span>
-                  <span class="text-royal-green">64%</span>
+                  <span class="text-royal-green">{{ returning_pct }}%</span>
                 </div>
                 <div class="w-full h-3 bg-gray-50 rounded-full overflow-hidden">
-                  <div class="royal-green h-full rounded-full" style="width: 64%"></div>
+                  <div class="royal-green h-full rounded-full" style="width: {{ returning_pct }}%"></div>
                 </div>
               </div>
 
               <div class="space-y-2">
                 <div class="flex items-center justify-between text-xs font-bold uppercase tracking-wider">
                   <span class="text-gray-500">New Customers</span>
-                  <span class="text-amber-500">36%</span>
+                  <span class="text-amber-500">{{ new_pct }}%</span>
                 </div>
                 <div class="w-full h-3 bg-gray-50 rounded-full overflow-hidden">
-                  <div class="golden-yellow h-full rounded-full" style="width: 36%"></div>
+                  <div class="golden-yellow h-full rounded-full" style="width: {{ new_pct }}%"></div>
                 </div>
               </div>
 
@@ -286,14 +305,14 @@
                   <div>
                     <p class="text-xs font-bold text-royal-green uppercase tracking-tight">AI Insight</p>
                     <p class="text-[11px] text-emerald-800 font-medium leading-relaxed mt-1">
-                      Returning customers spend 2.4x more on average. Focus on loyalty programs this month.
+                      Returning customers represent a key segment for sustained revenue growth. Focus on loyalty programs and discounts to keep them engaged.
                     </p>
                   </div>
                 </div>
               </div>
 
               <div class="pt-4 border-t border-gray-100 flex justify-center">
-                <a href="#" class="text-xs font-bold text-golden-yellow hover:underline flex items-center gap-1">
+                <a href="{% url 'pages:vendor_orders' %}" class="text-xs font-bold text-golden-yellow hover:underline flex items-center gap-1">
                   View All Customer Insights
                   <iconify-icon icon="lucide:arrow-right"></iconify-icon>
                 </a>
@@ -308,54 +327,30 @@
           <div class="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden flex flex-col">
             <div class="p-6 border-b border-gray-50 flex items-center justify-between">
               <h3 class="text-lg font-bold text-gray-800">Top Selling Products</h3>
-              <button class="text-xs font-bold text-royal-green hover:underline decoration-golden-yellow">Last 30 Days</button>
+              <span class="text-xs font-bold text-royal-green decoration-golden-yellow">All Time</span>
             </div>
             <div class="p-6 space-y-4 flex-1">
-              <!-- Product Item 1 -->
+              {% for product in top_products %}
+              <!-- Product Item -->
               <div class="flex items-center gap-4 group">
                 <div class="w-12 h-12 rounded-xl bg-gray-100 flex items-center justify-center border border-gray-100">
-                  <iconify-icon icon="lucide:smartphone" class="text-xl text-gray-500"></iconify-icon>
+                  <iconify-icon icon="lucide:box" class="text-xl text-gray-500"></iconify-icon>
                 </div>
                 <div class="flex-1">
-                  <p class="text-sm font-bold text-gray-800">Xiaomi Monitor 27" Pro</p>
-                  <p class="text-[10px] text-gray-400 font-bold uppercase tracking-tighter">Electronics</p>
+                  <p class="text-sm font-bold text-gray-800">{{ product.name }}</p>
+                  <p class="text-[10px] text-gray-400 font-bold uppercase tracking-tighter">{{ product.category.name }}</p>
                 </div>
                 <div class="text-right">
-                  <p class="text-sm font-bold text-gray-800">GH₵ 42,400</p>
-                  <p class="text-[10px] text-emerald-600 font-bold uppercase">84 Sold</p>
+                  <p class="text-sm font-bold text-gray-800">GH₵ {{ product.total_revenue|floatformat:2 }}</p>
+                  <p class="text-[10px] text-emerald-600 font-bold uppercase">{{ product.sold_count }} Sold</p>
                 </div>
               </div>
-              <!-- Product Item 2 -->
-              <div class="flex items-center gap-4 group">
-                <div class="w-12 h-12 rounded-xl bg-gray-100 flex items-center justify-center border border-gray-100">
-                  <iconify-icon icon="lucide:headphones" class="text-xl text-gray-500"></iconify-icon>
-                </div>
-                <div class="flex-1">
-                  <p class="text-sm font-bold text-gray-800">Sony WH-1000XM4</p>
-                  <p class="text-[10px] text-gray-400 font-bold uppercase tracking-tighter">Audio</p>
-                </div>
-                <div class="text-right">
-                  <p class="text-sm font-bold text-gray-800">GH₵ 38,200</p>
-                  <p class="text-[10px] text-emerald-600 font-bold uppercase">32 Sold</p>
-                </div>
-              </div>
-              <!-- Product Item 3 -->
-              <div class="flex items-center gap-4 group">
-                <div class="w-12 h-12 rounded-xl bg-gray-100 flex items-center justify-center border border-gray-100">
-                  <iconify-icon icon="lucide:keyboard" class="text-xl text-gray-500"></iconify-icon>
-                </div>
-                <div class="flex-1">
-                  <p class="text-sm font-bold text-gray-800">Keychron K2 Mech</p>
-                  <p class="text-[10px] text-gray-400 font-bold uppercase tracking-tighter">Accessories</p>
-                </div>
-                <div class="text-right">
-                  <p class="text-sm font-bold text-gray-800">GH₵ 12,800</p>
-                  <p class="text-[10px] text-emerald-600 font-bold uppercase">106 Sold</p>
-                </div>
-              </div>
+              {% empty %}
+              <p class="text-sm text-gray-500 text-center py-8">No products sold yet.</p>
+              {% endfor %}
             </div>
             <div class="p-4 border-t border-gray-100 text-center">
-              <a href="https://draft-40ce3127-8102-4d9a-a82b-8e81ec1da935.preview.superdesign.dev" class="text-xs font-bold text-royal-green hover:underline uppercase tracking-widest">Detailed Inventory Reports</a>
+              <a href="{% url 'pages:vendor_products' %}" class="text-xs font-bold text-royal-green hover:underline uppercase tracking-widest">Detailed Inventory Reports</a>
             </div>
           </div>
 
@@ -373,42 +368,24 @@
                       <th class="pb-4">Region</th>
                       <th class="pb-4">Orders</th>
                       <th class="pb-4 text-right">Revenue</th>
-                      <th class="pb-4 text-right">Growth</th>
+                      <th class="pb-4 text-right">Share</th>
                     </tr>
                   </thead>
                   <tbody class="divide-y divide-gray-50">
+                    {% for region in regional_sales %}
                     <tr class="group">
-                      <td class="py-3 text-sm font-bold text-gray-800">Greater Accra</td>
-                      <td class="py-3 text-sm font-medium text-gray-500">452</td>
-                      <td class="py-3 text-sm font-bold text-gray-800 text-right">GH₵ 62k</td>
+                      <td class="py-3 text-sm font-bold text-gray-800">{{ region.order__address__region }}</td>
+                      <td class="py-3 text-sm font-medium text-gray-500">{{ region.order_count }}</td>
+                      <td class="py-3 text-sm font-bold text-gray-800 text-right">GH₵ {{ region.revenue|floatformat:2 }}</td>
                       <td class="py-3 text-right">
-                        <span class="text-[10px] font-bold text-emerald-600">+14%</span>
+                        <span class="text-[10px] font-bold text-emerald-600">{% if total_sales > 0 %}{% widthratio region.revenue total_sales 100 %}%{% else %}0%{% endif %}</span>
                       </td>
                     </tr>
-                    <tr class="group">
-                      <td class="py-3 text-sm font-bold text-gray-800">Ashanti Region</td>
-                      <td class="py-3 text-sm font-medium text-gray-500">228</td>
-                      <td class="py-3 text-sm font-bold text-gray-800 text-right">GH₵ 34k</td>
-                      <td class="py-3 text-right">
-                        <span class="text-[10px] font-bold text-emerald-600">+8%</span>
-                      </td>
+                    {% empty %}
+                    <tr>
+                      <td colspan="4" class="py-8 text-center text-sm text-gray-500">No regional data available yet.</td>
                     </tr>
-                    <tr class="group">
-                      <td class="py-3 text-sm font-bold text-gray-800">Western Region</td>
-                      <td class="py-3 text-sm font-medium text-gray-500">84</td>
-                      <td class="py-3 text-sm font-bold text-gray-800 text-right">GH₵ 12k</td>
-                      <td class="py-3 text-right">
-                        <span class="text-[10px] font-bold text-red-500">-2%</span>
-                      </td>
-                    </tr>
-                    <tr class="group">
-                      <td class="py-3 text-sm font-bold text-gray-800">Central Region</td>
-                      <td class="py-3 text-sm font-medium text-gray-500">110</td>
-                      <td class="py-3 text-sm font-bold text-gray-800 text-right">GH₵ 17k</td>
-                      <td class="py-3 text-right">
-                        <span class="text-[10px] font-bold text-emerald-600">+11%</span>
-                      </td>
-                    </tr>
+                    {% endfor %}
                   </tbody>
                 </table>
               </div>
@@ -417,7 +394,7 @@
                <div class="p-4 rounded-2xl royal-green text-white text-xs font-bold flex items-center justify-between">
                  <div class="flex items-center gap-3">
                    <iconify-icon icon="lucide:info" class="text-lg"></iconify-icon>
-                   <span>Top Region: Greater Accra</span>
+                   <span>Top Region: {{ regional_sales.0.order__address__region|default:"N/A" }}</span>
                  </div>
                  <span class="text-golden-yellow uppercase tracking-widest">High Priority</span>
                </div>

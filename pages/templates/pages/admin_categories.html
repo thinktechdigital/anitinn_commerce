@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}Admin Categories{% endblock %}
+{% block body %}
+<div class="flex min-h-screen flex-col lg:flex-row bg-[#fcfbf8]">
+  {% include 'partials/admin_sidebar.html' %}
+  <main class="flex-1 lg:ml-64 px-6 py-10">
+    <div class="grid lg:grid-cols-3 gap-8">
+      <section class="lg:col-span-2">
+        <p class="text-xs font-bold uppercase tracking-widest text-golden-yellow">Admin</p>
+        <h1 class="text-3xl font-bold text-gray-900">Category Management</h1>
+        <div class="mt-8 bg-white border border-gray-100 rounded-3xl shadow-sm overflow-hidden">
+          {% if categories %}
+          <table class="w-full text-left">
+            <thead class="bg-gray-50 text-[10px] uppercase tracking-widest text-gray-400">
+              <tr><th class="px-6 py-4">Name</th><th class="px-6 py-4">Slug</th><th class="px-6 py-4">Icon</th><th class="px-6 py-4">Products</th></tr>
+            </thead>
+            <tbody class="divide-y divide-gray-100">
+              {% for category in categories %}
+              <tr><td class="px-6 py-4 font-bold text-gray-900">{{ category.name }}</td><td class="px-6 py-4 text-sm text-gray-600">{{ category.slug }}</td><td class="px-6 py-4"><iconify-icon icon="{{ category.icon }}" class="text-xl text-royal-green"></iconify-icon></td><td class="px-6 py-4 text-sm font-bold">{{ category.product_count }}</td></tr>
+              {% endfor %}
+            </tbody>
+          </table>
+          {% else %}
+          <div class="p-12 text-center"><iconify-icon icon="lucide:tags" class="text-5xl text-golden-yellow"></iconify-icon><h3 class="mt-4 font-bold">No categories yet</h3></div>
+          {% endif %}
+        </div>
+      </section>
+      <aside class="bg-white border border-gray-100 rounded-3xl p-6 shadow-sm h-fit">
+        <h2 class="text-lg font-bold text-gray-900 mb-5">Add or Update Category</h2>
+        {% if messages %}{% for message in messages %}<div class="mb-4 p-4 rounded-xl bg-green-50 text-green-800 border border-green-100">{{ message }}</div>{% endfor %}{% endif %}
+        <form method="post" class="space-y-4">
+          {% csrf_token %}
+          <input name="name" class="form-input w-full rounded-xl border-gray-200" placeholder="Category name" required>
+          <input name="slug" class="form-input w-full rounded-xl border-gray-200" placeholder="category-slug" required>
+          <input name="icon" class="form-input w-full rounded-xl border-gray-200" placeholder="lucide:box" value="lucide:box">
+          <button class="w-full py-3 rounded-xl royal-green text-white font-bold">Save Category</button>
+        </form>
+      </aside>
+    </div>
+  </main>
+</div>
+{% endblock %}

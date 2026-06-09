@@ -1,0 +1,5 @@
+<form method="post" class="surface-card p-4 flex gap-3">
+  {% csrf_token %}
+  <input name="message" class="form-input" placeholder="Write a message..." required>
+  <button class="btn-primary"><iconify-icon icon="lucide:send"></iconify-icon>Send</button>
+</form>

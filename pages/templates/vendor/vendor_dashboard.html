@@ -1,0 +1,18 @@
+{% extends "layouts/vendor_base.html" %}
+{% block title %}Vendor Dashboard{% endblock %}
+{% block vendor_title %}Vendor Dashboard{% endblock %}
+{% block vendor_content %}
+<div class="grid gap-8">
+  <div class="grid md:grid-cols-4 gap-5">
+    {% include "components/kpi_card.html" with label="Revenue" value=total_sales|default:"GH₵ 0" icon="lucide:banknote" %}
+    {% include "components/kpi_card.html" with label="Orders" value=total_orders|default:"0" icon="lucide:shopping-cart" icon_bg="golden-yellow" %}
+    {% include "components/kpi_card.html" with label="Customers" value=customers_count|default:"0" icon="lucide:users" %}
+    {% include "components/kpi_card.html" with label="Conversion" value=conversion_rate|default:"0%" icon="lucide:trending-up" icon_bg="golden-yellow" %}
+  </div>
+  {% include "components/sales_chart.html" %}
+  <section class="surface-card p-6">
+    <h2 class="text-xl font-black text-gray-900 mb-5">Recent Orders</h2>
+    <div class="grid gap-4">{% for order in recent_orders %}{% include "components/order_card.html" with order=order %}{% empty %}<p class="text-gray-500">No recent orders yet.</p>{% endfor %}</div>
+  </section>
+</div>
+{% endblock %}

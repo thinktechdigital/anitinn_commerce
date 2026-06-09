@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% block title %}Vendor Order #{{ order.id }}{% endblock %}
+{% block body %}
+<div class="min-h-screen bg-[#fcfbf8]">
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 py-10">
+    <a href="{% url 'pages:vendor_orders' %}" class="text-sm font-bold text-royal-green">&larr; Back to orders</a>
+
+    {% if messages %}
+    <div class="mt-6 space-y-2">{% for message in messages %}<div class="p-4 rounded-xl bg-green-50 border border-green-100 text-green-800 text-sm font-bold">{{ message }}</div>{% endfor %}</div>
+    {% endif %}
+
+    <div class="mt-6 grid lg:grid-cols-3 gap-8">
+      <section class="lg:col-span-2 bg-white border border-gray-100 rounded-3xl shadow-sm overflow-hidden">
+        <div class="p-6 border-b border-gray-100 flex flex-wrap items-center justify-between gap-4">
+          <div>
+            <p class="text-xs font-black uppercase tracking-widest text-golden-yellow">Order Detail</p>
+            <h1 class="mt-1 text-3xl font-black text-gray-900">#{{ order.id }}</h1>
+          </div>
+          {% include "components/order_status_badge.html" with status=order.status %}
+        </div>
+        <div class="divide-y divide-gray-100">
+          {% for item in vendor_items %}
+          <article class="p-6 flex gap-4">
+            {% if item.product.image_url %}
+            <img src="{{ item.product.image_url }}" alt="{{ item.product.name }}" class="w-20 h-20 rounded-2xl object-cover bg-gray-50 border border-gray-100">
+            {% else %}
+            <div class="w-20 h-20 rounded-2xl bg-gray-50 border border-gray-100 grid place-items-center text-gray-400"><iconify-icon icon="lucide:box" class="text-3xl"></iconify-icon></div>
+            {% endif %}
+            <div class="flex-1">
+              <a href="{% url 'pages:product_detail' item.product.id %}" class="font-black text-gray-900 hover:text-royal-green">{{ item.product.name }}</a>
+              <p class="mt-1 text-sm text-gray-500">Qty {{ item.quantity }} at GH₵ {{ item.price }}</p>
+            </div>
+            <p class="font-black text-gray-900">GH₵ {{ item.price }} x {{ item.quantity }}</p>
+          </article>
+          {% endfor %}
+        </div>
+      </section>
+
+      <aside class="space-y-6">
+        <section class="bg-white border border-gray-100 rounded-3xl p-6 shadow-sm">
+          <h2 class="text-lg font-black text-gray-900">Customer</h2>
+          <p class="mt-4 font-bold">{{ order.user.get_full_name|default:order.user.username }}</p>
+          <p class="text-sm text-gray-500">{{ order.user.email|default:"No email saved" }}</p>
+          <p class="text-sm text-gray-500">{{ order.user.profile.phone_number|default:"No phone saved" }}</p>
+          <div class="mt-5 flex gap-2">
+            {% if order.user.profile.phone_number %}<a href="tel:{{ order.user.profile.phone_number }}" class="flex-1 text-center py-3 rounded-xl royal-green text-white font-bold"><iconify-icon icon="lucide:phone"></iconify-icon> Call</a>{% endif %}
+            {% if order.user.email %}<a href="mailto:{{ order.user.email }}?subject=Anitinn Order %23{{ order.id }}" class="flex-1 text-center py-3 rounded-xl golden-yellow text-white font-bold"><iconify-icon icon="lucide:mail"></iconify-icon> Email</a>{% endif %}
+          </div>
+        </section>
+
+        <section class="bg-white border border-gray-100 rounded-3xl p-6 shadow-sm">
+          <h2 class="text-lg font-black text-gray-900">Fulfillment</h2>
+          <form method="post" action="{% url 'pages:vendor_order_status' order.id %}" class="mt-5 space-y-4">
+            {% csrf_token %}
+            <select name="status" class="form-input w-full rounded-xl border-gray-200">
+              {% for value, label in order_status_choices %}
+              <option value="{{ value }}" {% if order.status == value %}selected{% endif %}>{{ label }}</option>
+              {% endfor %}
+            </select>
+            <button class="w-full py-3 rounded-xl royal-green text-white font-black">Update Status</button>
+          </form>
+          <div class="mt-5 pt-5 border-t border-gray-100 text-sm text-gray-500 space-y-2">
+            <p><span class="font-bold text-gray-800">Tracking:</span> {{ order.tracking_number|default:"Pending" }}</p>
+            <p><span class="font-bold text-gray-800">Vendor Total:</span> GH₵ {{ vendor_subtotal }}</p>
+          </div>
+        </section>
+
+        <section class="bg-white border border-gray-100 rounded-3xl p-6 shadow-sm">
+          <h2 class="text-lg font-black text-gray-900">Shipping Address</h2>
+          {% if order.address %}
+          <p class="mt-3 text-sm text-gray-600">{{ order.address.street_address }}, {{ order.address.city }}, {{ order.address.region }}, {{ order.address.country }}</p>
+          {% else %}
+          <p class="mt-3 text-sm text-gray-500">No shipping address selected.</p>
+          {% endif %}
+        </section>
+      </aside>
+    </div>
+  </main>
+</div>
+{% endblock %}

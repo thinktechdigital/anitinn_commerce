@@ -1,0 +1,183 @@
+"""Canonical template inventory for the upgraded marketplace UX.
+
+Views should import these constants instead of scattering literal template
+paths across apps as the project is decomposed into accounts, vendors,
+products, orders, payments, support, notifications, and admin_panel.
+"""
+
+LAYOUT_TEMPLATES = {
+    "base": "layouts/base.html",
+    "buyer": "layouts/buyer_base.html",
+    "vendor": "layouts/vendor_base.html",
+    "admin": "layouts/admin_base.html",
+}
+
+PARTIAL_TEMPLATES = {
+    "navbar": "partials/navbar.html",
+    "footer": "partials/footer.html",
+    "buyer_sidebar": "partials/sidebar_buyer.html",
+    "vendor_sidebar": "partials/sidebar_vendor.html",
+    "admin_sidebar": "partials/sidebar_admin.html",
+    "breadcrumbs": "partials/breadcrumbs.html",
+    "notifications_dropdown": "partials/notifications_dropdown.html",
+    "search_bar": "partials/search_bar.html",
+    "pagination": "partials/pagination.html",
+}
+
+COMPONENT_TEMPLATES = {
+    "product_card": "components/product_card.html",
+    "product_grid": "components/product_grid.html",
+    "product_table": "components/product_table.html",
+    "product_filters": "components/product_filters.html",
+    "product_search": "components/product_search.html",
+    "product_gallery": "components/product_gallery.html",
+    "product_reviews": "components/product_reviews.html",
+    "order_card": "components/order_card.html",
+    "order_summary": "components/order_summary.html",
+    "order_status_badge": "components/order_status_badge.html",
+    "shipment_tracking": "components/shipment_tracking.html",
+    "invoice": "components/invoice_component.html",
+    "message_list": "components/message_list.html",
+    "message_thread": "components/message_thread.html",
+    "chat_sidebar": "components/chat_sidebar.html",
+    "chat_input": "components/chat_input.html",
+    "kpi_card": "components/kpi_card.html",
+    "sales_chart": "components/sales_chart.html",
+    "revenue_chart": "components/revenue_chart.html",
+    "customer_chart": "components/customer_chart.html",
+    "activity_feed": "components/activity_feed.html",
+}
+
+BUYER_TEMPLATES = {
+    "home": "buyer/home.html",
+    "marketplace": "buyer/marketplace.html",
+    "search_results": "buyer/search_results.html",
+    "category_products": "buyer/category_products.html",
+    "product_detail": "buyer/product_detail.html",
+    "compare_products": "buyer/compare_products.html",
+    "wishlist": "buyer/wishlist.html",
+    "cart": "buyer/cart.html",
+    "checkout": "buyer/checkout.html",
+    "payment": "buyer/payment.html",
+    "order_confirmation": "buyer/order_confirmation.html",
+    "order_history": "buyer/order_history.html",
+    "order_detail": "buyer/order_detail.html",
+    "order_tracking": "buyer/order_tracking.html",
+    "returns": "buyer/returns.html",
+    "return_request": "buyer/return_request.html",
+    "refund_status": "buyer/refund_status.html",
+    "messages": "buyer/messages.html",
+    "conversation": "buyer/conversation.html",
+    "notifications": "buyer/notifications.html",
+    "support_center": "buyer/support_center.html",
+    "support_ticket_create": "buyer/support_ticket_create.html",
+    "support_ticket_detail": "buyer/support_ticket_detail.html",
+    "saved_addresses": "buyer/saved_addresses.html",
+    "address_create": "buyer/address_create.html",
+    "address_edit": "buyer/address_edit.html",
+    "payment_methods": "buyer/payment_methods.html",
+    "profile": "buyer/profile.html",
+    "security": "buyer/security.html",
+    "preferences": "buyer/preferences.html",
+    "activity_log": "buyer/activity_log.html",
+}
+
+VENDOR_TEMPLATES = {
+    "onboarding": "vendor/vendor_onboarding.html",
+    "verification": "vendor/vendor_verification.html",
+    "store_setup": "vendor/store_setup.html",
+    "storefront": "vendor/storefront.html",
+    "public_profile": "vendor/vendor_public_profile.html",
+    "dashboard": "vendor/vendor_dashboard.html",
+    "products": "vendor/vendor_products.html",
+    "product_create": "vendor/product_create.html",
+    "product_edit": "vendor/product_edit.html",
+    "product_delete": "vendor/product_delete.html",
+    "inventory_dashboard": "vendor/inventory_dashboard.html",
+    "inventory_adjustment": "vendor/inventory_adjustment.html",
+    "inventory_history": "vendor/inventory_history.html",
+    "orders": "vendor/vendor_orders.html",
+    "order_detail": "vendor/vendor_order_detail.html",
+    "shipping_management": "vendor/shipping_management.html",
+    "shipping_zones": "vendor/shipping_zones.html",
+    "delivery_rates": "vendor/delivery_rates.html",
+    "customer_reviews": "vendor/customer_reviews.html",
+    "customer_messages": "vendor/customer_messages.html",
+    "conversation": "vendor/conversation.html",
+    "promotions": "vendor/promotions.html",
+    "coupon_create": "vendor/coupon_create.html",
+    "campaign_create": "vendor/campaign_create.html",
+    "earnings_dashboard": "vendor/earnings_dashboard.html",
+    "payout_history": "vendor/payout_history.html",
+    "withdrawal_request": "vendor/withdrawal_request.html",
+    "transactions": "vendor/transactions.html",
+    "analytics": "vendor/vendor_analytics.html",
+    "store_settings": "vendor/store_settings.html",
+    "notification_center": "vendor/notification_center.html",
+}
+
+ADMIN_TEMPLATES = {
+    "dashboard": "admin_panel/dashboard.html",
+    "user_management": "admin_panel/user_management.html",
+    "user_detail": "admin_panel/user_detail.html",
+    "vendor_management": "admin_panel/vendor_management.html",
+    "vendor_approval_queue": "admin_panel/vendor_approval_queue.html",
+    "vendor_detail": "admin_panel/vendor_detail.html",
+    "product_management": "admin_panel/product_management.html",
+    "product_review": "admin_panel/product_review.html",
+    "order_management": "admin_panel/order_management.html",
+    "order_detail": "admin_panel/order_detail.html",
+    "review_moderation": "admin_panel/review_moderation.html",
+    "reported_content": "admin_panel/reported_content.html",
+    "refund_requests": "admin_panel/refund_requests.html",
+    "vendor_payouts": "admin_panel/vendor_payouts.html",
+    "transactions": "admin_panel/transactions.html",
+    "categories": "admin_panel/categories.html",
+    "category_create": "admin_panel/category_create.html",
+    "category_edit": "admin_panel/category_edit.html",
+    "banners": "admin_panel/banners.html",
+    "cms_pages": "admin_panel/cms_pages.html",
+    "homepage_editor": "admin_panel/homepage_editor.html",
+    "analytics_dashboard": "admin_panel/analytics_dashboard.html",
+    "sales_report": "admin_panel/sales_report.html",
+    "vendor_report": "admin_panel/vendor_report.html",
+    "customer_report": "admin_panel/customer_report.html",
+    "audit_logs": "admin_panel/audit_logs.html",
+    "activity_monitor": "admin_panel/activity_monitor.html",
+    "dispute_center": "admin_panel/dispute_center.html",
+    "dispute_detail": "admin_panel/dispute_detail.html",
+    "platform_settings": "admin_panel/platform_settings.html",
+}
+
+AUTHENTICATION_TEMPLATES = {
+    "login": "authentication/login.html",
+    "register": "authentication/register.html",
+    "password_reset": "authentication/password_reset.html",
+    "verify_email": "authentication/verify_email.html",
+    "profile_setup": "authentication/profile_setup.html",
+}
+
+ERROR_TEMPLATES = {
+    "403": "errors/403.html",
+    "404": "errors/404.html",
+    "500": "errors/500.html",
+}
+
+EMAIL_TEMPLATES = {
+    "order_confirmation": "emails/order_confirmation.html",
+    "shipment_update": "emails/shipment_update.html",
+    "vendor_approval": "emails/vendor_approval.html",
+    "password_reset": "emails/password_reset.html",
+}
+
+TEMPLATE_REGISTRY = {
+    "layouts": LAYOUT_TEMPLATES,
+    "partials": PARTIAL_TEMPLATES,
+    "components": COMPONENT_TEMPLATES,
+    "buyer": BUYER_TEMPLATES,
+    "vendor": VENDOR_TEMPLATES,
+    "admin_panel": ADMIN_TEMPLATES,
+    "authentication": AUTHENTICATION_TEMPLATES,
+    "errors": ERROR_TEMPLATES,
+    "emails": EMAIL_TEMPLATES,
+}

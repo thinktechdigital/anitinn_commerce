@@ -31,7 +31,7 @@
         <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
             <div class="flex items-center gap-12">
                 <a id="nav-logo-link" href="{% url 'pages:marketplace' %}" class="flex items-center gap-3">
-                    <img src="https://vgbujcuwptvheqijyjbe.supabase.co/storage/v1/object/public/hmac-uploads/uploads/ef5bc30d-cbeb-42a5-88a1-362daf4d51a4/1780139179048-642ea9dd/ChatGPT_Image_May_29__2026__11_28_10_AM.png" alt="Anitinn Logo" class="w-10 h-10 rounded-full border border-gray-100 shadow-sm">
+                    <img src="/media/logo.png" alt="Anitinn Logo" class="w-10 h-10 rounded-full border border-gray-100 shadow-sm">
                     <span class="font-bold text-2xl tracking-tighter text-gray-800">ANITINN</span>
                 </a>
                 <nav class="hidden md:flex items-center gap-8">
@@ -178,7 +178,7 @@
                     </div>
                     <div class="flex-1">
                         <div>
-                            <p class="text-sm font-bold text-gray-800">{{ product.vendor.store_name }}</p>
+                            <a href="{% url 'pages:store_detail' product.vendor.id %}" class="text-sm font-bold text-gray-800 hover:text-royal-green">{{ product.vendor.store_name }}</a>
                             <p class="text-[10px] text-gray-500 font-bold uppercase tracking-tighter">Verified Local Vendor</p>
                         </div>
                     </div>
@@ -300,7 +300,7 @@
         <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
             <div class="flex flex-col gap-6">
                 <div class="flex items-center gap-3">
-                    <img src="https://vgbujcuwptvheqijyjbe.supabase.co/storage/v1/object/public/hmac-uploads/uploads/ef5bc30d-cbeb-42a5-88a1-362daf4d51a4/1780139179048-642ea9dd/ChatGPT_Image_May_29__2026__11_28_10_AM.png" class="w-10 h-10">
+                    <img src="/media/logo.png" class="w-10 h-10">
                     <span class="font-bold text-2xl tracking-tighter">ANITINN</span>
                 </div>
                 <p class="text-xs text-gray-500 leading-relaxed">Ghana’s #1 AI-Powered Multi-Vendor Marketplace. Empowering local vendors and global brands to reach every corner of the nation.</p>

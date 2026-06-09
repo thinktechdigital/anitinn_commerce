@@ -1,0 +1,10 @@
+<section class="surface-card p-6">
+  <h2 class="font-black text-gray-900">Conversation</h2>
+  <div class="mt-5 space-y-4">
+    {% for message in thread_messages %}
+    <article class="rounded-2xl bg-gray-50 p-4"><p class="text-sm font-bold text-gray-900">{{ message.sender }}</p><p class="mt-1 text-sm text-gray-600">{{ message.body }}</p></article>
+    {% empty %}
+    <p class="text-gray-500">No conversation messages yet.</p>
+    {% endfor %}
+  </div>
+</section>

@@ -1,0 +1,10 @@
+<aside class="surface-card p-4">
+  <h2 class="font-black text-gray-900">Conversations</h2>
+  <div class="mt-4 grid gap-2 text-sm font-semibold text-gray-600">
+    {% for conversation in conversations %}
+    <a href="{{ conversation.url }}" class="px-3 py-3 rounded-xl hover:bg-green-50 hover:text-royal-green">{{ conversation.title }}</a>
+    {% empty %}
+    <p class="px-3 py-3 text-gray-500">No conversations.</p>
+    {% endfor %}
+  </div>
+</aside>

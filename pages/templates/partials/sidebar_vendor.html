@@ -1,0 +1,18 @@
+<aside class="fixed inset-y-0 left-0 hidden lg:flex w-64 bg-[#1B5E3F] text-white flex-col z-40">
+  <div class="p-6 flex items-center gap-3">
+    <span class="w-10 h-10 rounded-full bg-white/10 grid place-items-center font-black">A</span>
+    <span class="font-black text-xl tracking-tight">ANITINN</span>
+  </div>
+  <nav class="flex-1 px-4 space-y-1 overflow-y-auto">
+    <p class="text-xs font-bold text-white/40 px-3 py-2 uppercase tracking-wider">Vendor</p>
+    <a href="{% url 'pages:vendor_dashboard' %}" class="flex items-center gap-3 px-3 py-3 rounded-xl {% if active_nav == 'dashboard' %}bg-white/10 text-golden-yellow{% else %}text-white/75 hover:bg-white/5{% endif %}"><iconify-icon icon="lucide:layout-dashboard"></iconify-icon>Dashboard</a>
+    <a href="{% url 'pages:vendor_products' %}" class="flex items-center gap-3 px-3 py-3 rounded-xl {% if active_nav == 'products' %}bg-white/10 text-golden-yellow{% else %}text-white/75 hover:bg-white/5{% endif %}"><iconify-icon icon="lucide:box"></iconify-icon>Products</a>
+    <a href="{% url 'pages:catalog' %}" class="flex items-center gap-3 px-3 py-3 rounded-xl {% if active_nav == 'catalog' %}bg-white/10 text-golden-yellow{% else %}text-white/75 hover:bg-white/5{% endif %}"><iconify-icon icon="lucide:book-open"></iconify-icon>Catalog</a>
+    <a href="{% url 'pages:vendor_orders' %}" class="flex items-center gap-3 px-3 py-3 rounded-xl {% if active_nav == 'orders' %}bg-white/10 text-golden-yellow{% else %}text-white/75 hover:bg-white/5{% endif %}"><iconify-icon icon="lucide:shopping-cart"></iconify-icon>Orders</a>
+    <a href="{% url 'pages:vendor_analytics' %}" class="flex items-center gap-3 px-3 py-3 rounded-xl {% if active_nav == 'analytics' %}bg-white/10 text-golden-yellow{% else %}text-white/75 hover:bg-white/5{% endif %}"><iconify-icon icon="lucide:bar-chart-3"></iconify-icon>Analytics</a>
+    <a href="{% url 'pages:vendor_reviews' %}" class="flex items-center gap-3 px-3 py-3 rounded-xl {% if active_nav == 'reviews' %}bg-white/10 text-golden-yellow{% else %}text-white/75 hover:bg-white/5{% endif %}"><iconify-icon icon="lucide:message-square"></iconify-icon>Reviews</a>
+    <a href="{% url 'pages:vendor_coupons' %}" class="flex items-center gap-3 px-3 py-3 rounded-xl {% if active_nav == 'marketing' %}bg-white/10 text-golden-yellow{% else %}text-white/75 hover:bg-white/5{% endif %}"><iconify-icon icon="lucide:ticket"></iconify-icon>Marketing</a>
+    <a href="{% url 'pages:vendor_payouts' %}" class="flex items-center gap-3 px-3 py-3 rounded-xl {% if active_nav == 'finance' %}bg-white/10 text-golden-yellow{% else %}text-white/75 hover:bg-white/5{% endif %}"><iconify-icon icon="lucide:wallet"></iconify-icon>Finance</a>
+    <a href="{% url 'pages:vendor_settings' %}" class="flex items-center gap-3 px-3 py-3 rounded-xl {% if active_nav == 'settings' %}bg-white/10 text-golden-yellow{% else %}text-white/75 hover:bg-white/5{% endif %}"><iconify-icon icon="lucide:settings"></iconify-icon>Settings</a>
+  </nav>
+</aside>

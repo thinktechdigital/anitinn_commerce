@@ -33,65 +33,12 @@
 {% endblock %}
 
 {% block body %}
-<div class="flex min-h-screen">
+<div class="flex min-h-screen flex-col lg:flex-row">
     <!-- Sidebar Navigation -->
-    <!-- component: DashboardSidebar (3e4d5170-0fd6-49b5-8819-3230c98e99b7) -->
-<div v-scope="{ ...{&quot;activeItem&quot;:&quot;analytics&quot;,&quot;dashboardHref&quot;:&quot;https://draft-aa0ca535-feab-4e01-8db8-b8cf8f06e855.preview.superdesign.dev&quot;,&quot;productsHref&quot;:&quot;https://draft-189044eb-5763-4705-8248-0eca3a4f4be8.preview.superdesign.dev&quot;,&quot;ordersHref&quot;:&quot;https://draft-e2a0e24c-2a02-4309-a0cf-f76fd9fdb3c5.preview.superdesign.dev&quot;,&quot;analyticsHref&quot;:&quot;#&quot;,&quot;reviewsHref&quot;:&quot;#&quot;,&quot;orderBadgeCount&quot;:12}, $emit() {} }">
-<aside class="w-64 bg-[#1B5E3F] text-white fixed h-full flex flex-col z-50">
-  <div class="p-6 flex items-center gap-3">
-    <img src="https://vgbujcuwptvheqijyjbe.supabase.co/storage/v1/object/public/hmac-uploads/uploads/ef5bc30d-cbeb-42a5-88a1-362daf4d51a4/1780139179048-642ea9dd/ChatGPT_Image_May_29__2026__11_28_10_AM.png" alt="Anitinn Logo" class="w-10 h-10 rounded-full border border-white/20">
-    <span class="font-bold text-xl tracking-tight">ANITINN</span>
-  </div>
-  <nav class="flex-1 px-4 space-y-1 overflow-y-auto mt-4" style="scrollbar-width: thin; scrollbar-color: rgba(255, 255, 255, 0.1) transparent;">
-    <p class="text-xs font-semibold text-white/40 px-3 py-2 uppercase tracking-wider">Main Menu</p>
-    
-    <a :href="dashboardHref" 
-       class="flex items-center gap-3 px-3 py-3 rounded-lg transition-all" 
-       :class="activeItem === 'dashboard' ? 'bg-white/10 text-[#D4A520] border-l-4 border-[#D4A520]' : 'text-white/70 hover:bg-white/5 hover:text-white'">
-      <iconify-icon icon="lucide:layout-dashboard"></iconify-icon>
-      <span class="font-medium">Dashboard</span>
-    </a>
-
-    <a :href="productsHref" 
-       class="flex items-center gap-3 px-3 py-3 rounded-lg transition-all" 
-       :class="activeItem === 'products' ? 'bg-white/10 text-[#D4A520] border-l-4 border-[#D4A520]' : 'text-white/70 hover:bg-white/5 hover:text-white'">
-      <iconify-icon icon="lucide:box"></iconify-icon>
-      <span class="font-medium">Products</span>
-    </a>
-
-    <a :href="ordersHref" 
-       class="flex items-center gap-3 px-3 py-3 rounded-lg transition-all" 
-       :class="activeItem === 'orders' ? 'bg-white/10 text-[#D4A520] border-l-4 border-[#D4A520]' : 'text-white/70 hover:bg-white/5 hover:text-white'">
-      <iconify-icon icon="lucide:shopping-cart"></iconify-icon>
-      <span class="font-medium">Orders</span>
-      <span v-if="orderBadgeCount > 0" class="ml-auto bg-[#D4A520] text-white text-[10px] px-1.5 py-0.5 rounded-full">{{ orderBadgeCount }}</span>
-    </a>
-
-    <a :href="analyticsHref" 
-       class="flex items-center gap-3 px-3 py-3 rounded-lg transition-all" 
-       :class="activeItem === 'analytics' ? 'bg-white/10 text-[#D4A520] border-l-4 border-[#D4A520]' : 'text-white/70 hover:bg-white/5 hover:text-white'">
-      <iconify-icon icon="lucide:bar-chart-3"></iconify-icon>
-      <span class="font-medium">Analytics</span>
-    </a>
-
-    <p class="text-xs font-semibold text-white/40 px-3 py-2 uppercase tracking-wider mt-8">Storefront</p>
-
-    <a :href="reviewsHref" 
-       class="flex items-center gap-3 px-3 py-3 rounded-lg transition-all" 
-       :class="activeItem === 'reviews' ? 'bg-white/10 text-[#D4A520] border-l-4 border-[#D4A520]' : 'text-white/70 hover:bg-white/5 hover:text-white'">
-      <iconify-icon icon="lucide:message-square"></iconify-icon>
-      <span class="font-medium">Reviews</span>
-    </a>
-  </nav>
-  <div class="p-4 mt-auto">
-    <button @click="$emit('upgrade')" class="w-full bg-[#D4A520] hover:brightness-110 text-white text-xs font-bold py-2 rounded-lg transition-all uppercase tracking-wide">Upgrade Plan</button>
-  </div>
-</aside>
-</div>
-<!-- /component: DashboardSidebar (3e4d5170-0fd6-49b5-8819-3230c98e99b7) -->
+    {% include 'partials/admin_sidebar.html' %}
 
     <!-- Main Content Area -->
-    <main class="flex-1 ml-64 min-h-screen flex flex-col relative">
+    <main class="flex-1 lg:ml-64 min-h-screen flex flex-col relative">
       
       <!-- Admin Header -->
       <!-- component: DashboardHeader (87403f5a-a910-4ccc-9453-3a69605a2a11) -->
@@ -449,7 +396,7 @@
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
             <div class="space-y-3 group cursor-pointer">
               <div class="aspect-square bg-gray-50 rounded-2xl overflow-hidden border border-gray-100">
-                <img src="https://vgbujcuwptvheqijyjbe.supabase.co/storage/v1/object/public/hmac-uploads/uploads/ef5bc30d-cbeb-42a5-88a1-362daf4d51a4/1780139198921-867f52d6/ChatGPT_Image_May_29__2026__11_28_10_AM.png" class="w-full h-full object-cover group-hover:scale-110 transition-transform">
+                <img src="/media/logo.png" class="w-full h-full object-cover group-hover:scale-110 transition-transform">
               </div>
               <div>
                 <h4 class="text-xs font-bold text-gray-800 truncate">Xiaomi Monitor 27"</h4>

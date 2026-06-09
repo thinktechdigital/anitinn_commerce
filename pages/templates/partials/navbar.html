@@ -1,0 +1,23 @@
+<header class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-gray-100">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center gap-4">
+    <a href="{% url 'pages:marketplace' %}" class="flex items-center gap-2 shrink-0">
+      <span class="w-9 h-9 rounded-full royal-green text-white grid place-items-center font-black">A</span>
+      <span class="font-black text-xl tracking-tight text-royal-green">ANITINN</span>
+    </a>
+    <div class="hidden md:block flex-1 max-w-2xl mx-auto">
+      {% include "partials/search_bar.html" with search_action="pages:catalog" search_placeholder="Search products, categories, vendors..." %}
+    </div>
+    <nav class="ml-auto flex items-center gap-1 sm:gap-2 text-sm font-bold text-gray-600">
+      <a href="{% url 'pages:catalog' %}" class="px-3 py-2 rounded-xl hover:bg-green-50 hover:text-royal-green">Marketplace</a>
+      <a href="{% url 'pages:wishlist' %}" class="hidden sm:inline-flex px-3 py-2 rounded-xl hover:bg-green-50 hover:text-royal-green">Wishlist</a>
+      <a href="{% url 'pages:order_history' %}" class="hidden lg:inline-flex px-3 py-2 rounded-xl hover:bg-green-50 hover:text-royal-green">Orders</a>
+      <a href="{% url 'pages:support_tickets' %}" class="hidden lg:inline-flex px-3 py-2 rounded-xl hover:bg-green-50 hover:text-royal-green">Support</a>
+      <a href="{% url 'pages:cart' %}" class="btn-accent px-3 py-2"><iconify-icon icon="lucide:shopping-cart"></iconify-icon><span class="hidden sm:inline">Cart</span></a>
+      {% if request.user.is_authenticated %}
+      <a href="{% url 'pages:profile' %}" class="btn-ghost px-3 py-2"><iconify-icon icon="lucide:user"></iconify-icon><span class="hidden sm:inline">Profile</span></a>
+      {% else %}
+      <a href="{% url 'pages:login' %}" class="btn-ghost px-3 py-2">Login</a>
+      {% endif %}
+    </nav>
+  </div>
+</header>

@@ -1,0 +1,22 @@
+<div class="surface-card overflow-hidden">
+  <div class="overflow-x-auto">
+    <table class="w-full text-left">
+      <thead class="bg-gray-50 text-[10px] uppercase tracking-widest text-gray-400">
+        <tr><th class="px-6 py-4">Product</th><th class="px-6 py-4">Category</th><th class="px-6 py-4">Stock</th><th class="px-6 py-4">Price</th><th class="px-6 py-4">Status</th></tr>
+      </thead>
+      <tbody class="divide-y divide-gray-100">
+        {% for product in products %}
+        <tr>
+          <td class="px-6 py-4 font-bold text-gray-900">{{ product.name }}</td>
+          <td class="px-6 py-4 text-sm text-gray-600">{{ product.category.name|default:"Uncategorized" }}</td>
+          <td class="px-6 py-4 text-sm font-bold">{{ product.stock }}</td>
+          <td class="px-6 py-4 text-sm font-bold text-royal-green">GH₵ {{ product.price }}</td>
+          <td class="px-6 py-4">{% include "components/order_status_badge.html" with status=product.status %}</td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="5" class="px-6 py-12 text-center text-gray-500">No products available.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>

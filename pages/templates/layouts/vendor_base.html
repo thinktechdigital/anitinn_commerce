@@ -1,0 +1,21 @@
+{% extends "layouts/base.html" %}
+{% block body %}
+<div class="min-h-screen bg-[#fcfbf8] lg:flex">
+  {% include "partials/sidebar_vendor.html" with active_nav=active_nav|default:"dashboard" %}
+  <main class="min-h-screen flex-1 lg:ml-64">
+    <header class="sticky top-0 z-30 bg-white/85 backdrop-blur-md border-b border-gray-100 px-4 sm:px-8 py-4">
+      <div class="flex items-center justify-between gap-4">
+        <div>
+          <p class="text-xs font-bold uppercase tracking-widest text-golden-yellow">Vendor Workspace</p>
+          <h1 class="text-2xl font-extrabold text-gray-900">{% block vendor_title %}{{ page_title|default:"Vendor Dashboard" }}{% endblock %}</h1>
+        </div>
+        {% include "partials/notifications_dropdown.html" %}
+      </div>
+    </header>
+    <div class="p-4 sm:p-8">
+      {% include "partials/breadcrumbs.html" %}
+      {% block vendor_content %}{% endblock %}
+    </div>
+  </main>
+</div>
+{% endblock %}

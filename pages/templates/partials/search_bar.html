@@ -1,0 +1,5 @@
+<form method="get" action="{% if search_action %}{% url search_action %}{% else %}{% url 'pages:catalog' %}{% endif %}" class="relative">
+  <label class="sr-only" for="global-search">Search</label>
+  <iconify-icon icon="lucide:search" class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></iconify-icon>
+  <input id="global-search" name="q" value="{{ request.GET.q }}" placeholder="{{ search_placeholder|default:'Search...' }}" class="form-input pl-10">
+</form>

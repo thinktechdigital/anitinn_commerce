@@ -38,8 +38,8 @@
   <div class="min-h-screen bg-gradient-to-br from-slate-50 via-white to-green-50 flex flex-col items-center justify-center p-6">
     <!-- Logo Area -->
     <div class="mb-10 text-center">
-      <a href="#" id="brand-logo-link" class="inline-block">
-        <img src="https://vgbujcuwptvheqijyjbe.supabase.co/storage/v1/object/public/hmac-uploads/uploads/ef5bc30d-cbeb-42a5-88a1-362daf4d51a4/1780139179048-642ea9dd/ChatGPT_Image_May_29__2026__11_28_10_AM.png" 
+      <a href="{% url 'pages:marketplace' %}" id="brand-logo-link" class="inline-block">
+        <img src="/media/logo.png" 
              alt="ANITINN Logo" 
              class="w-20 h-20 rounded-full border-4 border-white shadow-lg mx-auto mb-4">
       </a>
@@ -108,7 +108,7 @@
         <div>
           <div class="flex items-center justify-between mb-2 ml-1">
             <label for="password" class="block text-xs font-bold text-gray-500 uppercase tracking-wider">Password</label>
-            <a href="/password-reset/" id="forgot-password-link" class="text-xs font-bold text-royal-green hover:underline decoration-golden-yellow decoration-2">Forgot Password?</a>
+            <a href="{% url 'pages:password_reset' %}" id="forgot-password-link" class="text-xs font-bold text-royal-green hover:underline decoration-golden-yellow decoration-2">Forgot Password?</a>
           </div>
           <div class="relative">
             <input type="password" id="password" name="password" placeholder="••••••••" required
@@ -135,7 +135,7 @@
       <div class="mt-10 text-center">
         <p class="text-gray-500 font-semibold">
           Don't have an account? 
-          <a href="/register/" id="signup-link" class="text-royal-green underline decoration-golden-yellow decoration-2 underline-offset-4 ml-1">Create an account</a>
+          <a href="{% url 'pages:register' %}" id="signup-link" class="text-royal-green underline decoration-golden-yellow decoration-2 underline-offset-4 ml-1">Create an account</a>
         </p>
       </div>
     </div>
@@ -158,9 +158,9 @@
 
     <!-- Footer links -->
     <div class="mt-10 flex gap-6">
-      <a href="#" id="privacy-link" class="text-xs font-bold text-gray-400 uppercase tracking-widest hover:text-gray-600">Privacy Policy</a>
-      <a href="#" id="terms-link" class="text-xs font-bold text-gray-400 uppercase tracking-widest hover:text-gray-600">Terms of Service</a>
-      <a href="#" id="contact-link" class="text-xs font-bold text-gray-400 uppercase tracking-widest hover:text-gray-600">Help Center</a>
+      <a href="{% url "pages:privacy" %}" id="privacy-link" class="text-xs font-bold text-gray-400 uppercase tracking-widest hover:text-gray-600">Privacy Policy</a>
+      <a href="{% url "pages:terms" %}" id="terms-link" class="text-xs font-bold text-gray-400 uppercase tracking-widest hover:text-gray-600">Terms of Service</a>
+      <a href="{% url "pages:help" %}" id="contact-link" class="text-xs font-bold text-gray-400 uppercase tracking-widest hover:text-gray-600">Help Center</a>
     </div>
   </div>
 </body>

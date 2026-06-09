@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Audit Logs{% endblock %}
+{% block body %}
+<div class="flex min-h-screen flex-col lg:flex-row bg-[#fcfbf8]">
+  {% include 'partials/admin_sidebar.html' %}
+  <main class="flex-1 lg:ml-64 px-6 py-10">
+    <p class="text-xs font-bold uppercase tracking-widest text-golden-yellow">Admin</p>
+    <h1 class="text-3xl font-bold text-gray-900">Audit Logs</h1>
+    <section class="mt-8 bg-white border border-gray-100 rounded-3xl shadow-sm overflow-hidden">
+      {% if logs %}
+      <div class="divide-y divide-gray-100">
+        {% for log in logs %}
+        <article class="p-6 flex items-start gap-4">
+          <div class="w-10 h-10 rounded-xl royal-green text-white flex items-center justify-center"><iconify-icon icon="lucide:activity"></iconify-icon></div>
+          <div class="flex-1">
+            <div class="flex justify-between gap-4"><h2 class="font-bold text-gray-900">{{ log.action }}</h2><time class="text-xs text-gray-400">{{ log.created_at|date:"M d, Y H:i" }}</time></div>
+            <p class="mt-1 text-sm text-gray-600">{{ log.message }}</p>
+            <p class="mt-2 text-xs text-gray-400">{{ log.user|default:"System" }} · {{ log.actor_role|default:"-" }}{% if log.object_type %} · {{ log.object_type }} #{{ log.object_id }}{% endif %}</p>
+          </div>
+        </article>
+        {% endfor %}
+      </div>
+      {% else %}
+      <div class="p-12 text-center"><iconify-icon icon="lucide:activity" class="text-5xl text-golden-yellow"></iconify-icon><h3 class="mt-4 font-bold">No activity recorded yet</h3></div>
+      {% endif %}
+    </section>
+  </main>
+</div>
+{% endblock %}

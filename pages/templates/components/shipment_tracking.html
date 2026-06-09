@@ -1,0 +1,8 @@
+<section class="surface-card p-6">
+  <h2 class="text-lg font-black text-gray-900">Shipment Tracking</h2>
+  <div class="mt-5 grid gap-3 text-sm">
+    <p><span class="font-bold text-gray-500">Carrier:</span> {{ shipment.carrier|default:"Anitinn Logistics" }}</p>
+    <p><span class="font-bold text-gray-500">Tracking:</span> {{ shipment.tracking_number|default:order.tracking_number }}</p>
+    <p><span class="font-bold text-gray-500">Status:</span> {% include "components/order_status_badge.html" with status=shipment.status|default:order.status %}</p>
+  </div>
+</section>

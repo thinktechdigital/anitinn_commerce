@@ -1,0 +1,27 @@
+<footer class="bg-white border-t border-gray-100 mt-12">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 grid gap-8 md:grid-cols-4">
+    <div class="md:col-span-2">
+      <div class="flex items-center gap-2">
+        <span class="w-9 h-9 rounded-full royal-green text-white grid place-items-center font-black">A</span>
+        <span class="font-black text-xl text-royal-green">ANITINN</span>
+      </div>
+      <p class="mt-4 max-w-md text-sm text-gray-500">A Ghana-first multi-vendor marketplace for trusted products, vendors, orders, and support.</p>
+    </div>
+    <div>
+      <h2 class="text-xs font-black uppercase tracking-widest text-gray-400">Marketplace</h2>
+      <div class="mt-3 grid gap-2 text-sm font-semibold text-gray-600">
+        <a href="{% url 'pages:catalog' %}">Catalog</a>
+        <a href="{% url 'pages:wishlist' %}">Wishlist</a>
+        <a href="{% url 'pages:order_history' %}">Orders</a>
+      </div>
+    </div>
+    <div>
+      <h2 class="text-xs font-black uppercase tracking-widest text-gray-400">Help</h2>
+      <div class="mt-3 grid gap-2 text-sm font-semibold text-gray-600">
+        <a href="{% url 'pages:help' %}">Help Center</a>
+        <a href="{% url 'pages:support_tickets' %}">Support Tickets</a>
+        <a href="{% url 'pages:terms' %}">Terms</a>
+      </div>
+    </div>
+  </div>
+</footer>

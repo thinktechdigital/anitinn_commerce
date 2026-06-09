@@ -1,0 +1,1 @@
+{% extends "layouts/admin_base.html" %}{% block title %}Order Management{% endblock %}{% block admin_content %}<div class="grid gap-4">{% for order in orders %}{% include "components/order_card.html" with order=order %}{% empty %}<p class="surface-card p-8 text-gray-500">No orders.</p>{% endfor %}</div>{% endblock %}

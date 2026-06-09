@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Payments{% endblock %}
+{% block body %}
+<main class="min-h-screen bg-[#fcfbf8] px-6 py-10">
+  <div class="max-w-5xl mx-auto">
+    <p class="text-xs font-bold uppercase tracking-widest text-golden-yellow">Account</p><h1 class="text-3xl font-bold mb-8">Payment History</h1>
+    <div class="bg-white rounded-3xl border border-gray-100 overflow-hidden">
+      <table class="w-full text-left"><thead class="bg-gray-50 text-xs uppercase text-gray-400"><tr><th class="p-4">Reference</th><th class="p-4">Order</th><th class="p-4">Method</th><th class="p-4">Amount</th><th class="p-4">Status</th></tr></thead><tbody class="divide-y divide-gray-100">
+      {% for payment in payments %}<tr><td class="p-4 font-bold">{{ payment.transaction_reference }}</td><td class="p-4"><a class="text-royal-green font-bold" href="{% url 'pages:order_detail' payment.order.id %}">#{{ payment.order.id }}</a></td><td class="p-4">{{ payment.method }}</td><td class="p-4">GH₵ {{ payment.amount }}</td><td class="p-4">{{ payment.status }}</td></tr>{% empty %}<tr><td colspan="5" class="p-10 text-center text-gray-500">No payment records yet.</td></tr>{% endfor %}
+      </tbody></table>
+    </div>
+  </div>
+</main>
+{% endblock %}

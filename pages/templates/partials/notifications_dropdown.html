@@ -1,0 +1,4 @@
+<a href="{% url 'pages:notifications' %}" class="relative btn-ghost px-3 py-2" aria-label="Notifications">
+  <iconify-icon icon="lucide:bell"></iconify-icon>
+  {% if unread_notifications_count %}<span class="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-red-500 text-white text-[10px] grid place-items-center">{{ unread_notifications_count }}</span>{% endif %}
+</a>

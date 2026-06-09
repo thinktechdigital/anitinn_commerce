@@ -1,0 +1,12 @@
+<div class="grid gap-4">
+  <div class="surface-card aspect-square overflow-hidden bg-gray-50">
+    {% if product.image_url %}<img src="{{ product.image_url }}" alt="{{ product.name }}" class="w-full h-full object-cover">{% else %}<div class="w-full h-full grid place-items-center text-gray-300"><iconify-icon icon="lucide:image" class="text-6xl"></iconify-icon></div>{% endif %}
+  </div>
+  {% if product.images.all %}
+  <div class="grid grid-cols-4 gap-3">
+    {% for image in product.images.all %}
+    <img src="{{ image.image_url }}" alt="{{ image.alt_text|default:product.name }}" class="aspect-square rounded-2xl object-cover border border-gray-100">
+    {% endfor %}
+  </div>
+  {% endif %}
+</div>

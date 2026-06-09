@@ -1,0 +1,50 @@
+{% load static %}<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --royal-green: #1B5E3F;
+      --royal-green-dark: #144a32;
+      --golden-yellow: #D4A520;
+      --warm-white: #fcfbf8;
+      --ink: #1f2937;
+      --muted: #6b7280;
+      --line: #eef2f0;
+    }
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--warm-white);
+      color: var(--ink);
+    }
+    .royal-green { background-color: var(--royal-green); }
+    .royal-green-dark { background-color: var(--royal-green-dark); }
+    .text-royal-green { color: var(--royal-green); }
+    .bg-golden-yellow { background-color: var(--golden-yellow); }
+    .golden-yellow { background-color: var(--golden-yellow); }
+    .text-golden-yellow { color: var(--golden-yellow); }
+    .border-royal-green { border-color: var(--royal-green); }
+    .border-golden-yellow { border-color: var(--golden-yellow); }
+    .surface-card { background: white; border: 1px solid var(--line); border-radius: 1.5rem; box-shadow: 0 10px 30px -18px rgba(27, 94, 63, 0.25); }
+    .form-input { width: 100%; border: 1px solid #e5e7eb; border-radius: 0.875rem; padding: 0.75rem 1rem; background: white; outline: none; }
+    .form-input:focus { border-color: var(--royal-green); box-shadow: 0 0 0 4px rgba(27, 94, 63, 0.10); }
+    .btn-primary { display: inline-flex; align-items: center; justify-content: center; gap: .5rem; border-radius: .875rem; background: var(--royal-green); color: white; font-weight: 800; padding: .75rem 1rem; }
+    .btn-accent { display: inline-flex; align-items: center; justify-content: center; gap: .5rem; border-radius: .875rem; background: var(--golden-yellow); color: white; font-weight: 800; padding: .75rem 1rem; }
+    .btn-ghost { display: inline-flex; align-items: center; justify-content: center; gap: .5rem; border-radius: .875rem; border: 1px solid #e5e7eb; color: #374151; font-weight: 700; padding: .75rem 1rem; background: white; }
+    .hero-gradient { background: linear-gradient(135deg, #1B5E3F 0%, #144a32 100%); }
+    .custom-shadow { box-shadow: 0 10px 30px -10px rgba(27, 94, 63, 0.1); }
+  </style>
+  <title>{% block title %}{{ page_title|default:"Anitinn" }}{% endblock %} · Anitinn</title>
+  {% block extra_head %}{% endblock %}
+</head>
+<body>
+  {% block body %}{% endblock %}
+  {% block extra_scripts %}{% endblock %}
+</body>
+</html>

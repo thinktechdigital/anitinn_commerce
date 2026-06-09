@@ -1,0 +1,14 @@
+marketplace
+catalog
+product_detail
+cart
+checkout
+wishlist
+order_history
+order_detail
+order_tracking
+payment_methods
+notifications
+profile
+returns
+support_tickets

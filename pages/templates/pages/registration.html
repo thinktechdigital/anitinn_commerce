@@ -17,17 +17,36 @@
         .progress-step-active { background-color: #1B5E3F; width: 40px; }
         .progress-step-inactive { background-color: #E5E7EB; width: 12px; }
         .glass-overlay { background: linear-gradient(180deg, rgba(27, 94, 63, 0) 0%, rgba(27, 94, 63, 0.9) 100%); }
+        .role-card:has(input:checked) {
+            border-color: #1B5E3F;
+            background-color: rgba(27, 94, 63, 0.05);
+            box-shadow: 0 12px 30px -18px rgba(27, 94, 63, 0.45);
+        }
+        .role-card:has(input:checked) .role-icon {
+            color: #1B5E3F;
+        }
+        .role-card:has(input:checked) .role-dot {
+            border-color: #1B5E3F;
+        }
+        .role-card:has(input:checked) .role-dot::after {
+            content: "";
+            width: 8px;
+            height: 8px;
+            border-radius: 9999px;
+            background-color: #1B5E3F;
+            display: block;
+        }
     </style>
 </head>
 <body>
     <div class="min-h-screen flex warm-white">
         <!-- Left Side: Ghana Marketplace Theme Sidebar -->
         <div class="hidden lg:flex lg:w-5/12 relative">
-            <img src="https://vgbujcuwptvheqijyjbe.supabase.co/storage/v1/object/public/hmac-uploads/uploads/ef5bc30d-cbeb-42a5-88a1-362daf4d51a4/1780139198921-867f52d6/ChatGPT_Image_May_29__2026__11_28_10_AM.png" 
+            <img src="/media/logo.png" 
                  alt="Ghana Marketplace" 
                  class="absolute inset-0 w-full h-full object-cover">
             <div class="absolute inset-0 glass-overlay flex flex-col justify-end p-12 text-white">
-                <img src="https://vgbujcuwptvheqijyjbe.supabase.co/storage/v1/object/public/hmac-uploads/uploads/ef5bc30d-cbeb-42a5-88a1-362daf4d51a4/1780139179048-642ea9dd/ChatGPT_Image_May_29__2026__11_28_10_AM.png" 
+                <img src="/media/logo.png" 
                      alt="Anitinn Logo" class="w-16 h-16 rounded-full border-2 border-white/30 mb-6">
                 <h1 class="text-4xl font-extrabold mb-4 leading-tight">Empowering Ghanaian Businesses with AI</h1>
                 <p class="text-lg text-white/80 max-w-md">Join thousands of vendors and buyers in Ghana's most advanced marketplace ecosystem.</p>
@@ -144,21 +163,21 @@
                     <div class="space-y-3">
                         <label class="text-sm font-bold text-gray-700 ml-1">Account Role</label>
                         <div class="grid grid-cols-2 gap-4">
-                            <label class="relative flex flex-col p-4 border border-gray-200 rounded-xl cursor-pointer hover:border-[#1B5E3F] transition-all peer-checked:border-[#1B5E3F] peer-checked:bg-[#1B5E3F]/5 group">
-                                <input type="radio" name="role" value="BUYER" class="sr-only peer" checked>
+                            <label class="role-card relative flex flex-col p-4 border border-gray-200 rounded-xl cursor-pointer hover:border-[#1B5E3F] transition-all group">
+                                <input type="radio" name="role" value="BUYER" class="sr-only" {% if form.role.value == 'BUYER' or not form.role.value %}checked{% endif %}>
                                 <div class="flex justify-between items-start mb-2">
-                                    <iconify-icon icon="lucide:user" class="text-2xl text-gray-400 group-hover:text-[#1B5E3F] peer-checked:text-[#1B5E3F]"></iconify-icon>
-                                    <div class="w-4 h-4 rounded-full border border-gray-300 flex items-center justify-center peer-checked:border-[#1B5E3F] peer-checked:after:bg-[#1B5E3F] after:w-2 after:h-2 after:rounded-full"></div>
+                                    <iconify-icon icon="lucide:user" class="role-icon text-2xl text-gray-400 group-hover:text-[#1B5E3F]"></iconify-icon>
+                                    <div class="role-dot w-4 h-4 rounded-full border border-gray-300 flex items-center justify-center"></div>
                                 </div>
-                                <span class="text-sm font-bold text-gray-900">Buyer</span>
+                                <span class="text-sm font-bold text-gray-900">Customer</span>
                                 <span class="text-xs text-gray-500">Shop from verified vendors</span>
                             </label>
                             
-                            <label class="relative flex flex-col p-4 border border-gray-200 rounded-xl cursor-pointer hover:border-[#1B5E3F] transition-all group">
-                                <input type="radio" name="role" value="VENDOR" class="sr-only peer">
+                            <label class="role-card relative flex flex-col p-4 border border-gray-200 rounded-xl cursor-pointer hover:border-[#1B5E3F] transition-all group">
+                                <input type="radio" name="role" value="VENDOR" class="sr-only" {% if form.role.value == 'VENDOR' %}checked{% endif %}>
                                 <div class="flex justify-between items-start mb-2">
-                                    <iconify-icon icon="lucide:store" class="text-2xl text-gray-400 group-hover:text-[#1B5E3F]"></iconify-icon>
-                                    <div class="w-4 h-4 rounded-full border border-gray-300 flex items-center justify-center"></div>
+                                    <iconify-icon icon="lucide:store" class="role-icon text-2xl text-gray-400 group-hover:text-[#1B5E3F]"></iconify-icon>
+                                    <div class="role-dot w-4 h-4 rounded-full border border-gray-300 flex items-center justify-center"></div>
                                 </div>
                                 <span class="text-sm font-bold text-gray-900">Vendor</span>
                                 <span class="text-xs text-gray-500">Sell your premium products</span>
@@ -169,7 +188,7 @@
                     <div class="flex items-start gap-3 mt-4">
                         <input type="checkbox" id="terms" required class="mt-1 w-4 h-4 rounded border-gray-300 royal-green-text focus:ring-[#1B5E3F]">
                         <label for="terms" class="text-xs font-medium text-gray-600 leading-normal">
-                            I agree to the ANITINN <a href="/terms/" class="royal-green-text font-bold underline decoration-golden-yellow">Terms of Service</a> and <a href="/privacy/" class="royal-green-text font-bold underline decoration-golden-yellow">Privacy Policy</a>.
+                            I agree to the ANITINN <a href="{% url 'pages:terms' %}" class="royal-green-text font-bold underline decoration-golden-yellow">Terms of Service</a> and <a href="{% url 'pages:privacy' %}" class="royal-green-text font-bold underline decoration-golden-yellow">Privacy Policy</a>.
                         </label>
                     </div>
 
@@ -182,7 +201,7 @@
 
                 <p class="mt-8 text-center text-sm font-medium text-gray-600">
                     Already have an account? 
-                    <a href="/login/" class="royal-green-text font-bold hover:underline decoration-golden-yellow ml-1" id="nav-login-link">Log in here</a>
+                    <a href="{% url 'pages:login' %}" class="royal-green-text font-bold hover:underline decoration-golden-yellow ml-1" id="nav-login-link">Log in here</a>
                 </p>
             </div>
         </div>

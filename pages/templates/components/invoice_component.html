@@ -1,0 +1,5 @@
+<section class="surface-card p-6">
+  <h2 class="text-lg font-black text-gray-900">Invoice</h2>
+  <p class="mt-2 text-sm text-gray-500">Order #{{ order.id }} · {{ order.created_at|date:"M d, Y" }}</p>
+  <div class="mt-5 flex justify-between font-black"><span>Total Paid</span><span class="text-royal-green">GH₵ {{ order.total_price }}</span></div>
+</section>

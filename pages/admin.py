@@ -1,5 +1,9 @@
 from django.contrib import admin
-from .models import UserProfile, Address, Vendor, Category, Product, Review, Cart, CartItem, Order, OrderItem
+from .models import (
+    UserProfile, Address, Vendor, Category, Product, ProductImage, Inventory,
+    Review, Cart, CartItem, Wishlist, Order, OrderItem, Payment, Shipment,
+    Coupon, Notification, SupportTicket, ReturnRequest, VendorPayout, ActivityLog
+)
 
 class AddressInline(admin.TabularInline):
     model = Address
@@ -25,6 +29,15 @@ class ProductAdmin(admin.ModelAdmin):
     list_filter = ('status', 'category')
     search_fields = ('name', 'vendor__store_name', 'description')
 
+class ProductImageAdmin(admin.ModelAdmin):
+    list_display = ('product', 'is_primary', 'created_at')
+    list_filter = ('is_primary',)
+    search_fields = ('product__name', 'alt_text')
+
+class InventoryAdmin(admin.ModelAdmin):
+    list_display = ('product', 'quantity', 'low_stock_threshold', 'updated_at')
+    search_fields = ('product__name',)
+
 class ReviewAdmin(admin.ModelAdmin):
     list_display = ('product', 'user', 'rating', 'created_at')
     list_filter = ('rating', 'created_at')
@@ -49,11 +62,32 @@ class OrderAdmin(admin.ModelAdmin):
     search_fields = ('user__username', 'tracking_number')
     inlines = [OrderItemInline]
 
+class PaymentAdmin(admin.ModelAdmin):
+    list_display = ('transaction_reference', 'order', 'amount', 'method', 'status', 'created_at')
+    list_filter = ('status', 'method')
+    search_fields = ('transaction_reference', 'order__tracking_number')
+
+class ShipmentAdmin(admin.ModelAdmin):
+    list_display = ('tracking_number', 'order', 'carrier', 'status', 'created_at')
+    list_filter = ('status', 'carrier')
+    search_fields = ('tracking_number', 'order__tracking_number')
+
 admin.site.register(UserProfile, UserProfileAdmin)
 admin.site.register(Address)
 admin.site.register(Vendor, VendorAdmin)
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Product, ProductAdmin)
+admin.site.register(ProductImage, ProductImageAdmin)
+admin.site.register(Inventory, InventoryAdmin)
 admin.site.register(Review, ReviewAdmin)
 admin.site.register(Cart, CartAdmin)
 admin.site.register(Order, OrderAdmin)
+admin.site.register(Wishlist)
+admin.site.register(Payment, PaymentAdmin)
+admin.site.register(Shipment, ShipmentAdmin)
+admin.site.register(Coupon)
+admin.site.register(Notification)
+admin.site.register(SupportTicket)
+admin.site.register(ReturnRequest)
+admin.site.register(VendorPayout)
+admin.site.register(ActivityLog)

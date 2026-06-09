@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Notifications{% endblock %}
+{% block body %}
+<main class="min-h-screen bg-[#fcfbf8] px-6 py-10">
+  <div class="max-w-4xl mx-auto">
+    <div class="flex items-center justify-between mb-8">
+      <div><p class="text-xs font-bold uppercase tracking-widest text-golden-yellow">Account</p><h1 class="text-3xl font-bold">Notifications</h1></div>
+      <form method="post">{% csrf_token %}<button class="px-5 py-3 royal-green text-white rounded-xl font-bold text-sm">Mark All Read</button></form>
+    </div>
+    <div class="space-y-4">
+      {% for note in notifications %}
+      <article class="bg-white border {% if note.is_read %}border-gray-100{% else %}border-golden-yellow{% endif %} rounded-2xl p-5">
+        <div class="flex justify-between gap-4">
+          <div><h2 class="font-bold text-gray-900">{{ note.title }}</h2><p class="text-sm text-gray-600 mt-1">{{ note.body }}</p></div>
+          <span class="text-xs font-bold text-gray-400">{{ note.created_at|date:"M j, Y" }}</span>
+        </div>
+        {% if note.link_url %}<a href="{{ note.link_url }}" class="inline-block mt-4 text-sm font-bold text-royal-green">View details</a>{% endif %}
+      </article>
+      {% empty %}
+      <section class="bg-white rounded-3xl p-12 text-center border border-gray-100"><iconify-icon icon="lucide:bell" class="text-5xl text-golden-yellow"></iconify-icon><h2 class="mt-4 font-bold text-xl">You are all caught up</h2></section>
+      {% endfor %}
+    </div>
+  </div>
+</main>
+{% endblock %}
